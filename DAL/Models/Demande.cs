@@ -13,14 +13,17 @@ namespace DAL.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long id { get; set; }
+        [Required]
         public DateTime dateDebut { get; set; }
+        [Required]
         public DateTime dateFin { get; set; }
+        [Required]
         public double prixTotal { get; set; }
 
         public long clientId { get; set; }
         [ForeignKey("clientId")]
 
-        public Client client { get; set; }
+        public Compte client { get; set; }
         public long vehiculeId { get; set; }
         [ForeignKey("vehiculeId")]
         public Vehicule vehicule { get; set; }

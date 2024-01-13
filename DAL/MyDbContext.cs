@@ -14,7 +14,7 @@ namespace DAL
         {
         }
 
-        public DbSet<Client> clients { get; set; }
+        public DbSet<Compte> comptes { get; set; }
         public DbSet<Demande> demandes { get; set; }
         public DbSet<Vehicule> vehicules { get; set; }
     }

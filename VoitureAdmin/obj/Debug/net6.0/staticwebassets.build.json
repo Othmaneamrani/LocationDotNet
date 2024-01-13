@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "AN6HnAoI11nuBJ1hgXMAOA7Xp40Fz40uyMmiozJsGnI=",
+  "Hash": "ilpO6XwrK4PJ3ljdYFGwxANf+d+so0Z/BHN622g5buI=",
   "Source": "VoitureAdmin",
   "BasePath": "_content/VoitureAdmin",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\user\\projets\\VoitureAdmin\\VoitureAdmin\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\VoitureAdmin.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\user\\projets\\VoitureAdmin\\VoitureAdmin\\wwwroot\\car-icon.ico",
+      "SourceId": "VoitureAdmin",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\projets\\VoitureAdmin\\VoitureAdmin\\wwwroot\\",
+      "BasePath": "_content/VoitureAdmin",
+      "RelativePath": "car-icon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\car-icon.ico"
     },
     {
       "Identity": "C:\\Users\\user\\projets\\VoitureAdmin\\VoitureAdmin\\wwwroot\\css\\site.css",

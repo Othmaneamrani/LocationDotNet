@@ -13,12 +13,21 @@ namespace DAL.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long id { get; set; }
-        public string type {  get; set; }
+        [Required]
+        public string type { get; set; } //type de vehicule
+        [Required]
         public string marque { get; set; }
+        [Required]
         public double kilometrage { get; set; }
+        [Required]
         public int nombreSieges { get; set; }
-        public string typeMoteur { get; set; }
+        [Required]
+        public string typeMoteur { get; set; } //manuelle ou automatique
+        [Required]
         public double prix { get; set; }
+        [Required]
+        public string annonce { get; set; } //vente ou location
+
         [InverseProperty("vehicule")]
         public List<Demande> demandes { get; set; }
     }
