@@ -16,6 +16,8 @@ namespace VoitureAdmin
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnexionString")));
             builder.Services.AddAutoMapper(typeof(Program).Assembly);
             builder.Services.AddScoped<CompteService>();
+            builder.Services.AddScoped<VehiculeService>();
+            builder.Services.AddScoped<DemandeService>();
 
 
             var app = builder.Build();
