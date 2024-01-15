@@ -12,6 +12,8 @@ namespace BLL.Command
     public class VehiculeCommand
     {
         public long idCommand { get; set; }
+        public byte[] photoCommand { get; set; }
+
         public string typeCommand { get; set; }
         public string marqueCommand { get; set; }
         public double kilometrageCommand { get; set; }

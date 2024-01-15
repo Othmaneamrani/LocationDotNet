@@ -14,6 +14,8 @@ namespace DAL.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long id { get; set; }
         [Required]
+        public byte[] photo { get; set; }
+        [Required]
         public string type { get; set; } //type de vehicule
         [Required]
         public string marque { get; set; }

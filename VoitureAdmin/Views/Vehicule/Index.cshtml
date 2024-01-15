@@ -1,5 +1,6 @@
 ﻿@model List<BLL.Representation.VehiculeRepresentation>
 
+
 <h2 class="mt-5 mb-5">Véhicules</h2>
 
 @if (Model == null || Model.Count == 0)
@@ -12,6 +13,7 @@ else
         <thead>
             <tr>
                 <th scope="col">Id</th>
+                <th scope="col">Photo</th>
                 <th scope="col">Type</th>
                 <th scope="col">Marque</th>
                 <th scope="col">Kilometrage</th>
@@ -27,6 +29,16 @@ else
             {
                 <tr>
                     <th scope="row">@vehicule.idRepresentation</th>
+                    <td>
+                        @if (vehicule.photoRepresentation != null && vehicule.photoRepresentation.Length > 0)
+                        {
+                            <img src="data:image/png;base64,@Convert.ToBase64String(vehicule.photoRepresentation)" alt="Photo du véhicule" />
+                        }
+                        else
+                        {
+                            <span>Aucune photo</span>
+                        }
+                    </td>
                     <td>@vehicule.typeRepresentation.First().ToString().ToUpper()@vehicule.typeRepresentation.Substring(1)</td>
                     <td>@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</td>
                     <td>@vehicule.kilometrageRepresentation</td>
@@ -43,3 +55,5 @@ else
         </tbody>
     </table>
 }
+
+<a asp-controller="Vehicule" asp-action="add" class="btn btn-primary">Ajouter un véhicule</a>

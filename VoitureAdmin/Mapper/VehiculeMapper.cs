@@ -10,6 +10,7 @@ namespace VoitureAdmin.Mapper
         public VehiculeMapper()
         {
             CreateMap<Vehicule, VehiculeRepresentation>().ForMember(dest => dest.idRepresentation, opt => opt.MapFrom(src => src.id))
+            .ForMember(dest => dest.photoRepresentation, opt => opt.MapFrom(src => src.photo))
             .ForMember(dest => dest.typeRepresentation, opt => opt.MapFrom(src => src.type))
             .ForMember(dest => dest.marqueRepresentation, opt => opt.MapFrom(src => src.marque))
             .ForMember(dest => dest.kilometrageRepresentation, opt => opt.MapFrom(src => src.kilometrage))
@@ -20,6 +21,7 @@ namespace VoitureAdmin.Mapper
 
             CreateMap<VehiculeCommand, Vehicule>()
             .ForMember(dest => dest.id, opt => opt.MapFrom(src => src.idCommand))
+            .ForMember(dest => dest.photo, opt => opt.MapFrom(src => src.photoCommand))
             .ForMember(dest => dest.type, opt => opt.MapFrom(src => src.typeCommand))
             .ForMember(dest => dest.marque, opt => opt.MapFrom(src => src.marqueCommand))
             .ForMember(dest => dest.kilometrage, opt => opt.MapFrom(src => src.kilometrageCommand))
