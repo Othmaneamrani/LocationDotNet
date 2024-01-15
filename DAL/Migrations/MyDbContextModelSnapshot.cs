@@ -74,7 +74,7 @@ namespace DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("id"));
 
-                    b.Property<long>("clientId")
+                    b.Property<long>("compteId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("dateDebut")
@@ -91,7 +91,7 @@ namespace DAL.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("clientId");
+                    b.HasIndex("compteId");
 
                     b.HasIndex("vehiculeId");
 
@@ -143,9 +143,9 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Models.Demande", b =>
                 {
-                    b.HasOne("DAL.Models.Compte", "client")
+                    b.HasOne("DAL.Models.Compte", "compte")
                         .WithMany("demandes")
-                        .HasForeignKey("clientId")
+                        .HasForeignKey("compteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -155,7 +155,7 @@ namespace DAL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("client");
+                    b.Navigation("compte");
 
                     b.Navigation("vehicule");
                 });

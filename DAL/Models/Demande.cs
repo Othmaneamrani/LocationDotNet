@@ -20,10 +20,10 @@ namespace DAL.Models
         [Required]
         public double prixTotal { get; set; }
 
-        public long clientId { get; set; }
-        [ForeignKey("clientId")]
+        public long compteId { get; set; }
+        [ForeignKey("compteId")]
 
-        public Compte client { get; set; }
+        public Compte compte { get; set; }
         public long vehiculeId { get; set; }
         [ForeignKey("vehiculeId")]
         public Vehicule vehicule { get; set; }

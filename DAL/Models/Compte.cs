@@ -30,7 +30,7 @@ namespace DAL.Models
         [Required]
         public string telephone { get; set; }
 
-        [InverseProperty("client")]
+        [InverseProperty("compte")]
         public List<Demande> demandes { get; set; }
         public List<Vehicule> favoris { get; set; }
     }

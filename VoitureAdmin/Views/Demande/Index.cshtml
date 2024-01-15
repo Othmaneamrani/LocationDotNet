@@ -1,0 +1,41 @@
+﻿@model List<BLL.Representation.DemandeRepresentation>
+
+<h2 class="mt-5 mb-5">Demandes</h2>
+
+@if (Model == null || Model.Count == 0)
+{
+    <p>Aucun demande trouvé.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">DateDebut</th>
+                <th scope="col">DateFin</th>
+                <th scope="col">PrixTotal</th>
+                <th scope="col">CompteId</th>
+                <th scope="col">VehiculeId</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var demande in Model)
+            {
+                <tr>
+                    <th scope="row">@demande.idRepresentation</th>
+                    <td>@demande.dateDebutRepresentation</td>
+                    <td>@demande.dateFinRepresentation</td>
+                    <td>@demande.prixTotalRepresentation</td>
+                    <td>@demande.compteIdRepresentation</td>
+                    <td>@demande.vehiculeIdRepresentation</td>
+                    <td>
+                        <a class="btn btn-primary" href="*">Modifier</a> @* href="GetUpdate/@demande.idRepresentation" *@
+                        <a class="btn ml-0 btn-danger" href="*">Supprimer</a> @* href="GetDelete/@demande.idRepresentation" *@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

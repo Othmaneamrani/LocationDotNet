@@ -1,0 +1,45 @@
+﻿@model List<BLL.Representation.VehiculeRepresentation>
+
+<h2 class="mt-5 mb-5">Véhicules</h2>
+
+@if (Model == null || Model.Count == 0)
+{
+    <p>Aucun Véhicule trouvé.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Type</th>
+                <th scope="col">Marque</th>
+                <th scope="col">Kilometrage</th>
+                <th scope="col">NombreSieges</th>
+                <th scope="col">TypeMoteur</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Annonce</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var vehicule in Model)
+            {
+                <tr>
+                    <th scope="row">@vehicule.idRepresentation</th>
+                    <td>@vehicule.typeRepresentation.First().ToString().ToUpper()@vehicule.typeRepresentation.Substring(1)</td>
+                    <td>@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</td>
+                    <td>@vehicule.kilometrageRepresentation</td>
+                    <td>@vehicule.nombreSiegesRepresentation</td>
+                    <td>@vehicule.typeMoteurRepresentation.First().ToString().ToUpper()@vehicule.typeMoteurRepresentation.Substring(1)</td>
+                    <td>@vehicule.prixRepresentation</td>
+                    <td>@vehicule.annonceRepresentation.First().ToString().ToUpper()@vehicule.annonceRepresentation.Substring(1)</td>
+                    <td>
+                        <a class="btn btn-primary" href="*">Modifier</a> @* href="GetUpdate/@vehicule.idRepresentation" *@
+                        <a class="btn ml-0 btn-danger" href="*">Supprimer</a> @* href="GetDelete/@vehicule.idRepresentation" *@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

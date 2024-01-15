@@ -1,3 +1,4 @@
+using BLL.Services;
 using DAL;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +14,9 @@ namespace VoitureAdmin
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<MyDbContext>(options => 
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnexionString")));
+            builder.Services.AddAutoMapper(typeof(Program).Assembly);
+            builder.Services.AddScoped<CompteService>();
+
 
             var app = builder.Build();
 
