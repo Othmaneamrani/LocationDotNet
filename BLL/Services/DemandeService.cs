@@ -22,5 +22,11 @@ namespace BLL.Services
             List<Demande> list = _db.demandes.ToList();
             return list;
         }
+
+        public async Task addDemande(Demande demande)
+        {
+            await _db.demandes.AddAsync(demande);
+            await _db.SaveChangesAsync();
+        }
     }
 }

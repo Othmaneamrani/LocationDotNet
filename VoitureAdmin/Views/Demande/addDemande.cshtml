@@ -1,0 +1,31 @@
+﻿@model BLL.Command.DemandeCommand
+
+<h2 class="mt-5">Ajouter une nouvelle demande</h2>
+
+<form method="post" action="addDemande" class="mt-5">
+
+    <div class="mb-3">
+        <label class="form-label">Date de début</label>
+        <input type="date" class="form-control" asp-for="dateDebutCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Date de fin</label>
+        <input type="date" class="form-control" asp-for="dateFinCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Prix total</label>
+        <input type="number" class="form-control" asp-for="prixTotalCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Id du proprietaire de la commande</label>
+        <input type="number" class="form-control" asp-for="compteIdCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Id du véhicule</label>
+        <input type="number" class="form-control" asp-for="vehiculeIdCommand" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <a asp-controller="Demande" asp-action="Index" class="btn btn-primary m-md-1">Retour</a>
+
+</form>
