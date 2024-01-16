@@ -17,7 +17,7 @@ else
                 <th scope="col">Type</th>
                 <th scope="col">Marque</th>
                 <th scope="col">Kilometrage</th>
-                <th scope="col">NombreSieges</th>
+                <th scope="col">Nombre de sieges</th>
                 <th scope="col">TypeMoteur</th>
                 <th scope="col">Prix</th>
                 <th scope="col">Annonce</th>
@@ -30,9 +30,9 @@ else
                 <tr>
                     <th scope="row">@vehicule.idRepresentation</th>
                     <td>
-                        @if (vehicule.photoRepresentation != null && vehicule.photoRepresentation.Length > 0)
+                        @if (!string.IsNullOrEmpty(vehicule.photoRepresentation))
                         {
-                            <img src="data:image/png;base64,@Convert.ToBase64String(vehicule.photoRepresentation)" alt="Photo du véhicule" />
+                            <img class="thumbnail-image" src="@vehicule.photoRepresentation" alt="Photo du véhicule" />
                         }
                         else
                         {
@@ -56,4 +56,4 @@ else
     </table>
 }
 
-<a asp-controller="Vehicule" asp-action="add" class="btn btn-primary">Ajouter un véhicule</a>
+<a asp-controller="Vehicule" asp-action="addVehicule" class="btn btn-primary">Ajouter un véhicule</a>

@@ -1,0 +1,60 @@
+﻿@model BLL.Command.CompteCommand
+
+<h2 class="mt-5">Ajouter un nouveau véhicule</h2>
+
+<form method="post" action="addCompte" onsubmit="return validatePassword();" class="mt-5">
+
+    <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" class="form-control" asp-for="usernameCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" asp-for="passwordCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Confirmation password</label>
+        <input type="password" class="form-control" id="confirmPassword" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Nom</label>
+        <input type="text" class="form-control" asp-for="nomCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Prénom</label>
+        <input type="text" class="form-control" asp-for="prenomCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Age</label>
+        <input type="number" class="form-control" asp-for="ageCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" asp-for="emailCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">CIN</label>
+        <input type="text" class="form-control" asp-for="cinCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Téléphone</label>
+        <input type="text" class="form-control" asp-for="telephoneCommand" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <a asp-controller="Compte" asp-action="Index" class="btn btn-primary m-md-1">Retour</a>
+
+</form>
+
+<script>
+    function validatePassword() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+            alert("Les mots de passe ne correspondent pas.");
+            return false;
+        }
+        return true;
+    }
+</script>

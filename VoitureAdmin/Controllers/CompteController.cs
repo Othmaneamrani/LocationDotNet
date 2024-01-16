@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BLL.Command;
 using BLL.Representation;
 using BLL.Services;
 using DAL.Models;
@@ -21,6 +22,19 @@ namespace VoitureAdmin.Controllers
         {
             List<CompteRepresentation> list = _mapper.Map<List<CompteRepresentation>>(_compteService.getAll());
             return View(list);
+        }
+        [HttpGet]
+        public IActionResult addCompte()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult addCompte(CompteCommand compteCommand) 
+        {
+
+            _compteService.addComtpe(_mapper.Map<Compte>(compteCommand));
+            return RedirectToAction("Index");
         }
     }
 }

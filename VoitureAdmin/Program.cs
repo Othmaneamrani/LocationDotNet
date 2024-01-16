@@ -1,6 +1,9 @@
 using BLL.Services;
 using DAL;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace VoitureAdmin
 {
@@ -10,6 +13,7 @@ namespace VoitureAdmin
         {
             var builder = WebApplication.CreateBuilder(args);
 
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<MyDbContext>(options => 
@@ -18,6 +22,17 @@ namespace VoitureAdmin
             builder.Services.AddScoped<CompteService>();
             builder.Services.AddScoped<VehiculeService>();
             builder.Services.AddScoped<DemandeService>();
+            builder.Configuration.AddJsonFile("appsettings.json");
+            var firebaseConfigSection = builder.Configuration.GetSection("FirebaseConfig");
+            if (firebaseConfigSection != null && !string.IsNullOrEmpty(firebaseConfigSection.Value))
+            {
+                FirebaseApp.Create(new AppOptions
+                {
+                    Credential = GoogleCredential.FromJson(firebaseConfigSection.Value)
+                });
+            }
+
+
 
 
             var app = builder.Build();

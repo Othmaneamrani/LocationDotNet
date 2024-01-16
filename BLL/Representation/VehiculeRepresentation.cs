@@ -10,7 +10,7 @@ namespace BLL.Representation
     public class VehiculeRepresentation
     {
         public long idRepresentation { get; set; }
-        public byte[] photoRepresentation { get; set; }
+        public string photoRepresentation { get; set; }
         public string typeRepresentation { get; set; }
         public string marqueRepresentation { get; set; }
         public double kilometrageRepresentation { get; set; }

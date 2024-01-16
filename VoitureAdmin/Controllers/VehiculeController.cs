@@ -25,16 +25,16 @@ namespace VoitureAdmin.Controllers
         }
 
         [HttpGet]
-        public IActionResult add()
+        public IActionResult addVehicule()
         {
             return View();
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> add(VehiculeCommand vehiculeCommand) 
+        public  IActionResult addVehicule(VehiculeCommand vehiculeCommand) 
         {
-            _vehiculeService.add(_mapper.Map<Vehicule>(vehiculeCommand));
+            _vehiculeService.addVehicule(_mapper.Map<Vehicule>(vehiculeCommand));
             return RedirectToAction("Index");
         }
     }

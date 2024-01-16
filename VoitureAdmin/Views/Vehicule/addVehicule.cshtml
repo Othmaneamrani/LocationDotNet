@@ -2,39 +2,39 @@
 
 <h2 class="mt-5">Ajouter un nouveau véhicule</h2>
 
-<form method="post" action="add" class="mt-5">
+<form method="post" action="addVehicule" class="mt-5">
 
     <div class="mb-3">
         <label class="form-label">Photo du véhicule</label>
-        <input type="file" class="form-control" name="photoCommand" accept="image/*">
+        <input type="text" class="form-control" asp-for="photoCommand" accept="image/*" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Type de véhicule</label>
-        <input type="text" class="form-control" asp-for="typeCommand">
+        <input type="text" class="form-control" asp-for="typeCommand" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Marque</label>
-        <input type="text" class="form-control" asp-for="marqueCommand">
+        <input type="text" class="form-control" asp-for="marqueCommand" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Kilometrage</label>
-        <input type="number" class="form-control" asp-for="kilometrageCommand">
+        <input type="number" class="form-control" asp-for="kilometrageCommand" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Nombre de sieges</label>
-        <input type="text" class="form-control" asp-for="nombreSiegesCommand">
+        <input type="text" class="form-control" asp-for="nombreSiegesCommand" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Type de moteur</label>
-        <input type="text" class="form-control" asp-for="typeMoteurCommand">
+        <input type="text" class="form-control" asp-for="typeMoteurCommand"  required>
     </div>    
     <div class="mb-3">
         <label class="form-label">Prix</label>
-        <input type="text" class="form-control" asp-for="prixCommand">
+        <input type="text" class="form-control" asp-for="prixCommand" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Annonce (vente ou location)</label>
-        <input type="text" class="form-control" asp-for="annonceCommand">
+        <input type="text" class="form-control" asp-for="annonceCommand" required>
     </div>
 
     <button type="submit" class="btn btn-primary">Ajouter</button>

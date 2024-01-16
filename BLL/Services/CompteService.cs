@@ -24,5 +24,10 @@ namespace BLL.Services
             List<Compte> list = _db.comptes.ToList();
             return list;
         }
+        public async Task addComtpe(Compte compte) 
+        {
+            await _db.comptes.AddAsync(compte);
+            await _db.SaveChangesAsync();
+        }
     }
 }

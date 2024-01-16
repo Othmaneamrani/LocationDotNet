@@ -24,10 +24,10 @@ namespace BLL.Services
             return list;
         }
 
-        public void add(Vehicule vehicule) 
+        public async Task addVehicule(Vehicule vehicule) 
         {
-             _db.AddAsync(vehicule);
-            _db.SaveChangesAsync();
+            await _db.AddAsync(vehicule);
+            await _db.SaveChangesAsync();
         }
     }
 }
