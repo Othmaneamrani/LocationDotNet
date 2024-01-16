@@ -14,8 +14,10 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Confirmation password</label>
-        <input type="password" class="form-control" id="confirmPassword" required>
+        <input type="password" class="form-control" id="confirmPassword" oninput="validatePasswordText()" required>
+        <div id="passwordMismatch" style="color: red;"></div>
     </div>
+
     <div class="mb-3">
         <label class="form-label">Nom</label>
         <input type="text" class="form-control" asp-for="nomCommand" required>
@@ -52,9 +54,23 @@
         var confirmPassword = document.getElementById("confirmPassword").value;
 
         if (password !== confirmPassword) {
-            alert("Les mots de passe ne correspondent pas.");
+            alert("Validation de Password invalide.");
             return false;
         }
         return true;
     }
+
+
+        function validatePasswordText() {
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+            var mismatchMessage = document.getElementById("passwordMismatch");
+
+            if (password !== confirmPassword) {
+                mismatchMessage.textContent = "Les mots de passe ne correspondent pas.";
+            } else {
+                mismatchMessage.textContent = "";
+            }
+        }
+
 </script>
