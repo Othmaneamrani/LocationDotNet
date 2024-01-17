@@ -9,7 +9,8 @@ namespace VoitureAdmin.Mapper
     {
         public VehiculeMapper()
         {
-            CreateMap<Vehicule, VehiculeRepresentation>().ForMember(dest => dest.idRepresentation, opt => opt.MapFrom(src => src.id))
+            CreateMap<Vehicule, VehiculeRepresentation>()
+             .ForMember(dest => dest.idRepresentation, opt => opt.MapFrom(src => src.id))
             .ForMember(dest => dest.photoRepresentation, opt => opt.MapFrom(src => src.photo))
             .ForMember(dest => dest.typeRepresentation, opt => opt.MapFrom(src => src.type))
             .ForMember(dest => dest.marqueRepresentation, opt => opt.MapFrom(src => src.marque))
@@ -29,6 +30,7 @@ namespace VoitureAdmin.Mapper
             .ForMember(dest => dest.typeMoteur, opt => opt.MapFrom(src => src.typeMoteurCommand))
             .ForMember(dest => dest.prix, opt => opt.MapFrom(src => src.prixCommand))
             .ForMember(dest => dest.annonce, opt => opt.MapFrom(src => src.annonceCommand));
+
         }
     }
 }

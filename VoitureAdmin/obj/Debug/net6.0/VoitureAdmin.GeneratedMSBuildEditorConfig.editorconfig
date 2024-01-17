@@ -48,6 +48,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWN1bGVcYWRkVmVoaWN1bGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Vehicule/deleteVehicule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWN1bGVcZGVsZXRlVmVoaWN1bGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Vehicule/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVoaWN1bGVcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

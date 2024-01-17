@@ -31,9 +31,9 @@ namespace VoitureAdmin.Controllers
 
 
         [HttpPost]
-        public IActionResult addDemande(DemandeCommand demandeCommand)
+        public async Task<IActionResult> addDemande(DemandeCommand demandeCommand)
         {
-            _demandeService.addDemande(_mapper.Map<Demande>(demandeCommand));
+            await _demandeService.addDemande(_mapper.Map<Demande>(demandeCommand));
             return RedirectToAction("Index");
         }
     }

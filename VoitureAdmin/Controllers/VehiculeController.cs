@@ -32,9 +32,22 @@ namespace VoitureAdmin.Controllers
 
 
         [HttpPost]
-        public  IActionResult addVehicule(VehiculeCommand vehiculeCommand) 
+        public async Task<IActionResult> addVehicule(VehiculeCommand vehiculeCommand) 
         {
-            _vehiculeService.addVehicule(_mapper.Map<Vehicule>(vehiculeCommand));
+            await _vehiculeService.addVehicule(_mapper.Map<Vehicule>(vehiculeCommand));
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult deleteVehicule(long id) 
+        {
+            return View(_vehiculeService.getById(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> deleteVehicule(Vehicule vehicule)
+        {
+            await _vehiculeService.deleteVehicule(vehicule);
             return RedirectToAction("Index");
         }
     }

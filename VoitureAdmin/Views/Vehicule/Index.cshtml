@@ -48,7 +48,7 @@ else
                     <td>@vehicule.annonceRepresentation.First().ToString().ToUpper()@vehicule.annonceRepresentation.Substring(1)</td>
                     <td>
                         <a class="btn btn-primary" href="*">Modifier</a> @* href="GetUpdate/@vehicule.idRepresentation" *@
-                        <a class="btn ml-0 btn-danger" href="*">Supprimer</a> @* href="GetDelete/@vehicule.idRepresentation" *@
+                        <a class="btn ml-0 btn-danger" href="Vehicule/deleteVehicule/@vehicule.idRepresentation">Supprimer</a> @* href="GetDelete/@vehicule.idRepresentation" *@
                     </td>
                 </tr>
             }

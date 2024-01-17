@@ -30,10 +30,10 @@ namespace VoitureAdmin.Controllers
         }
 
         [HttpPost]
-        public IActionResult addCompte(CompteCommand compteCommand) 
+        public async Task<IActionResult> addCompte(CompteCommand compteCommand) 
         {
 
-            _compteService.addComtpe(_mapper.Map<Compte>(compteCommand));
+            await _compteService.addComtpe(_mapper.Map<Compte>(compteCommand));
             return RedirectToAction("Index");
         }
     }

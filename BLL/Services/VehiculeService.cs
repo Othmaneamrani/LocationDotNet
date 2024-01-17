@@ -1,6 +1,7 @@
 ﻿using BLL.Command;
 using DAL;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,17 @@ namespace BLL.Services
         {
             await _db.AddAsync(vehicule);
             await _db.SaveChangesAsync();
+        }
+
+        public Vehicule getById(long id) 
+        {
+            return _db.vehicules.Find(id);
+        }
+
+        public async Task deleteVehicule(Vehicule vehicule)
+        {
+                _db.Remove(vehicule);
+                await _db.SaveChangesAsync();
         }
     }
 }
