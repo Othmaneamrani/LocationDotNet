@@ -9,18 +9,16 @@ namespace VoitureAdmin.Controllers
 {
     public class DemandeController : Controller
     {
-        private readonly IMapper _mapper;
         private readonly DemandeService _demandeService;
 
-        public DemandeController(IMapper mapper, DemandeService demandeService)
+        public DemandeController(DemandeService demandeService)
         {
-            _mapper = mapper;
             _demandeService = demandeService;
         }
 
         public IActionResult Index()
         {
-            List<DemandeRepresentation> list = _mapper.Map<List<DemandeRepresentation>>(_demandeService.getAll());
+            List<DemandeRepresentation> list =_demandeService.getAll();
             return View(list);
         }
         [HttpGet]
@@ -33,7 +31,7 @@ namespace VoitureAdmin.Controllers
         [HttpPost]
         public async Task<IActionResult> addDemande(DemandeCommand demandeCommand)
         {
-            await _demandeService.addDemande(_mapper.Map<Demande>(demandeCommand));
+            await _demandeService.addDemande(demandeCommand);
             return RedirectToAction("Index");
         }
     }

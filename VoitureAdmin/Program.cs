@@ -1,10 +1,10 @@
+using BLL.Mapper;
 using BLL.Services;
 using DAL;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-
+using Microsoft.Extensions.DependencyInjection;
 namespace VoitureAdmin
 {
     public class Program
@@ -18,7 +18,7 @@ namespace VoitureAdmin
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<MyDbContext>(options => 
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnexionString")));
-            builder.Services.AddAutoMapper(typeof(Program).Assembly);
+            builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
             builder.Services.AddScoped<CompteService>();
             builder.Services.AddScoped<VehiculeService>();
             builder.Services.AddScoped<DemandeService>();

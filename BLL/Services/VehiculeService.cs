@@ -1,44 +1,42 @@
-﻿using BLL.Command;
+﻿using AutoMapper;
+using BLL.Command;
+using BLL.Representation;
 using DAL;
 using DAL.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BLL.Services
 {
     public class VehiculeService
     {
         private readonly MyDbContext _db;
+        private readonly IMapper _mapper;
 
-        public VehiculeService(MyDbContext db)
+        public VehiculeService(MyDbContext db , IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
 
-        public List<Vehicule> getAll()
+        public List<VehiculeRepresentation> getAll()
         {
-            List<Vehicule> list = _db.vehicules.ToList();
-            return list;
+            return _mapper.Map<List<VehiculeRepresentation>>(_db.vehicules.ToList()) ;
         }
 
-        public async Task addVehicule(Vehicule vehicule) 
+        public async Task addVehicule(VehiculeCommand vehiculeCommand) 
         {
-            await _db.AddAsync(vehicule);
+            await _db.AddAsync(_mapper.Map<Vehicule>(vehiculeCommand));
             await _db.SaveChangesAsync();
         }
 
-        public Vehicule getById(long id) 
+        public VehiculeCommand getById(long id) 
         {
-            return _db.vehicules.Find(id);
+            return _mapper.Map<VehiculeCommand>(_db.vehicules.Find(id));
         }
 
-        public async Task deleteVehicule(Vehicule vehicule)
+        public async Task deleteVehicule(long id)
         {
-                _db.Remove(vehicule);
+                _db.Remove(_mapper.Map<Vehicule>(await _db.vehicules.FindAsync(id)));
                 await _db.SaveChangesAsync();
         }
     }

@@ -9,18 +9,16 @@ namespace VoitureAdmin.Controllers
 {
     public class VehiculeController : Controller
     {
-        private readonly IMapper _mapper;
         private readonly VehiculeService _vehiculeService;
 
-        public VehiculeController(IMapper mapper, VehiculeService vehiculeService)
+        public VehiculeController(VehiculeService vehiculeService)
         {
-            _mapper = mapper;
             _vehiculeService = vehiculeService;
         }
 
         public IActionResult Index()
         {
-            List<VehiculeRepresentation> list = _mapper.Map<List<VehiculeRepresentation>>(_vehiculeService.getAll());
+            List<VehiculeRepresentation> list =_vehiculeService.getAll();
             return View(list);
         }
 
@@ -32,22 +30,22 @@ namespace VoitureAdmin.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> addVehicule(VehiculeCommand vehiculeCommand) 
+        public async Task<IActionResult> addVehicule(VehiculeCommand vehiculeCommand)
         {
-            await _vehiculeService.addVehicule(_mapper.Map<Vehicule>(vehiculeCommand));
+            await _vehiculeService.addVehicule(vehiculeCommand);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        public IActionResult deleteVehicule(long id) 
+        public IActionResult deleteVehiculeView(long id)
         {
-            return View(_vehiculeService.getById(id));
+            return View("deleteVehicule", _vehiculeService.getById(id));
         }
 
         [HttpPost]
-        public async Task<IActionResult> deleteVehicule(Vehicule vehicule)
+        public async Task<IActionResult> deleteVehicule(long id)
         {
-            await _vehiculeService.deleteVehicule(vehicule);
+            await _vehiculeService.deleteVehicule(id);
             return RedirectToAction("Index");
         }
     }

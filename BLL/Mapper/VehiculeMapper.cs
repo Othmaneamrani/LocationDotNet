@@ -3,7 +3,7 @@ using BLL.Command;
 using BLL.Representation;
 using DAL.Models;
 
-namespace VoitureAdmin.Mapper
+namespace BLL.Mapper
 {
     public class VehiculeMapper : Profile
     {
@@ -30,6 +30,18 @@ namespace VoitureAdmin.Mapper
             .ForMember(dest => dest.typeMoteur, opt => opt.MapFrom(src => src.typeMoteurCommand))
             .ForMember(dest => dest.prix, opt => opt.MapFrom(src => src.prixCommand))
             .ForMember(dest => dest.annonce, opt => opt.MapFrom(src => src.annonceCommand));
+
+
+            CreateMap<Vehicule, VehiculeCommand>()
+            .ForMember(dest => dest.idCommand, opt => opt.MapFrom(src => src.id))
+            .ForMember(dest => dest.photoCommand, opt => opt.MapFrom(src => src.photo))
+            .ForMember(dest => dest.typeCommand, opt => opt.MapFrom(src => src.type))
+            .ForMember(dest => dest.marqueCommand, opt => opt.MapFrom(src => src.marque))
+            .ForMember(dest => dest.kilometrageCommand, opt => opt.MapFrom(src => src.kilometrage))
+            .ForMember(dest => dest.nombreSiegesCommand, opt => opt.MapFrom(src => src.nombreSieges))
+            .ForMember(dest => dest.typeMoteurCommand, opt => opt.MapFrom(src => src.typeMoteur))
+            .ForMember(dest => dest.prixCommand, opt => opt.MapFrom(src => src.prix))
+            .ForMember(dest => dest.annonceCommand, opt => opt.MapFrom(src => src.annonce));
 
         }
     }

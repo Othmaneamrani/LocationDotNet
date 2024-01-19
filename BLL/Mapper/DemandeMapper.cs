@@ -3,7 +3,7 @@ using BLL.Command;
 using BLL.Representation;
 using DAL.Models;
 
-namespace VoitureAdmin.Mapper
+namespace BLL.Mapper
 {
     public class DemandeMapper : Profile
     {

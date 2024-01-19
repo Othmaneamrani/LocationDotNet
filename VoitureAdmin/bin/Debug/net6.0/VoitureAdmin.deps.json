@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "VoitureAdmin/1.0.0": {
         "dependencies": {
+          "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "BLL": "1.0.0",
           "FirebaseAdmin": "2.0.0",
@@ -750,6 +751,7 @@
       },
       "BLL/1.0.0": {
         "dependencies": {
+          "AutoMapper": "12.0.1",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.1",
           "DAL": "1.0.0"
         },

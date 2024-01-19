@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BLL.Command;
 using BLL.Representation;
 using DAL;
 using DAL.Models;
@@ -12,21 +13,23 @@ namespace BLL.Services
 {
     public class CompteService
     {
-        private readonly MyDbContext _db;  
+        private readonly MyDbContext _db;
+        private readonly IMapper _mapper;
 
-        public CompteService(MyDbContext myDbContext)
+
+        public CompteService(MyDbContext myDbContext, IMapper mapper)
         {
             _db = myDbContext;
+            _mapper = mapper;
         }
 
-        public List<Compte> getAll()
+        public List<CompteRepresentation> getAll()
         {
-            List<Compte> list = _db.comptes.ToList();
-            return list;
+            return _mapper.Map<List<CompteRepresentation>>(_db.comptes.ToList());
         }
-        public async Task addComtpe(Compte compte) 
+        public async Task addComtpe(CompteCommand compteCommand) 
         {
-            await _db.comptes.AddAsync(compte);
+            await _db.comptes.AddAsync(_mapper.Map<Compte>(compteCommand));
             await _db.SaveChangesAsync();
         }
     }

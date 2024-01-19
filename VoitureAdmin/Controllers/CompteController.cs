@@ -10,17 +10,15 @@ namespace VoitureAdmin.Controllers
     public class CompteController : Controller
     {
         private readonly CompteService _compteService;
-        private readonly IMapper _mapper;
 
-        public CompteController(CompteService compteService, IMapper mapper)
+        public CompteController(CompteService compteService)
         {
             _compteService = compteService;
-            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            List<CompteRepresentation> list = _mapper.Map<List<CompteRepresentation>>(_compteService.getAll());
+            List<CompteRepresentation> list = _compteService.getAll();  
             return View(list);
         }
         [HttpGet]
@@ -30,10 +28,10 @@ namespace VoitureAdmin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> addCompte(CompteCommand compteCommand) 
+        public async Task<IActionResult> addCompte(CompteCommand compteCommand)
         {
 
-            await _compteService.addComtpe(_mapper.Map<Compte>(compteCommand));
+            await _compteService.addComtpe(compteCommand);
             return RedirectToAction("Index");
         }
     }
