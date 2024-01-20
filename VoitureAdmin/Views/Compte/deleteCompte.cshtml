@@ -1,0 +1,20 @@
+﻿@model BLL.Command.CompteCommand
+
+
+@if (Model != null)
+{
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 70vh;">
+        <div class="card " style="width: 18rem; padding: 35px;">
+            <div class="card-body text-center ">
+                <h5 class="card-title mb-4">Etes-vous sur de vouloir supprimer le compte de @Model.usernameCommand ?</h5>
+                <form asp-controller="Compte" asp-action="deleteCompte" asp-route-id="@Model.idCommand" method="post">
+                    <button type="submit" class="btn btn-danger m-lg-1">Oui</button>
+                    <a asp-controller="Compte" asp-action="Index" class="btn btn-primary m-md-1">Non</a>
+                </form>
+            </div>
+        </div>
+    </div>
+}else
+{
+    <p>Compte déjà supprimé.</p>
+}

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class DemandeService
+    public class DemandeService : IDemandeService
     {
         private readonly MyDbContext _db;
         private readonly IMapper _mapper;
@@ -34,5 +34,24 @@ namespace BLL.Services
             await _db.demandes.AddAsync(_mapper.Map<Demande>(demandeCommand));
             await _db.SaveChangesAsync();
         }
+
+        public DemandeCommand getById(long id)
+        {
+            return _mapper.Map<DemandeCommand>(_db.demandes.Find(id));
+        }
+
+        public async Task deleteDemande(long id)
+        {
+            _db.Remove(await _db.demandes.FindAsync(id));
+            await _db.SaveChangesAsync();
+        }
+
+        public async Task updateDemande(DemandeCommand demandeCommand)
+        {
+            Demande demande = await _db.demandes.FindAsync(demandeCommand.idCommand);
+            _mapper.Map(demandeCommand, demande);
+            await _db.SaveChangesAsync();
+        }
+
     }
 }

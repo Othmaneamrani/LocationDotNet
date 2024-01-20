@@ -34,5 +34,32 @@ namespace VoitureAdmin.Controllers
             await _compteService.addComtpe(compteCommand);
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult deleteCompteView(long id)
+        {
+            return View("deleteCompte", _compteService.getById(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> deleteCompte(long id)
+        {
+            await _compteService.deleteCompte(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult updateCompte(long id)
+        {
+            return View(_compteService.getById(id));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> updateCompte(CompteCommand compteCommand)
+        {
+            await _compteService.updateCompte(compteCommand);
+            return RedirectToAction("Index");
+        }
     }
 }

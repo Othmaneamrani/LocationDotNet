@@ -3,11 +3,11 @@ using BLL.Command;
 using BLL.Representation;
 using DAL;
 using DAL.Models;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL.Services
 {
-    public class VehiculeService
+    public class VehiculeService : IVehiculeService
     {
         private readonly MyDbContext _db;
         private readonly IMapper _mapper;
@@ -31,13 +31,20 @@ namespace BLL.Services
 
         public VehiculeCommand getById(long id) 
         {
-            return _mapper.Map<VehiculeCommand>(_db.vehicules.Find(id));
+            return  _mapper.Map<VehiculeCommand>(_db.vehicules.Find(id));
         }
 
         public async Task deleteVehicule(long id)
         {
-                _db.Remove(_mapper.Map<Vehicule>(await _db.vehicules.FindAsync(id)));
+                _db.Remove(await _db.vehicules.FindAsync(id));
                 await _db.SaveChangesAsync();
+        }
+
+        public async Task updateVehicule(VehiculeCommand vehiculeCommand)
+        {
+            Vehicule vehicule = await _db.vehicules.FindAsync(vehiculeCommand.idCommand);
+            _mapper.Map(vehiculeCommand, vehicule);
+            await _db.SaveChangesAsync();
         }
     }
 }

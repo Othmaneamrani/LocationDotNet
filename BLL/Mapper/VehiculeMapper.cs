@@ -18,7 +18,9 @@ namespace BLL.Mapper
             .ForMember(dest => dest.nombreSiegesRepresentation, opt => opt.MapFrom(src => src.nombreSieges))
             .ForMember(dest => dest.typeMoteurRepresentation, opt => opt.MapFrom(src => src.typeMoteur))
             .ForMember(dest => dest.prixRepresentation, opt => opt.MapFrom(src => src.prix))
-            .ForMember(dest => dest.annonceRepresentation, opt => opt.MapFrom(src => src.annonce));
+            .ForMember(dest => dest.annonceRepresentation, opt => opt.MapFrom(src => src.annonce))
+            .ForMember(dest => dest.demandesRepresentation, opt => opt.MapFrom(src => src.demandes));
+
 
             CreateMap<VehiculeCommand, Vehicule>()
             .ForMember(dest => dest.id, opt => opt.MapFrom(src => src.idCommand))
@@ -29,7 +31,9 @@ namespace BLL.Mapper
             .ForMember(dest => dest.nombreSieges, opt => opt.MapFrom(src => src.nombreSiegesCommand))
             .ForMember(dest => dest.typeMoteur, opt => opt.MapFrom(src => src.typeMoteurCommand))
             .ForMember(dest => dest.prix, opt => opt.MapFrom(src => src.prixCommand))
-            .ForMember(dest => dest.annonce, opt => opt.MapFrom(src => src.annonceCommand));
+            .ForMember(dest => dest.annonce, opt => opt.MapFrom(src => src.annonceCommand))
+            .ForMember(dest => dest.demandes, opt => opt.MapFrom(src => src.demandesCommand));
+
 
 
             CreateMap<Vehicule, VehiculeCommand>()
@@ -41,7 +45,9 @@ namespace BLL.Mapper
             .ForMember(dest => dest.nombreSiegesCommand, opt => opt.MapFrom(src => src.nombreSieges))
             .ForMember(dest => dest.typeMoteurCommand, opt => opt.MapFrom(src => src.typeMoteur))
             .ForMember(dest => dest.prixCommand, opt => opt.MapFrom(src => src.prix))
-            .ForMember(dest => dest.annonceCommand, opt => opt.MapFrom(src => src.annonce));
+            .ForMember(dest => dest.annonceCommand, opt => opt.MapFrom(src => src.annonce))
+            .ForMember(dest => dest.demandesCommand, opt => opt.MapFrom(src => src.demandes));
+
 
         }
     }

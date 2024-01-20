@@ -27,6 +27,16 @@ namespace BLL.Mapper
             .ForMember(dest => dest.compte, opt => opt.MapFrom(src => src.compteCommand))
             .ForMember(dest => dest.vehiculeId, opt => opt.MapFrom(src => src.vehiculeIdCommand))
             .ForMember(dest => dest.vehicule, opt => opt.MapFrom(src => src.vehiculeCommand));
+
+            CreateMap<Demande, DemandeCommand>()
+            .ForMember(dest => dest.idCommand, opt => opt.MapFrom(src => src.id))
+            .ForMember(dest => dest.dateDebutCommand, opt => opt.MapFrom(src => src.dateDebut))
+            .ForMember(dest => dest.dateFinCommand, opt => opt.MapFrom(src => src.dateFin))
+            .ForMember(dest => dest.prixTotalCommand, opt => opt.MapFrom(src => src.prixTotal))
+            .ForMember(dest => dest.compteIdCommand, opt => opt.MapFrom(src => src.compteId))
+            .ForMember(dest => dest.compteCommand, opt => opt.MapFrom(src => src.compte))
+            .ForMember(dest => dest.vehiculeIdCommand, opt => opt.MapFrom(src => src.vehiculeId))
+            .ForMember(dest => dest.vehiculeCommand, opt => opt.MapFrom(src => src.vehicule));
         }
     }
 }

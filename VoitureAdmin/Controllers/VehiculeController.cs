@@ -48,5 +48,20 @@ namespace VoitureAdmin.Controllers
             await _vehiculeService.deleteVehicule(id);
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public IActionResult updateVehicule(long id)
+        {
+            return View(_vehiculeService.getById(id));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> updateVehicule(VehiculeCommand vehiculeCommand)
+        {
+            await _vehiculeService.updateVehicule(vehiculeCommand);
+            return RedirectToAction("Index");
+        }
     }
 }
