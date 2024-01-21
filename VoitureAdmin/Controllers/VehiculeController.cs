@@ -1,24 +1,23 @@
-﻿using AutoMapper;
-using BLL.Command;
+﻿using BLL.Command;
 using BLL.Representation;
 using BLL.Services;
-using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace VoitureAdmin.Controllers
 {
     public class VehiculeController : Controller
     {
-        private readonly VehiculeService _vehiculeService;
+        private readonly IVehiculeService _iVehiculeService;
 
-        public VehiculeController(VehiculeService vehiculeService)
+
+        public VehiculeController(IVehiculeService iVehiculeService)
         {
-            _vehiculeService = vehiculeService;
+            _iVehiculeService = iVehiculeService;
         }
 
         public IActionResult Index()
         {
-            List<VehiculeRepresentation> list =_vehiculeService.getAll();
+            List<VehiculeRepresentation> list =_iVehiculeService.getAll();
             return View(list);
         }
 
@@ -32,20 +31,20 @@ namespace VoitureAdmin.Controllers
         [HttpPost]
         public async Task<IActionResult> addVehicule(VehiculeCommand vehiculeCommand)
         {
-            await _vehiculeService.addVehicule(vehiculeCommand);
+            await _iVehiculeService.addVehicule(vehiculeCommand);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult deleteVehiculeView(long id)
         {
-            return View("deleteVehicule", _vehiculeService.getById(id));
+            return View("deleteVehicule", _iVehiculeService.getById(id));
         }
 
         [HttpPost]
         public async Task<IActionResult> deleteVehicule(long id)
         {
-            await _vehiculeService.deleteVehicule(id);
+            await _iVehiculeService.deleteVehicule(id);
             return RedirectToAction("Index");
         }
 
@@ -53,14 +52,14 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         public IActionResult updateVehicule(long id)
         {
-            return View(_vehiculeService.getById(id));
+            return View(_iVehiculeService.getById(id));
         }
 
 
         [HttpPost]
         public async Task<IActionResult> updateVehicule(VehiculeCommand vehiculeCommand)
         {
-            await _vehiculeService.updateVehicule(vehiculeCommand);
+            await _iVehiculeService.updateVehicule(vehiculeCommand);
             return RedirectToAction("Index");
         }
     }

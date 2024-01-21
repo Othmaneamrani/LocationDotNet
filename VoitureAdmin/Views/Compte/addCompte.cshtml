@@ -2,19 +2,22 @@
 
 <h2 class="mt-5">Ajouter un nouveau véhicule</h2>
 
-<form method="post" action="addCompte" onsubmit="return validatePassword();" class="mt-5">
+<form method="post" action="addCompte" onsubmit="return validationAlert();" class="mt-5">
 
     <div class="mb-3">
         <label class="form-label">Username</label>
-        <input type="text" class="form-control" asp-for="usernameCommand" required>
+        <input type="text" id="username" class="form-control" oninput="inputValidation()" asp-for="usernameCommand" required>
+        <div id="espaceUsername" style="color: red;"></div>
     </div>
     <div class="mb-3">
         <label class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" asp-for="passwordCommand" required>
+        <input type="password" class="form-control" id="password" oninput="inputValidation()" asp-for="passwordCommand" required>
+        <div id="passwordLongueur" style="color: red;"></div>
+        <div id="espacePassword" style="color: red;"></div>
     </div>
     <div class="mb-3">
         <label class="form-label">Confirmation password</label>
-        <input type="password" class="form-control" id="confirmPassword" oninput="validatePasswordText()" required>
+        <input type="password" class="form-control" id="confirmPassword" oninput="inputValidation()" required>
         <div id="passwordMismatch" style="color: red;"></div>
     </div>
 
@@ -49,28 +52,57 @@
 </form>
 
 <script>
-    function validatePassword() {
+    function validationAlert() {
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirmPassword").value;
+        var username = document.getElementById("username").value;
 
         if (password !== confirmPassword) {
             alert("Validation de Password invalide.");
             return false;
+        }else if (password.includes(" ")){
+            alert("Password ne doit pas contenir d'espace.");
+            return false;
+        } else if (username.includes(" ")) {
+            alert("Username ne doit pas contenir d'espace.");
+        }else{
+            return true;
         }
-        return true;
     }
 
 
-        function validatePasswordText() {
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
-            var mismatchMessage = document.getElementById("passwordMismatch");
+    function inputValidation() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
 
-            if (password !== confirmPassword) {
-                mismatchMessage.textContent = "Les mots de passe ne correspondent pas.";
-            } else {
-                mismatchMessage.textContent = "";
-            }
+        if (username.includes(" ") && username.trim() !== "") {
+            document.getElementById("espaceUsername").textContent = "Username ne doit pas contenir d'espaces.";
+        } else {
+            document.getElementById("espaceUsername").textContent = "";
         }
+
+        if (password.includes(" ") && password.trim() !== "") {
+            document.getElementById("espacePassword").textContent = "Password ne doit pas contenir d'espaces.";
+        } else {
+            document.getElementById("espacePassword").textContent = "";
+        }
+
+        if (password.length < 6 && password.trim() !== "") {
+            document.getElementById("passwordLongueur").textContent = "Password invalide, il doit dépasser 6 caractères.";
+        } else {
+            document.getElementById("passwordLongueur").textContent = "";
+        }
+
+        if (password !== confirmPassword) {
+            document.getElementById("passwordMismatch").textContent = "Les mots de passe ne correspondent pas.";
+        } else {
+            document.getElementById("passwordMismatch").textContent = "";
+        }
+
+        return true;
+    }
+
+ 
 
 </script>

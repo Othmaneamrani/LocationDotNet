@@ -29,8 +29,11 @@ namespace BLL.Services
         }
         public async Task addComtpe(CompteCommand compteCommand) 
         {
-            await _db.comptes.AddAsync(_mapper.Map<Compte>(compteCommand));
-            await _db.SaveChangesAsync();
+            if (compteCommand.passwordCommand.Length > 6)
+            {
+                await _db.comptes.AddAsync(_mapper.Map<Compte>(compteCommand));
+                await _db.SaveChangesAsync();
+            }
         }
 
         public CompteCommand getById(long id)

@@ -19,9 +19,9 @@ namespace VoitureAdmin
             builder.Services.AddDbContext<MyDbContext>(options => 
             options.UseSqlServer(builder.Configuration.GetConnectionString("MyConnexionString")));
             builder.Services.AddAutoMapper(typeof(AutoMapperConfig));
-            builder.Services.AddScoped<CompteService>();
-            builder.Services.AddScoped<VehiculeService>();
-            builder.Services.AddScoped<DemandeService>();
+            builder.Services.AddScoped<ICompteService, CompteService>();
+            builder.Services.AddScoped<IDemandeService , DemandeService>();
+            builder.Services.AddScoped<IVehiculeService, VehiculeService>();
             builder.Configuration.AddJsonFile("appsettings.json");
             var firebaseConfigSection = builder.Configuration.GetSection("FirebaseConfig");
             if (firebaseConfigSection != null && !string.IsNullOrEmpty(firebaseConfigSection.Value))

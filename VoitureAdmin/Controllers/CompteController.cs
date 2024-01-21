@@ -9,16 +9,16 @@ namespace VoitureAdmin.Controllers
 {
     public class CompteController : Controller
     {
-        private readonly CompteService _compteService;
+        private readonly ICompteService _iCompteService;
 
-        public CompteController(CompteService compteService)
+        public CompteController(ICompteService iCompteService)
         {
-            _compteService = compteService;
+            _iCompteService = iCompteService;
         }
 
         public IActionResult Index()
         {
-            List<CompteRepresentation> list = _compteService.getAll();  
+            List<CompteRepresentation> list = _iCompteService.getAll();  
             return View(list);
         }
         [HttpGet]
@@ -30,35 +30,34 @@ namespace VoitureAdmin.Controllers
         [HttpPost]
         public async Task<IActionResult> addCompte(CompteCommand compteCommand)
         {
-
-            await _compteService.addComtpe(compteCommand);
+            await _iCompteService.addComtpe(compteCommand);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult deleteCompteView(long id)
         {
-            return View("deleteCompte", _compteService.getById(id));
+            return View("deleteCompte", _iCompteService.getById(id));
         }
 
         [HttpPost]
         public async Task<IActionResult> deleteCompte(long id)
         {
-            await _compteService.deleteCompte(id);
+            await _iCompteService.deleteCompte(id);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult updateCompte(long id)
         {
-            return View(_compteService.getById(id));
+            return View(_iCompteService.getById(id));
         }
 
 
         [HttpPost]
         public async Task<IActionResult> updateCompte(CompteCommand compteCommand)
         {
-            await _compteService.updateCompte(compteCommand);
+            await _iCompteService.updateCompte(compteCommand);
             return RedirectToAction("Index");
         }
     }

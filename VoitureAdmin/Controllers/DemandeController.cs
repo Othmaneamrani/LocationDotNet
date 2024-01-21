@@ -9,16 +9,16 @@ namespace VoitureAdmin.Controllers
 {
     public class DemandeController : Controller
     {
-        private readonly DemandeService _demandeService;
+        private readonly IDemandeService _iDemandeService;
 
-        public DemandeController(DemandeService demandeService)
+        public DemandeController(IDemandeService iDemandeService)
         {
-            _demandeService = demandeService;
+            _iDemandeService = iDemandeService;
         }
 
         public IActionResult Index()
         {
-            List<DemandeRepresentation> list =_demandeService.getAll();
+            List<DemandeRepresentation> list = _iDemandeService.getAll();
             return View(list);
         }
         [HttpGet]
@@ -31,34 +31,34 @@ namespace VoitureAdmin.Controllers
         [HttpPost]
         public async Task<IActionResult> addDemande(DemandeCommand demandeCommand)
         {
-            await _demandeService.addDemande(demandeCommand);
+            await _iDemandeService.addDemande(demandeCommand);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult deleteDemandeView(long id)
         {
-            return View("deleteDemande", _demandeService.getById(id));
+            return View("deleteDemande", _iDemandeService.getById(id));
         }
 
         [HttpPost]
         public async Task<IActionResult> deleteDemande(long id)
         {
-            await _demandeService.deleteDemande(id);
+            await _iDemandeService.deleteDemande(id);
             return RedirectToAction("Index");
         }
 
         [HttpGet]
         public IActionResult updateDemande(long id)
         {
-            return View(_demandeService.getById(id));
+            return View(_iDemandeService.getById(id));
         }
 
 
         [HttpPost]
         public async Task<IActionResult> updateDemande(DemandeCommand demandeCommand)
         {
-            await _demandeService.updateDemande(demandeCommand);
+            await _iDemandeService.updateDemande(demandeCommand);
             return RedirectToAction("Index");
         }
     }
