@@ -1,5 +1,20 @@
 ﻿@model BLL.Command.CompteCommand
 
+<style>
+    .input-group {
+        display: flex;
+    }
+
+        .input-group input {
+            flex: 1;
+        }
+
+        .input-group button {
+            margin-left: 10px;
+        }
+</style>
+
+
 <h2 class="mt-5">Ajouter un nouveau véhicule</h2>
 
 <form method="post" action="addCompte" onsubmit="return validationAlert();" class="mt-5">
@@ -9,42 +24,70 @@
         <input type="text" id="username" class="form-control" oninput="inputValidation()" asp-for="usernameCommand" required>
         <div id="espaceUsername" style="color: red;"></div>
     </div>
+
+
     <div class="mb-3">
         <label class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" oninput="inputValidation()" asp-for="passwordCommand" required>
+        <div class="input-group">
+            <input type="password" class="form-control" id="password" oninput="inputValidation()" asp-for="passwordCommand" required>
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">Show</button>
+        </div>
         <div id="passwordLongueur" style="color: red;"></div>
         <div id="espacePassword" style="color: red;"></div>
     </div>
+
+
+
     <div class="mb-3">
         <label class="form-label">Confirmation password</label>
-        <input type="password" class="form-control" id="confirmPassword" oninput="inputValidation()" required>
-        <div id="passwordMismatch" style="color: red;"></div>
+        <div class="input-group">
+            <input type="password" class="form-control" id="confirmPassword" oninput="inputValidation()" required>
+            <button class="btn btn-outline-secondary" type="button" id="togglePasswordConfirm">Show</button>
+        </div>
+    <div id="passwordMismatch" style="color: red;"></div>
     </div>
+
+
 
     <div class="mb-3">
         <label class="form-label">Nom</label>
         <input type="text" class="form-control" asp-for="nomCommand" required>
     </div>
+
+
+
     <div class="mb-3">
         <label class="form-label">Prénom</label>
         <input type="text" class="form-control" asp-for="prenomCommand" required>
     </div>
+
+
+
     <div class="mb-3">
         <label class="form-label">Age</label>
         <input type="number" class="form-control" asp-for="ageCommand" required>
     </div>
+
+
+
     <div class="mb-3">
         <label class="form-label">Email</label>
         <input type="email" class="form-control" asp-for="emailCommand" required>
     </div>
+
+
+
     <div class="mb-3">
         <label class="form-label">CIN</label>
         <input type="text" class="form-control" asp-for="cinCommand" required>
     </div>
+
+
     <div class="mb-3">
         <label class="form-label">Téléphone</label>
         <input type="text" class="form-control" asp-for="telephoneCommand" required>
     </div>
+
 
     <button type="submit" class="btn btn-primary">Ajouter</button>
     <a asp-controller="Compte" asp-action="Index" class="btn btn-primary m-md-1">Retour</a>
@@ -103,6 +146,32 @@
         return true;
     }
 
- 
+        document.getElementById("togglePassword").addEventListener("click", function () {
+            var passwordInput = document.getElementById("password");
+            var toggleButton = document.getElementById("togglePassword");
+
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+                toggleButton.textContent = "Hide";
+            } else {
+                passwordInput.type = "password";
+                toggleButton.textContent = "Show";
+            }
+        });
+
+
+    document.getElementById("togglePasswordConfirm").addEventListener("click", function () {
+        var passwordInput = document.getElementById("confirmPassword");
+        var toggleButton = document.getElementById("togglePasswordConfirm");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            toggleButton.textContent = "Show";
+        }
+    });
+
 
 </script>

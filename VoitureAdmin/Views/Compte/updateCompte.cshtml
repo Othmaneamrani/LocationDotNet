@@ -1,79 +1,184 @@
 ﻿@model BLL.Command.CompteCommand
 
+<style>
+    .input-group {
+        display: flex;
+    }
+
+        .input-group input {
+            flex: 1;
+        }
+
+        .input-group button {
+            margin-left: 10px;
+        }
+</style>
+
+
 <h2 class="mt-5">Modifier un véhicule</h2>
 
-<form method="post" action="updateCompte" onsubmit="return validatePassword();" class="mt-5">
+<form method="post" action="updateCompte" onsubmit="return validationAlert();" class="mt-5">
+
+
     <div class="mb-3">
         <label class="form-label">Id</label>
-        <input type="number" class="form-control" asp-for="idCommand" readonly>
+        <input type="text" class="form-control" asp-for="idCommand" readonly>
     </div>
+
+
     <div class="mb-3">
         <label class="form-label">Username</label>
-        <input type="text" class="form-control" asp-for="usernameCommand" required>
+        <input type="text" id="username" class="form-control" oninput="inputValidation()" asp-for="usernameCommand" required>
+        <div id="espaceUsername" style="color: red;"></div>
     </div>
+
+
     <div class="mb-3">
         <label class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" asp-for="passwordCommand" required>
+        <div class="input-group">
+            <input type="password" class="form-control" id="password" oninput="inputValidation()" asp-for="passwordCommand" required>
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">Show</button>
+        </div>
+        <div id="passwordLongueur" style="color: red;"></div>
+        <div id="espacePassword" style="color: red;"></div>
     </div>
+
+
+
     <div class="mb-3">
         <label class="form-label">Confirmation password</label>
-        <input type="password" class="form-control" id="confirmPassword" oninput="validatePasswordText()" required>
+        <div class="input-group">
+            <input type="password" class="form-control" id="confirmPassword" oninput="inputValidation()" required>
+            <button class="btn btn-outline-secondary" type="button" id="togglePasswordConfirm">Show</button>
+        </div>
         <div id="passwordMismatch" style="color: red;"></div>
     </div>
+
+
 
     <div class="mb-3">
         <label class="form-label">Nom</label>
         <input type="text" class="form-control" asp-for="nomCommand" required>
     </div>
+
+
+
     <div class="mb-3">
         <label class="form-label">Prénom</label>
         <input type="text" class="form-control" asp-for="prenomCommand" required>
     </div>
+
+
+
     <div class="mb-3">
         <label class="form-label">Age</label>
         <input type="number" class="form-control" asp-for="ageCommand" required>
     </div>
+
+
+
     <div class="mb-3">
         <label class="form-label">Email</label>
         <input type="email" class="form-control" asp-for="emailCommand" required>
     </div>
+
+
+
     <div class="mb-3">
         <label class="form-label">CIN</label>
         <input type="text" class="form-control" asp-for="cinCommand" required>
     </div>
+
+
     <div class="mb-3">
         <label class="form-label">Téléphone</label>
         <input type="text" class="form-control" asp-for="telephoneCommand" required>
     </div>
 
-    <button type="submit" class="btn btn-primary">Sauvegarder</button>
+
+    <button type="submit" class="btn btn-primary">Ajouter</button>
     <a asp-controller="Compte" asp-action="Index" class="btn btn-primary m-md-1">Retour</a>
 
 </form>
 
 <script>
-    function validatePassword() {
+    function validationAlert() {
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirmPassword").value;
+        var username = document.getElementById("username").value;
 
         if (password !== confirmPassword) {
             alert("Validation de Password invalide.");
             return false;
+        } else if (password.includes(" ")) {
+            alert("Password ne doit pas contenir d'espace.");
+            return false;
+        } else if (username.includes(" ")) {
+            alert("Username ne doit pas contenir d'espace.");
+        } else {
+            return true;
         }
+    }
+
+
+    function inputValidation() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (username.includes(" ") && username.trim() !== "") {
+            document.getElementById("espaceUsername").textContent = "Username ne doit pas contenir d'espaces.";
+        } else {
+            document.getElementById("espaceUsername").textContent = "";
+        }
+
+        if (password.includes(" ") && password.trim() !== "") {
+            document.getElementById("espacePassword").textContent = "Password ne doit pas contenir d'espaces.";
+        } else {
+            document.getElementById("espacePassword").textContent = "";
+        }
+
+        if (password.length < 6 && password.trim() !== "") {
+            document.getElementById("passwordLongueur").textContent = "Password invalide, il doit dépasser 6 caractères.";
+        } else {
+            document.getElementById("passwordLongueur").textContent = "";
+        }
+
+        if (password !== confirmPassword) {
+            document.getElementById("passwordMismatch").textContent = "Les mots de passe ne correspondent pas.";
+        } else {
+            document.getElementById("passwordMismatch").textContent = "";
+        }
+
         return true;
     }
 
+    document.getElementById("togglePassword").addEventListener("click", function () {
+        var passwordInput = document.getElementById("password");
+        var toggleButton = document.getElementById("togglePassword");
 
-    function validatePasswordText() {
-        var password = document.getElementById("password").value;
-        var confirmPassword = document.getElementById("confirmPassword").value;
-        var mismatchMessage = document.getElementById("passwordMismatch");
-
-        if (password !== confirmPassword) {
-            mismatchMessage.textContent = "Les mots de passe ne correspondent pas.";
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.textContent = "Hide";
         } else {
-            mismatchMessage.textContent = "";
+            passwordInput.type = "password";
+            toggleButton.textContent = "Show";
         }
-    }
+    });
+
+
+    document.getElementById("togglePasswordConfirm").addEventListener("click", function () {
+        var passwordInput = document.getElementById("confirmPassword");
+        var toggleButton = document.getElementById("togglePasswordConfirm");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            toggleButton.textContent = "Show";
+        }
+    });
+
 
 </script>
