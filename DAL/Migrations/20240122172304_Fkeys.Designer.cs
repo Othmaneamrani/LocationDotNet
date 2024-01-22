@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAL.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20240122024349_fav")]
-    partial class fav
+    [Migration("20240122172304_Fkeys")]
+    partial class Fkeys
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -121,7 +121,7 @@ namespace DAL.Migrations
 
                     b.HasIndex("vehiculeId");
 
-                    b.ToTable("Favoris");
+                    b.ToTable("favoris");
                 });
 
             modelBuilder.Entity("DAL.Models.Vehicule", b =>
@@ -168,13 +168,13 @@ namespace DAL.Migrations
 
             modelBuilder.Entity("DAL.Models.Demande", b =>
                 {
-                    b.HasOne("DAL.Models.Compte", "compte")
+                    b.HasOne("DAL.Models.Vehicule", "vehicule")
                         .WithMany("demandes")
                         .HasForeignKey("compteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DAL.Models.Vehicule", "vehicule")
+                    b.HasOne("DAL.Models.Compte", "compte")
                         .WithMany("demandes")
                         .HasForeignKey("vehiculeId")
                         .OnDelete(DeleteBehavior.Cascade)

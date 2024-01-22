@@ -14,17 +14,14 @@ namespace DAL.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long id { get; set; }
 
-        [ForeignKey("compteId")]
         public long compteId { get; set; }
 
-        [ForeignKey("vehiculeId")]
         public long vehiculeId { get; set; }
 
-
-        [InverseProperty("favoris")]
+        [ForeignKey("compteId")]
         public Compte compte { get; set; }
 
-        [InverseProperty("favoris")]
+        [ForeignKey("vehiculeId")]
         public Vehicule vehicule { get; set; }
     }
 }

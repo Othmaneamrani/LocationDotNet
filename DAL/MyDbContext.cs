@@ -17,5 +17,7 @@ namespace DAL
         public DbSet<Compte> comptes { get; set; }
         public DbSet<Demande> demandes { get; set; }
         public DbSet<Vehicule> vehicules { get; set; }
+        public DbSet<Favoris> favoris { get; set; }
+
     }
 }

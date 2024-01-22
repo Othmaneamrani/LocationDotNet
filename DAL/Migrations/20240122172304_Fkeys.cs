@@ -5,11 +5,19 @@
 namespace DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class fav : Migration
+    public partial class Fkeys : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_demandes_comptes_compteId",
+                table: "demandes");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_demandes_vehicules_vehiculeId",
+                table: "demandes");
+
             migrationBuilder.DropForeignKey(
                 name: "FK_vehicules_comptes_Compteid",
                 table: "vehicules");
@@ -23,7 +31,7 @@ namespace DAL.Migrations
                 table: "vehicules");
 
             migrationBuilder.CreateTable(
-                name: "Favoris",
+                name: "favoris",
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
@@ -33,15 +41,15 @@ namespace DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favoris", x => x.id);
+                    table.PrimaryKey("PK_favoris", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Favoris_comptes_compteId",
+                        name: "FK_favoris_comptes_compteId",
                         column: x => x.compteId,
                         principalTable: "comptes",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Favoris_vehicules_vehiculeId",
+                        name: "FK_favoris_vehicules_vehiculeId",
                         column: x => x.vehiculeId,
                         principalTable: "vehicules",
                         principalColumn: "id",
@@ -49,21 +57,45 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favoris_compteId",
-                table: "Favoris",
+                name: "IX_favoris_compteId",
+                table: "favoris",
                 column: "compteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favoris_vehiculeId",
-                table: "Favoris",
+                name: "IX_favoris_vehiculeId",
+                table: "favoris",
                 column: "vehiculeId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_demandes_comptes_vehiculeId",
+                table: "demandes",
+                column: "vehiculeId",
+                principalTable: "comptes",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_demandes_vehicules_compteId",
+                table: "demandes",
+                column: "compteId",
+                principalTable: "vehicules",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_demandes_comptes_vehiculeId",
+                table: "demandes");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_demandes_vehicules_compteId",
+                table: "demandes");
+
             migrationBuilder.DropTable(
-                name: "Favoris");
+                name: "favoris");
 
             migrationBuilder.AddColumn<long>(
                 name: "Compteid",
@@ -75,6 +107,22 @@ namespace DAL.Migrations
                 name: "IX_vehicules_Compteid",
                 table: "vehicules",
                 column: "Compteid");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_demandes_comptes_compteId",
+                table: "demandes",
+                column: "compteId",
+                principalTable: "comptes",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_demandes_vehicules_vehiculeId",
+                table: "demandes",
+                column: "vehiculeId",
+                principalTable: "vehicules",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
                 name: "FK_vehicules_comptes_Compteid",

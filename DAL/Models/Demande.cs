@@ -19,13 +19,12 @@ namespace DAL.Models
         public DateTime dateFin { get; set; }
         [Required]
         public double prixTotal { get; set; }
-
         public long compteId { get; set; }
-        [ForeignKey("compteId")]
-
-        public Compte compte { get; set; }
-        public long vehiculeId { get; set; }
         [ForeignKey("vehiculeId")]
+        public Compte compte { get; set; }
+
+        public long vehiculeId { get; set; }
+        [ForeignKey("compteId")]
         public Vehicule vehicule { get; set; }
     }
 }
