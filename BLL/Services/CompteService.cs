@@ -27,12 +27,23 @@ namespace BLL.Services
         {
             return _mapper.Map<List<CompteRepresentation>>(_db.comptes.ToList());
         }
-        public async Task addComtpe(CompteCommand compteCommand) 
+        public async Task addComtpe(CompteCommand compteCommand)
         {
             if (compteCommand.passwordCommand.Length > 6)
             {
-                await _db.comptes.AddAsync(_mapper.Map<Compte>(compteCommand));
-                await _db.SaveChangesAsync();
+                if (System.Text.RegularExpressions.Regex.IsMatch(compteCommand.telephoneCommand, @"^\d+$"))
+                {
+                    await _db.comptes.AddAsync(_mapper.Map<Compte>(compteCommand));
+                    await _db.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new ArgumentException("Le numéro de téléphone doit contenir uniquement des chiffres.");
+                }
+            }
+            else
+            {
+                throw new ArgumentException("Le password est invalide.");
             }
         }
 
@@ -52,6 +63,36 @@ namespace BLL.Services
             Compte compte = await _db.comptes.FindAsync(compteCommand.idCommand);
             _mapper.Map(compteCommand, compte);
             await _db.SaveChangesAsync();
+        }
+
+
+        public bool getUsername(string username)
+        {
+            List<Compte> list = _db.comptes.ToList();
+            bool ok=true;
+            foreach (Compte compte in list)
+            {
+                if(compte.username == username)
+                {
+                    ok = false;
+                }
+            }
+            return ok;
+        }
+
+
+        public bool getMail(string mail)
+        {
+            List<Compte> list = _db.comptes.ToList();
+            bool ok = true;
+            foreach (Compte compte in list)
+            {
+                if (compte.email == mail)
+                {
+                    ok = false;
+                }
+            }
+            return ok;
         }
     }
 }

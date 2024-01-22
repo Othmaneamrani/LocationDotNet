@@ -1,5 +1,8 @@
 ﻿@model BLL.Command.CompteCommand
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
 <style>
     .input-group {
         display: flex;
@@ -19,17 +22,17 @@
 
 <form method="post" action="updateCompte" onsubmit="return validationAlert();" class="mt-5">
 
-
     <div class="mb-3">
         <label class="form-label">Id</label>
-        <input type="text" class="form-control" asp-for="idCommand" readonly>
+        <input type="number" class="form-control" asp-for="idCommand" readonly >
     </div>
-
 
     <div class="mb-3">
         <label class="form-label">Username</label>
         <input type="text" id="username" class="form-control" oninput="inputValidation()" asp-for="usernameCommand" required>
         <div id="espaceUsername" style="color: red;"></div>
+        <div id="usernameUtilise" style="color: red;"></div>
+
     </div>
 
 
@@ -79,7 +82,8 @@
 
     <div class="mb-3">
         <label class="form-label">Email</label>
-        <input type="email" class="form-control" asp-for="emailCommand" required>
+        <input id="mail" type="email" class="form-control" oninput="inputValidation()" asp-for="emailCommand" required>
+        <div id="mailUtilise" style="color: red;"></div>
     </div>
 
 
@@ -92,11 +96,12 @@
 
     <div class="mb-3">
         <label class="form-label">Téléphone</label>
-        <input type="text" class="form-control" asp-for="telephoneCommand" required>
+        <input id="telephone" type="text" class="form-control" asp-for="telephoneCommand" oninput="inputValidation()" required>
+        <div id="telephoneMismatch" style="color: red;"></div>
     </div>
 
 
-    <button type="submit" class="btn btn-primary">Ajouter</button>
+    <button type="submit" class="btn btn-primary">Sauvegarder</button>
     <a asp-controller="Compte" asp-action="Index" class="btn btn-primary m-md-1">Retour</a>
 
 </form>
@@ -107,6 +112,7 @@
         var confirmPassword = document.getElementById("confirmPassword").value;
         var username = document.getElementById("username").value;
 
+
         if (password !== confirmPassword) {
             alert("Validation de Password invalide.");
             return false;
@@ -115,6 +121,8 @@
             return false;
         } else if (username.includes(" ")) {
             alert("Username ne doit pas contenir d'espace.");
+        } else if ((!/^\d+$/.test(telephone) && telephone.trim() !== "") || (telephone.includes(" ") && telephone.trim() !== "")) {
+            alert("Le numero de téléphone doit se composer uniquement de chiffres sans espace.");
         } else {
             return true;
         }
@@ -125,6 +133,11 @@
         var username = document.getElementById("username").value;
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirmPassword").value;
+        var telephone = document.getElementById("telephone").value;
+        var mail = document.getElementById("mail").value;
+        var usernameCommand = "@Model.usernameCommand";
+        var mailCommand = "@Model.emailCommand";
+
 
         if (username.includes(" ") && username.trim() !== "") {
             document.getElementById("espaceUsername").textContent = "Username ne doit pas contenir d'espaces.";
@@ -148,6 +161,53 @@
             document.getElementById("passwordMismatch").textContent = "Les mots de passe ne correspondent pas.";
         } else {
             document.getElementById("passwordMismatch").textContent = "";
+        }
+
+        if ((!/^\d+$/.test(telephone) && telephone.trim() !== "") || (telephone.includes(" ") && telephone.trim() !== "")) {
+            document.getElementById("telephoneMismatch").textContent = "Le numero de téléphone doit se composer uniquement de chiffres sans espace.";
+        } else {
+            document.getElementById("telephoneMismatch").textContent = "";
+        }
+        if (username.trim() !== "") {
+            $.ajax({
+                url: "/Compte/CheckUsernameUpdate",
+                type: "GET",
+                data: { username: username,
+                    usernameCommand: usernameCommand
+                       },
+                success: function (result) {
+                    console.log(result);
+                    if (result === true) {
+                        document.getElementById("usernameUtilise").textContent = "";
+                    } else {
+                        document.getElementById("usernameUtilise").textContent = "Username déjà utilisé.";
+                    }
+                },
+                error: function (error) {
+                    console.error("Erreur lors de la vérification de l'username : ", error);
+                }
+            });
+        }
+
+
+        if (mail.trim() !== "") {
+            $.ajax({
+                url: "/Compte/CheckMailUpdate",
+                type: "GET",
+                data: { mail: mail,
+                        mailCommand : mailCommand
+                       },
+                success: function (result) {
+                    if (result === true) {
+                        document.getElementById("mailUtilise").textContent = "";
+                    } else {
+                        document.getElementById("mailUtilise").textContent = "Adresse mail déjà utilisée.";
+                    }
+                },
+                error: function (error) {
+                    console.error("Erreur lors de la vérification du mail : ", error);
+                }
+            });
         }
 
         return true;
@@ -179,6 +239,7 @@
             toggleButton.textContent = "Show";
         }
     });
+
 
 
 </script>

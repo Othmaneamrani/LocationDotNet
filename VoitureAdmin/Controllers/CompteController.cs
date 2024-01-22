@@ -30,7 +30,11 @@ namespace VoitureAdmin.Controllers
         [HttpPost]
         public async Task<IActionResult> addCompte(CompteCommand compteCommand)
         {
-            await _iCompteService.addComtpe(compteCommand);
+            bool ok = _iCompteService.getUsername(compteCommand.usernameCommand);
+            if (ok)
+            {
+                await _iCompteService.addComtpe(compteCommand);
+            }
             return RedirectToAction("Index");
         }
 
@@ -60,5 +64,44 @@ namespace VoitureAdmin.Controllers
             await _iCompteService.updateCompte(compteCommand);
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public JsonResult CheckUsername(string username)
+        {
+            bool isUsernameAvailable = _iCompteService.getUsername(username);
+            return Json(isUsernameAvailable);
+        }
+
+        [HttpGet]
+        public JsonResult CheckMail(string mail)
+        {
+            bool isUsernameAvailable = _iCompteService.getMail(mail);
+            return Json(isUsernameAvailable);
+        }
+
+
+        [HttpGet]
+        public JsonResult CheckUsernameUpdate(string username,string usernameCommand)
+        {
+            bool isUsernameAvailable=true;
+            if (!string.IsNullOrEmpty(usernameCommand) && username != usernameCommand)
+            {
+                isUsernameAvailable = _iCompteService.getUsername(username);
+            }
+            return Json(isUsernameAvailable);
+        }
+
+        [HttpGet]
+        public JsonResult CheckMailUpdate(string mail, string mailCommand)
+        {
+            bool ismailAvailable = true;
+            if (!string.IsNullOrEmpty(mailCommand) && mail != mailCommand)
+            {
+                ismailAvailable = _iCompteService.getMail(mail);
+            }
+            return Json(ismailAvailable);
+        }
+
     }
 }
