@@ -32,6 +32,8 @@ namespace DAL.Models
 
         [InverseProperty("compte")]
         public List<Demande> demandes { get; set; }
-        public List<Vehicule> favoris { get; set; }
+
+        [InverseProperty("compte")]
+        public List<Favoris> favoris { get; set; }
     }
 }
