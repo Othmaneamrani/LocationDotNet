@@ -80,8 +80,8 @@ namespace BLL.Services
 
         public List<VehiculeRepresentation> search (string search)
         {
-            var vehicule =  _db.vehicules.Where(v => v.id.ToString() == search);
-            if (vehicule != null)
+            var vehicule =  _db.vehicules.Where(v => v.id.ToString() == search || v.marque.Contains(search)).ToList();
+            if(vehicule != null)
             {
                 return _mapper.Map <List<VehiculeRepresentation>>(vehicule);
             }

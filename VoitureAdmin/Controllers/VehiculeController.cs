@@ -83,11 +83,11 @@ namespace VoitureAdmin.Controllers
             var list = _iVehiculeService.search(search);
             if(list != null)
             {           
-                return RedirectToAction("Index", list);
+                return View(list);
             }
             else
             {
-                return RedirectToAction("Index", null);
+                return View(null);
             }
 
         }
