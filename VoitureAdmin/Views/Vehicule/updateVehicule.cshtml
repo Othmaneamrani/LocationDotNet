@@ -2,7 +2,7 @@
 
 <h2 class="mt-5">Modifier un véhicule</h2>
 
-<form method="post" action="updateVehicule" class="mt-5">
+<form method="post" action="updateVehicule" onsubmit="return validationAlert();" class="mt-5">
     <div class="mb-3">
         <label class="form-label">Id</label>
         <input type="number" class="form-control" asp-for="idCommand" readonly>
@@ -27,7 +27,8 @@
 
     <div class="mb-3">
         <label class="form-label">Prix /jour</label>
-        <input type="text" class="form-control" asp-for="prixCommand" required>
+        <input id="prix" type="text" class="form-control" oninput="inputValidation()" asp-for="prixCommand" required>
+        <div id="prixMismatch" style="color: red;"></div>
     </div>
     <div class="mb-3">
         <label class="form-label">Disponibilité</label>
@@ -43,3 +44,28 @@
     <a asp-controller="Vehicule" asp-action="Index" class="btn btn-primary m-md-1">Retour</a>
 
 </form>
+
+
+
+<script>
+    function validationAlert() {
+        var prix = document.getElementById("prix").value;
+        var prixMismatch = document.getElementById("prixMismatch").textContent;
+        if (prixMismatch === "Le prix ne peut pas etre négatif.") {
+            alert("Le prix ne peut pas etre négatif.")
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function inputValidation() {
+        var prix = document.getElementById("prix").value;
+        if (prix < 0) {
+            document.getElementById("prixMismatch").textContent = "Le prix ne peut pas etre négatif.";
+        } else {
+            document.getElementById("prixMismatch").textContent = "";
+        }
+        return true;
+    }
+</script>

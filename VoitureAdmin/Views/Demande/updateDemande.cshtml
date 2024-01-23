@@ -6,18 +6,24 @@
 <h2 class="mt-5">Modifier une demande</h2>
 
 <form method="post" action="updateDemande" onsubmit="return validationAlert();" class="mt-5">
-
+    <div class="mb-3">
+        <label class="form-label">Id</label>
+        <input type="number" class="form-control"  asp-for="idCommand" readonly >
+    </div>
     <div class="mb-3">
         <label class="form-label">Date de début</label>
-        <input type="date" class="form-control" asp-for="dateDebutCommand" required>
+        <input id="dateDebut" type="datetime-local" class="form-control" oninput="demandeValidation()" asp-for="dateDebutCommand" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Date de fin</label>
-        <input type="date" class="form-control" asp-for="dateFinCommand" required>
+        <input id="dateFin" type="datetime-local" class="form-control" oninput="demandeValidation()" asp-for="dateFinCommand" required>
+        <div id="dateMismatch" style="color: red;"></div>
     </div>
     <div class="mb-3">
         <label class="form-label">Prix total</label>
-        <input type="number" class="form-control" asp-for="prixTotalCommand" required>
+        <input id="prix" type="number" class="form-control" oninput="demandeValidation()" asp-for="prixTotalCommand" required>
+        <div id="prixMismatch" style="color: red;"></div>
+
     </div>
     <div class="mb-3">
         <label class="form-label">Id du proprietaire de la commande</label>
@@ -43,11 +49,21 @@
     function validationAlert() {
         var compteIdAlert = document.getElementById("compteIdAlert").textContent;
         var vehiculeIdAlert = document.getElementById("vehiculeIdAlert").textContent;
+        var prixMismatch = document.getElementById("prixMismatch").textContent;
+        var dateMismatch = document.getElementById("dateMismatch").textContent;
+
+
         if (compteIdAlert === "Id non disponible.") {
             alert("Id du compte non disponible.");
             return false;
         } else if (vehiculeIdAlert === "Véhicule non disponible.") {
             alert("Id du véhicule non disponible.");
+            return false;
+        } else if (prixMismatch === "Le prix ne peut pas etre négatif.") {
+            alert("Le prix ne peut pas etre négatif.");
+            return false;
+        } else if (dateMismatch === "Les dates sont invalides.") {
+            alert("Les dates sont invalides.");
             return false;
         } else {
             return true;
@@ -57,6 +73,10 @@
     function demandeValidation() {
         var compteId = document.getElementById("compteId").value;
         var vehiculeId = document.getElementById("vehiculeId").value;
+        var prix = document.getElementById("prix").value;
+        var dateDebut = new Date(document.getElementById("dateDebut").value);
+        var dateFin = new Date(document.getElementById("dateFin").value);
+
 
         if (compteId.trim() !== "") {
             $.ajax({
@@ -99,7 +119,17 @@
             });
         } else {
             document.getElementById("vehiculeIdAlert").textContent = "";
+        } if (prix < 0) {
+            document.getElementById("prixMismatch").textContent = "Le prix ne peut pas etre négatif.";
+        } else {
+            document.getElementById("prixMismatch").textContent = "";
         }
+        if (dateDebut > dateFin) {
+            document.getElementById("dateMismatch").textContent = "Les dates sont invalides.";
+        } else {
+            document.getElementById("dateMismatch").textContent = "";
+        }
+        return true;
     }
 
 </script>
