@@ -77,5 +77,20 @@ namespace VoitureAdmin.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult search (string search)
+        {
+            var list = _iVehiculeService.search(search);
+            if(list != null)
+            {           
+                return RedirectToAction("Index", list);
+            }
+            else
+            {
+                return RedirectToAction("Index", null);
+            }
+
+        }
+
     }
 }

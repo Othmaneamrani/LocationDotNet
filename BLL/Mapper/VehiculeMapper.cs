@@ -41,7 +41,6 @@ namespace BLL.Mapper
             .ForMember(dest => dest.estDispoCommand, opt => opt.MapFrom(src => src.estDispo));
 
 
-
         }
     }
 }

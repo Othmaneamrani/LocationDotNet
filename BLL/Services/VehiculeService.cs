@@ -3,6 +3,7 @@ using BLL.Command;
 using BLL.Representation;
 using DAL;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace BLL.Services
 {
@@ -11,7 +12,7 @@ namespace BLL.Services
         private readonly MyDbContext _db;
         private readonly IMapper _mapper;
 
-        public VehiculeService(MyDbContext db , IMapper mapper)
+        public VehiculeService(MyDbContext db, IMapper mapper)
         {
             _db = db;
             _mapper = mapper;
@@ -19,24 +20,24 @@ namespace BLL.Services
 
         public List<VehiculeRepresentation> getAll()
         {
-            return _mapper.Map<List<VehiculeRepresentation>>(_db.vehicules.ToList()) ;
+            return _mapper.Map<List<VehiculeRepresentation>>(_db.vehicules.ToList());
         }
 
-        public async Task addVehicule(VehiculeCommand vehiculeCommand) 
+        public async Task addVehicule(VehiculeCommand vehiculeCommand)
         {
             await _db.AddAsync(_mapper.Map<Vehicule>(vehiculeCommand));
             await _db.SaveChangesAsync();
         }
 
-        public VehiculeCommand getById(long id) 
+        public VehiculeCommand getById(long id)
         {
-            return  _mapper.Map<VehiculeCommand>(_db.vehicules.Find(id));
+            return _mapper.Map<VehiculeCommand>(_db.vehicules.Find(id));
         }
 
         public async Task deleteVehicule(long id)
         {
-                _db.Remove(await _db.vehicules.FindAsync(id));
-                await _db.SaveChangesAsync();
+            _db.Remove(await _db.vehicules.FindAsync(id));
+            await _db.SaveChangesAsync();
         }
 
         public async Task updateVehicule(VehiculeCommand vehiculeCommand)
@@ -63,10 +64,10 @@ namespace BLL.Services
         }
 
 
-        public  VehiculeRepresentation getPrix(long vehiculeId)
+        public VehiculeRepresentation getPrix(long vehiculeId)
         {
-            Vehicule vehicule =  _db.vehicules.Find(vehiculeId);
-            if(vehicule != null)
+            Vehicule vehicule = _db.vehicules.Find(vehiculeId);
+            if (vehicule != null)
             {
                 return _mapper.Map<VehiculeRepresentation>(vehicule);
             }
@@ -74,10 +75,20 @@ namespace BLL.Services
             {
                 return null;
             }
-            
+
         }
 
-
-
+        public List<VehiculeRepresentation> search (string search)
+        {
+            var vehicule =  _db.vehicules.Where(v => v.id.ToString() == search);
+            if (vehicule != null)
+            {
+                return _mapper.Map <List<VehiculeRepresentation>>(vehicule);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

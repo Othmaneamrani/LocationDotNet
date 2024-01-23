@@ -17,6 +17,7 @@ namespace BLL.Services
         public Task updateVehicule(VehiculeCommand vehiculeCommand);
         public bool GetIds(long vehiculeId);
         public VehiculeRepresentation getPrix(long vehiculeId);
+        public List<VehiculeRepresentation> search (string search);
 
     }
 }
