@@ -9,29 +9,30 @@
 else
 {
     <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Username</th>
-                <th scope="col">Password</th>
-                <th scope="col">Email</th>
-                <th scope="col">Téléphone</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Email</th>
+            <th scope="col">Téléphone</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
         <tbody>
-            @foreach (var compte in Model)
-            {
+        @foreach (var compte in Model)
+        {
                 <tr>
-                    <th scope="row">@compte.idRepresentation</th>
-                    <td>@compte.usernameRepresentation.First().ToString().ToUpper()@compte.usernameRepresentation.Substring(1)</td>
-                    <td>@compte.passwordRepresentation.First().ToString().ToUpper()@compte.passwordRepresentation.Substring(1)</td>
-                    <td>@compte.emailRepresentation</td>
-                    <td>@compte.telephoneRepresentation</td>
-                    <td>
-                        <a class="btn btn-primary" href="Compte/updateCompte/@compte.idRepresentation">Modifier</a>
-                        <a class="btn ml-0 btn-danger" href="Compte/deleteCompteView/@compte.idRepresentation">Supprimer</a>
-                    </td>
+                <th scope="row">@compte.idRepresentation</th>
+                <td class="align-middle">@compte.usernameRepresentation.First().ToString().ToUpper()@compte.usernameRepresentation.Substring(1)</td>
+                <td class="align-middle">@compte.passwordRepresentation.First().ToString().ToUpper()@compte.passwordRepresentation.Substring(1)</td>
+                <td class="align-middle">@compte.emailRepresentation</td>
+                <td class="align-middle">@compte.telephoneRepresentation</td>
+
+                    <td class="text-center align-middle">
+                    <a class="btn btn-primary" href="Compte/updateCompte/@compte.idRepresentation">Modifier</a>
+                    <a class="btn ml-0 btn-danger" href="Compte/deleteCompteView/@compte.idRepresentation">Supprimer</a>
+                </td>
                 </tr>
             }
         </tbody>

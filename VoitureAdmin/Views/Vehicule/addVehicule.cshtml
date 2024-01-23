@@ -15,16 +15,24 @@
 
     <div class="mb-3">
         <label class="form-label">Type de moteur</label>
-        <input type="text" class="form-control" asp-for="typeMoteurCommand"  required>
-    </div>    
+        <select class="form-control" asp-for="typeMoteurCommand" required>
+            <option value="auto">Manuel</option>
+            <option value="manu">Automatique</option>
+        </select>
+    </div>
+
     <div class="mb-3">
         <label class="form-label">Prix /jour</label>
         <input type="number" class="form-control" asp-for="prixCommand" required>
     </div>
     <div class="mb-3">
         <label class="form-label">Disponibilité</label>
-        <input type="text" class="form-control" asp-for="estDispoCommand" required>
+        <select class="form-control" asp-for="estDispoCommand" required>
+            <option value="Oui">Oui</option>
+            <option value="Non">Non</option>
+        </select>
     </div>
+
 
     <button type="submit" class="btn btn-primary">Ajouter</button>
     <a asp-controller="Vehicule" asp-action="Index" class="btn btn-primary m-md-1">Retour</a>

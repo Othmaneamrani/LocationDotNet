@@ -9,28 +9,29 @@
 else
 {
     <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">DateDebut</th>
-                <th scope="col">DateFin</th>
-                <th scope="col">PrixTotal</th>
-                <th scope="col">CompteId</th>
-                <th scope="col">VehiculeId</th>
-                <th scope="col">Actions</th>
-            </tr>
-        </thead>
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">DateDebut</th>
+            <th scope="col">DateFin</th>
+            <th scope="col">PrixTotal</th>
+            <th scope="col">CompteId</th>
+            <th scope="col">VehiculeId</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
         <tbody>
-            @foreach (var demande in Model)
-            {
+        @foreach (var demande in Model)
+        {
                 <tr>
-                    <th scope="row">@demande.idRepresentation</th>
-                    <td>@demande.dateDebutRepresentation</td>
-                    <td>@demande.dateFinRepresentation</td>
-                    <td>@demande.prixTotalRepresentation</td>
-                    <td>@demande.compteIdRepresentation</td>
-                    <td>@demande.vehiculeIdRepresentation</td>
-                    <td>
+                <th scope="row">@demande.idRepresentation</th>
+                <td class="align-middle">@demande.dateDebutRepresentation</td>
+                <td class="align-middle">@demande.dateFinRepresentation</td>
+                <td class="align-middle">@demande.prixTotalRepresentation</td>
+                <td class="align-middle">@demande.compteIdRepresentation</td>
+                <td class="align-middle">@demande.vehiculeIdRepresentation</td>
+
+                    <td class="text-center align-middle">
                         <a class="btn btn-primary" href="Demande/updateDemande/@demande.idRepresentation">Modifier</a>
                         <a class="btn ml-0 btn-danger" href="Demande/deleteDemandeView/@demande.idRepresentation">Supprimer</a>
                     </td>

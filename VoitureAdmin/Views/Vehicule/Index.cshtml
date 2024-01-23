@@ -3,6 +3,7 @@
 
 <h2 class="mt-5 mb-5">Véhicules</h2>
 
+
 @if (Model == null || Model.Count == 0)
 {
     <p>Aucun Véhicule trouvé.</p>
@@ -26,7 +27,7 @@ else
             {
                 <tr>
                     <th scope="row">@vehicule.idRepresentation</th>
-                    <td>
+                    <td class="text-center align-middle">
                         @if (!string.IsNullOrEmpty(vehicule.photoRepresentation))
                         {
                             <img class="thumbnail-image" src="@vehicule.photoRepresentation" alt="Photo du véhicule" />
@@ -36,11 +37,11 @@ else
                             <span>Aucune photo</span>
                         }
                     </td>
-                    <td>@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</td>
-                    <td>@vehicule.typeMoteurRepresentation.First().ToString().ToUpper()@vehicule.typeMoteurRepresentation.Substring(1)</td>
-                    <td>@vehicule.prixRepresentation</td>
-                    <td>@vehicule.estDispoRepresentation.First().ToString().ToUpper()@vehicule.estDispoRepresentation.Substring(1)</td>
-                    <td>
+                    <td class="align-middle">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</td>
+                    <td class="align-middle">@vehicule.typeMoteurRepresentation.First().ToString().ToUpper()@vehicule.typeMoteurRepresentation.Substring(1)</td>
+                    <td class="align-middle">@vehicule.prixRepresentation</td>
+                    <td class="align-middle">@vehicule.estDispoRepresentation.First().ToString().ToUpper()@vehicule.estDispoRepresentation.Substring(1)</td>
+                    <td class="text-center align-middle">
                         <a class="btn btn-primary" href="Vehicule/updateVehicule/@vehicule.idRepresentation">Modifier</a>
                         <a class="btn ml-0 btn-danger" href="Vehicule/deleteVehiculeView/@vehicule.idRepresentation">Supprimer</a>
                     </td>
