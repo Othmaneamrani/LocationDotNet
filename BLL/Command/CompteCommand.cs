@@ -14,11 +14,7 @@ namespace BLL.Command
         public long idCommand { get; set; }
         public string usernameCommand { get; set; }
         public string passwordCommand { get; set; }
-        public string nomCommand { get; set; }
-        public string prenomCommand { get; set; }
-        public int ageCommand { get; set; }
         public string emailCommand { get; set; }
-        public string cinCommand { get; set; }
         public string telephoneCommand { get; set; }
 
         public List<Demande> demandesCommand { get; set; }

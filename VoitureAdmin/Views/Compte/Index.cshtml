@@ -14,11 +14,7 @@ else
                 <th scope="col">Id</th>
                 <th scope="col">Username</th>
                 <th scope="col">Password</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Prenom</th>
-                <th scope="col">Age</th>
                 <th scope="col">Email</th>
-                <th scope="col">Cin</th>
                 <th scope="col">Téléphone</th>
                 <th scope="col">Actions</th>
             </tr>
@@ -30,11 +26,7 @@ else
                     <th scope="row">@compte.idRepresentation</th>
                     <td>@compte.usernameRepresentation.First().ToString().ToUpper()@compte.usernameRepresentation.Substring(1)</td>
                     <td>@compte.passwordRepresentation.First().ToString().ToUpper()@compte.passwordRepresentation.Substring(1)</td>
-                    <td>@compte.nomRepresentation.First().ToString().ToUpper()@compte.nomRepresentation.Substring(1)</td>
-                    <td>@compte.prenomRepresentation.First().ToString().ToUpper()@compte.prenomRepresentation.Substring(1)</td>
-                    <td>@compte.ageRepresentation</td>
                     <td>@compte.emailRepresentation</td>
-                    <td>@compte.cinRepresentation</td>
                     <td>@compte.telephoneRepresentation</td>
                     <td>
                         <a class="btn btn-primary" href="Compte/updateCompte/@compte.idRepresentation">Modifier</a>

@@ -39,8 +39,8 @@
     <div class="mb-3">
         <label class="form-label">Password</label>
         <div class="input-group">
-            <input type="password" class="form-control" id="password" oninput="inputValidation()" asp-for="passwordCommand" required>
-            <button class="btn btn-outline-secondary" type="button" id="togglePassword">Show</button>
+            <input type="text" class="form-control" id="password" oninput="inputValidation()" asp-for="passwordCommand" required>
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">Hide</button>
         </div>
         <div id="passwordLongueur" style="color: red;"></div>
         <div id="espacePassword" style="color: red;"></div>
@@ -51,31 +51,10 @@
     <div class="mb-3">
         <label class="form-label">Confirmation password</label>
         <div class="input-group">
-            <input type="password" class="form-control" id="confirmPassword" oninput="inputValidation()" required>
-            <button class="btn btn-outline-secondary" type="button" id="togglePasswordConfirm">Show</button>
+            <input type="text" class="form-control" id="confirmPassword" oninput="inputValidation()" required>
+            <button class="btn btn-outline-secondary" type="button" id="togglePasswordConfirm">Hide</button>
         </div>
         <div id="passwordMismatch" style="color: red;"></div>
-    </div>
-
-
-
-    <div class="mb-3">
-        <label class="form-label">Nom</label>
-        <input type="text" class="form-control" asp-for="nomCommand" required>
-    </div>
-
-
-
-    <div class="mb-3">
-        <label class="form-label">Prénom</label>
-        <input type="text" class="form-control" asp-for="prenomCommand" required>
-    </div>
-
-
-
-    <div class="mb-3">
-        <label class="form-label">Age</label>
-        <input type="number" class="form-control" asp-for="ageCommand" required>
     </div>
 
 
@@ -86,12 +65,6 @@
         <div id="mailUtilise" style="color: red;"></div>
     </div>
 
-
-
-    <div class="mb-3">
-        <label class="form-label">CIN</label>
-        <input type="text" class="form-control" asp-for="cinCommand" required>
-    </div>
 
 
     <div class="mb-3">

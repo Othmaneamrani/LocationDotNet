@@ -12,11 +12,7 @@ namespace BLL.Representation
         public long idRepresentation { get; set; }
         public string usernameRepresentation { get; set; }
         public string passwordRepresentation { get; set; }
-        public string nomRepresentation { get; set; }
-        public string prenomRepresentation { get; set; }
-        public int ageRepresentation { get; set; }
         public string emailRepresentation { get; set; }
-        public string cinRepresentation { get; set; }
         public string telephoneRepresentation { get; set; }
 
         public List<Demande> demandesRepresentation { get; set; }

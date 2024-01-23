@@ -18,15 +18,7 @@ namespace DAL.Models
         [Required]
         public string password { get; set; }
         [Required]
-        public string nom { get; set; }
-        [Required]
-        public string prenom { get; set; }
-        [Required]
-        public int age { get; set; }
-        [Required]
         public string email { get; set; }
-        [Required]
-        public string cin { get; set; }
         [Required]
         public string telephone { get; set; }
 

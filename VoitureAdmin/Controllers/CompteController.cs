@@ -103,5 +103,17 @@ namespace VoitureAdmin.Controllers
             return Json(ismailAvailable);
         }
 
+        [HttpGet]
+        public IActionResult login()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Sign()
+        {
+            return View();
+        }
+
     }
 }
