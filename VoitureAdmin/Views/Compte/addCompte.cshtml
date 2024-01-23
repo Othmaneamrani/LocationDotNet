@@ -82,18 +82,33 @@
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirmPassword").value;
         var username = document.getElementById("username").value;
+        var usernameUtilise = document.getElementById("usernameUtilise").textContent;
+        var mailUtilise = document.getElementById("mailUtilise").textContent;
+        var telephone = document.getElementById("telephone").value;
+
 
         if (password !== confirmPassword) {
             alert("Validation de Password invalide.");
             return false;
-        }else if (password.includes(" ")){
+        } else if (password.includes(" ")) {
             alert("Password ne doit pas contenir d'espace.");
             return false;
         } else if (username.includes(" ")) {
             alert("Username ne doit pas contenir d'espace.");
-        } else if ((!/^\d+$/.test(telephone) && telephone.trim() !== "") || (telephone.includes(" ") && telephone.trim() !== "")) {
+            return false;
+        } else if (!/^\d+$/.test(telephone) || telephone.includes(" ")) {
             alert("Le numero de téléphone doit se composer uniquement de chiffres sans espace.");
-        }else{
+            return false;
+        } else if (password.length < 6) {
+            alert("Password invalide, il doit dépasser 6 caractères.");
+            return false;
+        } else if (usernameUtilise === "Username déjà utilisé.") {
+            alert("Username déjà utilisé.");
+            return false;
+        } else if (mailUtilise === "Adresse mail déjà utilisée.") {
+            alert("Adresse mail déjà utilisée.");
+            return false;
+        } else {
             return true;
         }
     }
@@ -150,7 +165,8 @@
                 },
                 error: function (error) {
                     console.error("Erreur lors de la vérification de l'username : ", error);
-                }
+                },
+                async: false
             });
         }
 
@@ -169,7 +185,8 @@
                 },
                 error: function (error) {
                     console.error("Erreur lors de la vérification du mail : ", error);
-                }
+                },
+                async: false
             });
         }
 

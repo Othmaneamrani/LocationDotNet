@@ -62,5 +62,14 @@ namespace VoitureAdmin.Controllers
             await _iVehiculeService.updateVehicule(vehiculeCommand);
             return RedirectToAction("Index");
         }
+
+
+        [HttpGet]
+        public JsonResult CheckId(long vehiculeId)
+        {
+            bool isIdAvailable = _iVehiculeService.GetIds(vehiculeId);
+            return Json(isIdAvailable);
+        }
+
     }
 }

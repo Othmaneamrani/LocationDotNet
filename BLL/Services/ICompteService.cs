@@ -17,6 +17,8 @@ namespace BLL.Services
         public Task updateCompte(CompteCommand compteCommand);
         public bool getUsername(string username);
         public bool getMail(string mail);
+        public bool GetIds(long compteId);
+
 
     }
 }

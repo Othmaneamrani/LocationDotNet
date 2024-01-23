@@ -15,6 +15,7 @@ namespace BLL.Services
         public VehiculeCommand getById(long id);
         public Task deleteVehicule(long id);
         public Task updateVehicule(VehiculeCommand vehiculeCommand);
+        public bool GetIds(long vehiculeId);
 
     }
 }

@@ -4,6 +4,7 @@ using BLL.Representation;
 using BLL.Services;
 using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace VoitureAdmin.Controllers
 {
@@ -76,8 +77,8 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         public JsonResult CheckMail(string mail)
         {
-            bool isUsernameAvailable = _iCompteService.getMail(mail);
-            return Json(isUsernameAvailable);
+            bool isMailAvailable = _iCompteService.getMail(mail);
+            return Json(isMailAvailable);
         }
 
 
@@ -95,12 +96,12 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         public JsonResult CheckMailUpdate(string mail, string mailCommand)
         {
-            bool ismailAvailable = true;
+            bool isMailAvailable = true;
             if (!string.IsNullOrEmpty(mailCommand) && mail != mailCommand)
             {
-                ismailAvailable = _iCompteService.getMail(mail);
+                isMailAvailable = _iCompteService.getMail(mail);
             }
-            return Json(ismailAvailable);
+            return Json(isMailAvailable);
         }
 
         [HttpGet]
@@ -114,6 +115,15 @@ namespace VoitureAdmin.Controllers
         {
             return View();
         }
+
+
+        [HttpGet]
+        public JsonResult CheckId(long compteId)
+        {
+            bool isIdAvailable = _iCompteService.GetIds(compteId);
+            return Json(isIdAvailable);
+        }
+
 
     }
 }

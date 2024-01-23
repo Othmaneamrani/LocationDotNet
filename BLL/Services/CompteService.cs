@@ -94,5 +94,20 @@ namespace BLL.Services
             }
             return ok;
         }
+
+
+        public bool GetIds(long compteId)
+        {
+            List<Compte> list = _db.comptes.ToList();
+            bool ok = false;
+            foreach (Compte compte in list)
+            {
+                if (compte.id == compteId)
+                {
+                    ok = true;
+                }
+            }
+            return ok;
+        }
     }
 }

@@ -1,8 +1,11 @@
 ﻿@model BLL.Command.DemandeCommand
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
 <h2 class="mt-5">Ajouter une nouvelle demande</h2>
 
-<form method="post" action="addDemande" class="mt-5">
+<form method="post" action="addDemande" onsubmit="return validationAlert();" class="mt-5">
 
     <div class="mb-3">
         <label class="form-label">Date de début</label>
@@ -18,14 +21,85 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Id du proprietaire de la commande</label>
-        <input type="number" class="form-control" asp-for="compteIdCommand" required>
+        <input id="compteId" type="number" class="form-control" oninput="demandeValidation()" asp-for="compteIdCommand" required>
+        <div id="compteIdAlert" style="color: red;"></div>
+
     </div>
     <div class="mb-3">
         <label class="form-label">Id du véhicule</label>
-        <input type="number" class="form-control" asp-for="vehiculeIdCommand" required>
+        <input id="vehiculeId" type="number" oninput="demandeValidation()" class="form-control" asp-for="vehiculeIdCommand" required>
+        <div id="vehiculeIdAlert" style="color: red;"></div>
     </div>
 
     <button type="submit" class="btn btn-primary">Ajouter</button>
     <a asp-controller="Demande" asp-action="Index" class="btn btn-primary m-md-1">Retour</a>
 
 </form>
+
+
+        <script>
+
+            function validationAlert() {
+                var compteIdAlert = document.getElementById("compteIdAlert").textContent;
+                var vehiculeIdAlert = document.getElementById("vehiculeIdAlert").textContent;
+                if (compteIdAlert === "Id non disponible.") {
+                    alert("Id du compte non disponible.");
+                    return false;
+                } else if (vehiculeIdAlert === "Véhicule non disponible.") {
+                    alert("Id du véhicule non disponible.");
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+
+            function demandeValidation() {
+            var compteId = document.getElementById("compteId").value;
+            var vehiculeId = document.getElementById("vehiculeId").value;
+
+                if (compteId.trim() !== "") {
+                    $.ajax({
+                        url: "/Compte/CheckId",
+                        type: "GET",
+                data: { compteId: compteId },
+                        success: function (result) {
+                            if (result === true) {
+                                document.getElementById("compteIdAlert").textContent = "";
+                            } else {
+                                document.getElementById("compteIdAlert").textContent = "Id non disponible.";
+                            }
+                        },
+                        error: function (error) {
+                            console.error("Erreur lors de la vérification de l'id : ", error);
+                        },
+                        async: false
+                    });
+                } else {
+                    document.getElementById("compteIdAlert").textContent = "";
+                }
+
+
+                if (vehiculeId.trim() !== "") {
+                    $.ajax({
+                        url: "/Vehicule/CheckId",
+                        type: "GET",
+                        data: { vehiculeId: vehiculeId },
+                        success: function (result) {
+                            if (result === true) {
+                                document.getElementById("vehiculeIdAlert").textContent = "";
+                            } else {
+                                document.getElementById("vehiculeIdAlert").textContent = "Véhicule non disponible.";
+                            }
+                        },
+                        error: function (error) {
+                            console.error("Erreur lors de la vérification de l'id : ", error);
+                        },
+                        async: false
+                    });
+                } else {
+                    document.getElementById("vehiculeIdAlert").textContent = "";
+                }
+            }
+
+        </script>

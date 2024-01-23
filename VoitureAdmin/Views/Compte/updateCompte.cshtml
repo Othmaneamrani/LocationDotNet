@@ -84,6 +84,9 @@
         var password = document.getElementById("password").value;
         var confirmPassword = document.getElementById("confirmPassword").value;
         var username = document.getElementById("username").value;
+        var telephone = document.getElementById("telephone").value;
+        var usernameUtilise = document.getElementById("usernameUtilise").textContent;
+        var mailUtilise = document.getElementById("mailUtilise").textContent;
 
 
         if (password !== confirmPassword) {
@@ -96,6 +99,15 @@
             alert("Username ne doit pas contenir d'espace.");
         } else if ((!/^\d+$/.test(telephone) && telephone.trim() !== "") || (telephone.includes(" ") && telephone.trim() !== "")) {
             alert("Le numero de téléphone doit se composer uniquement de chiffres sans espace.");
+        } else if (password.length < 6) {
+            alert("Password invalide, il doit dépasser 6 caractères.");
+            return false;
+        } else if (usernameUtilise === "Username déjà utilisé.") {
+            alert("Username déjà utilisé.");
+            return false;
+        } else if (mailUtilise === "Adresse mail déjà utilisée.") {
+            alert("Adresse mail déjà utilisée.");
+            return false;
         } else {
             return true;
         }
@@ -158,7 +170,8 @@
                 },
                 error: function (error) {
                     console.error("Erreur lors de la vérification de l'username : ", error);
-                }
+                },
+                async: false
             });
         }
 
@@ -179,7 +192,8 @@
                 },
                 error: function (error) {
                     console.error("Erreur lors de la vérification du mail : ", error);
-                }
+                },
+                async: false
             });
         }
 

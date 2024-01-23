@@ -46,5 +46,23 @@ namespace BLL.Services
             _mapper.Map(vehiculeCommand, vehicule);
             await _db.SaveChangesAsync();
         }
+
+
+
+        public bool GetIds(long vehiculeId)
+        {
+            List<Vehicule> list = _db.vehicules.ToList();
+            bool ok = false;
+            foreach (Vehicule vehicule in list)
+            {
+                if (vehicule.id == vehiculeId)
+                {
+                    ok = true;
+                }
+            }
+            return ok;
+        }
+    
+
     }
 }
