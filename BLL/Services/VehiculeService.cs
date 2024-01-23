@@ -3,7 +3,6 @@ using BLL.Command;
 using BLL.Representation;
 using DAL;
 using DAL.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace BLL.Services
 {
@@ -62,7 +61,23 @@ namespace BLL.Services
             }
             return ok;
         }
-    
+
+
+        public  VehiculeRepresentation getPrix(long vehiculeId)
+        {
+            Vehicule vehicule =  _db.vehicules.Find(vehiculeId);
+            if(vehicule != null)
+            {
+                return _mapper.Map<VehiculeRepresentation>(vehicule);
+            }
+            else
+            {
+                return null;
+            }
+            
+        }
+
+
 
     }
 }

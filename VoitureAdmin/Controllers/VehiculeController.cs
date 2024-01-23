@@ -71,5 +71,11 @@ namespace VoitureAdmin.Controllers
             return Json(isIdAvailable);
         }
 
+        public VehiculeRepresentation getPrix(long vehiculeId)
+        {
+            return _iVehiculeService.getPrix(vehiculeId);
+
+        }
+
     }
 }
