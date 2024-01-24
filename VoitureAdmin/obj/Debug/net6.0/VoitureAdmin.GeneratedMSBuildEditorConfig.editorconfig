@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\user\projets\VoitureAdmin\VoitureAdmin
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/Depart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XERlcGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -90,6 +94,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Shared/navbarHome.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXG5hdmJhckhvbWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Shared/navbarLogin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXG5hdmJhckxvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Shared/vehiculeNavbar.cshtml]

@@ -9,5 +9,10 @@ namespace VoitureAdmin.Controllers
         {
             return View(loginRepresentation);
         }
+
+        public IActionResult Depart()
+        {
+            return View();
+        }
     }
 }
