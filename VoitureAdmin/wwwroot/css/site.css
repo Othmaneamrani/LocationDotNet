@@ -50,6 +50,8 @@ body {
 
     .login-box .user-box {
         position: relative;
+        display: flex;
+        justify-content: space-between;
     }
 
         .login-box .user-box input {
@@ -57,7 +59,7 @@ body {
             padding: 10px 0;
             font-size: 16px;
             color: #fff;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             border: none;
             border-bottom: 1px solid #fff;
             outline: none;
@@ -93,7 +95,7 @@ body {
         text-transform: uppercase;
         overflow: hidden;
         transition: .5s;
-        margin-top: 20px;
+        margin-top: 30px;
         letter-spacing: 4px
     }
 
@@ -300,5 +302,35 @@ tbody:hover tr:hover td {
     text-shadow: 0 1px 0 #fff;
 }
 
+.login-box .cal {
+    position: relative;
+    display: inline-block;
+    padding: 5px 5px;
+    color: #03e9f4;
+    font-size: 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: .5s;
+    margin-top: 20px;
+    letter-spacing: 3px;
+}
 
+
+.login-box .user-box button {
+    width: 18%; 
+    padding: 10px 5px;
+    font-size: 14px;
+    color: #03e9f4;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+    .login-box .user-box button:hover {
+        color: #03a9f4;
+    }
+
+.attention{
+    margin-top:-20px;
 }

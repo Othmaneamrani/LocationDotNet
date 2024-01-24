@@ -141,7 +141,7 @@
             document.getElementById("passwordLongueur").textContent = "";
         }
 
-        if (password !== confirmPassword) {
+        if (password.trim() !== "" && confirmPassword.trim() !== "" && password !== confirmPassword) {
             document.getElementById("passwordMismatch").textContent = "Les mots de passe ne correspondent pas.";
         } else {
             document.getElementById("passwordMismatch").textContent = "";

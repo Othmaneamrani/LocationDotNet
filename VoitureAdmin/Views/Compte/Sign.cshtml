@@ -1,26 +1,42 @@
 ﻿<div class="login-box">
-    <h2>Login</h2>
-    <form>
+    <h2>Sign up</h2>
+    <form onsubmit="return validationAlert();" >
         <div class="user-box">
-            <input type="text" name="" required="">
+            <input id="username" type="text" oninput="inputValidation()" required>
             <label>Username</label>
         </div>
+        <div id="espaceUsername" class="attention" style="color: red;"></div>
+        <div id="usernameUtilise" class="attention" style="color: red;"></div>
+
+
         <div class="user-box">
-            <input type="password" name="" required="">
+            <input id="password" type="password" oninput="inputValidation()" required>
+            <button type="button" id="togglePassword" >Show</button>
             <label>Password</label>
         </div>
+        <div id="passwordLongueur" class="attention" style="color: red;"></div>
+        <div id="espacePassword" class="attention" style="color: red;"></div>
+
         <div class="user-box">
-            <input type="password" name="" required="">
+            <input type="password" id="confirmPassword" oninput="inputValidation()" required>
+            <button type="button" id="togglePasswordConfirm">Show</button>
             <label>Confirm password</label>
         </div>
+        <div id="passwordMismatch" class="attention" style="color: red;"></div>
+
+
         <div class="user-box">
-            <input type="email" name="" required="">
+            <input id="mail" type="email" oninput="inputValidation()" required>
             <label>Email</label>
         </div>
+        <div id="mailUtilise" class="attention" style="color: red;"></div>
+
+
         <div class="user-box">
-            <input type="email" name="" required="">
+            <input id="telephone" type="text" oninput="inputValidation()" required>
             <label>Téléphone</label>
         </div>
+        <div id="telephoneMismatch" class="attention" style="color: red;"></div>
 
         <a href="#">
             <span></span>
@@ -30,7 +46,156 @@
             Submit
         </a>
         <div class="signup-link">
-            <a asp-controller="Compte"  asp-action="Login">Login</a>
+            <a class="cal" asp-controller="Compte"  asp-action="Login">Login</a>
         </div>
     </form>
 </div>
+
+
+
+<script>
+    function validationAlert() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        var username = document.getElementById("username").value;
+        var usernameUtilise = document.getElementById("usernameUtilise").textContent;
+        var mailUtilise = document.getElementById("mailUtilise").textContent;
+        var telephone = document.getElementById("telephone").value;
+
+
+        if (password !== confirmPassword) {
+            alert("Validation de Password invalide.");
+            return false;
+        } else if (password.includes(" ")) {
+            alert("Password ne doit pas contenir d'espace.");
+            return false;
+        } else if (username.includes(" ")) {
+            alert("Username ne doit pas contenir d'espace.");
+            return false;
+        } else if (!/^\d+$/.test(telephone) || telephone.includes(" ")) {
+            alert("Le numero de téléphone doit se composer uniquement de chiffres sans espace.");
+            return false;
+        } else if (password.length < 6) {
+            alert("Password invalide, il doit dépasser 6 caractères.");
+            return false;
+        } else if (usernameUtilise === "Username déjà utilisé.") {
+            alert("Username déjà utilisé.");
+            return false;
+        } else if (mailUtilise === "Adresse mail déjà utilisée.") {
+            alert("Adresse mail déjà utilisée.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+    function inputValidation() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        var telephone = document.getElementById("telephone").value;
+        var mail = document.getElementById("mail").value;
+
+
+        if (username.includes(" ") && username.trim() !== "") {
+            document.getElementById("espaceUsername").textContent = "Username ne doit pas contenir d'espaces.";
+        } else {
+            document.getElementById("espaceUsername").textContent = "";
+        }
+
+        if (password.includes(" ") && password.trim() !== "") {
+            document.getElementById("espacePassword").textContent = "Password ne doit pas contenir d'espaces.";
+        } else {
+            document.getElementById("espacePassword").textContent = "";
+        }
+
+        if (password.length < 6 && password.trim() !== "") {
+            document.getElementById("passwordLongueur").textContent = "Password invalide, il doit dépasser 6 caractères.";
+        } else {
+            document.getElementById("passwordLongueur").textContent = "";
+        }
+
+        if (password.trim() !== "" && confirmPassword.trim() !== "" && password !== confirmPassword) {
+            document.getElementById("passwordMismatch").textContent = "Les mots de passe ne correspondent pas.";
+        } else {
+            document.getElementById("passwordMismatch").textContent = "";
+        }
+
+        if ((!/^\d+$/.test(telephone) && telephone.trim() !== "") || (telephone.includes(" ") && telephone.trim() !== "")) {
+            document.getElementById("telephoneMismatch").textContent = "Le numero de téléphone doit se composer uniquement de chiffres sans espace.";
+        } else {
+            document.getElementById("telephoneMismatch").textContent = "";
+        }
+        if (username.trim() !== "") {
+            $.ajax({
+                url: "/Compte/CheckUsername",
+                type: "GET",
+                data: { username: username },
+                success: function (result) {
+                    if (result === true) {
+                        document.getElementById("usernameUtilise").textContent = "";
+                    } else {
+                        document.getElementById("usernameUtilise").textContent = "Username déjà utilisé.";
+                    }
+                },
+                error: function (error) {
+                    console.error("Erreur lors de la vérification de l'username : ", error);
+                },
+                async: false
+            });
+        }
+
+
+        if (mail.trim() !== "") {
+            $.ajax({
+                url: "/Compte/CheckMail",
+                type: "GET",
+                data: { mail: mail },
+                success: function (result) {
+                    if (result === true) {
+                        document.getElementById("mailUtilise").textContent = "";
+                    } else {
+                        document.getElementById("mailUtilise").textContent = "Adresse mail déjà utilisée.";
+                    }
+                },
+                error: function (error) {
+                    console.error("Erreur lors de la vérification du mail : ", error);
+                },
+                async: false
+            });
+        }
+
+        return true;
+    }
+
+    document.getElementById("togglePassword").addEventListener("click", function () {
+        var passwordInput = document.getElementById("password");
+        var toggleButton = document.getElementById("togglePassword");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            toggleButton.textContent = "Show";
+        }
+    });
+
+
+    document.getElementById("togglePasswordConfirm").addEventListener("click", function () {
+        var passwordInput = document.getElementById("confirmPassword");
+        var toggleButton = document.getElementById("togglePasswordConfirm");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            toggleButton.textContent = "Show";
+        }
+    });
+
+
+
+</script>
