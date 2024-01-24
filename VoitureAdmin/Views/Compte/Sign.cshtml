@@ -1,8 +1,10 @@
-﻿<div class="login-box">
+﻿@model BLL.Command.CompteCommand
+
+<div class="login-box">
     <h2>Sign up</h2>
-    <form onsubmit="return validationAlert();" >
+    <form method="post" action="Sign"  onsubmit="return validationAlert();" >
         <div class="user-box">
-            <input id="username" type="text" oninput="inputValidation()" required>
+            <input id="username" asp-for="usernameCommand" type="text" oninput="inputValidation()" required>
             <label>Username</label>
         </div>
         <div id="espaceUsername" class="attention" style="color: red;"></div>
@@ -10,8 +12,8 @@
 
 
         <div class="user-box">
-            <input id="password" type="password" oninput="inputValidation()" required>
-            <button type="button" id="togglePassword" >Show</button>
+            <input id="password" type="password" asp-for="passwordCommand" oninput="inputValidation()" required>
+            <button class="bout" type="button" id="togglePassword" >Show</button>
             <label>Password</label>
         </div>
         <div id="passwordLongueur" class="attention" style="color: red;"></div>
@@ -26,25 +28,25 @@
 
 
         <div class="user-box">
-            <input id="mail" type="email" oninput="inputValidation()" required>
+            <input id="mail" type="email" asp-for="emailCommand" oninput="inputValidation()" required>
             <label>Email</label>
         </div>
         <div id="mailUtilise" class="attention" style="color: red;"></div>
 
 
         <div class="user-box">
-            <input id="telephone" type="text" oninput="inputValidation()" required>
+            <input id="telephone" type="text" asp-for="telephoneCommand" oninput="inputValidation()" required>
             <label>Téléphone</label>
         </div>
         <div id="telephoneMismatch" class="attention" style="color: red;"></div>
 
-        <a href="#">
+        <button class="btn" type="submit">
             <span></span>
             <span></span>
             <span></span>
             <span></span>
             Submit
-        </a>
+        </button>
         <div class="signup-link">
             <a class="cal" asp-controller="Compte"  asp-action="Login">Login</a>
         </div>

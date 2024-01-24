@@ -20,6 +20,10 @@ namespace BLL.Services
         public bool GetIds(long compteId);
         public List<CompteRepresentation> search(string search);
 
+        public CompteRepresentation sign (CompteCommand compteCommand);
+        public CompteRepresentation login(LoginCommand loginCommand);
+
+
 
 
     }

@@ -139,8 +139,34 @@ namespace VoitureAdmin.Controllers
 
         }
 
+        [HttpPost]
+        public IActionResult Sign(CompteCommand compteCommand) 
+        {
+            CompteRepresentation result = _iCompteService.sign(compteCommand);
+            if(result != null)
+            {
+                LoginRepresentation loginRepresentation = new LoginRepresentation { idRepresentation = result.idRepresentation, usernameRepresentation = result.usernameRepresentation };
+                return View("goodSign", loginRepresentation);
+            }
+            return View();
+        }
 
 
+
+        [HttpPost]
+        public IActionResult Login(LoginCommand loginCommand)
+        {
+            CompteRepresentation result = _iCompteService.login(loginCommand);
+            if (result != null)
+            {
+                LoginRepresentation loginRepresentation = new LoginRepresentation { idRepresentation=result.idRepresentation , usernameRepresentation = result.usernameRepresentation };
+                return RedirectToAction("Index", "Client", loginRepresentation); 
+            }
+            else
+            {
+                return View("falseLogin");
+            }
+        }
 
     }
 }

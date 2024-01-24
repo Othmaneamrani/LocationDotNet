@@ -16,12 +16,24 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\user\projets\VoitureAdmin\VoitureAdmin
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Compte/addCompte.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHRlXGFkZENvbXB0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Compte/deleteCompte.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHRlXGRlbGV0ZUNvbXB0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Compte/falseLogin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHRlXGZhbHNlTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Compte/goodSign.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHRlXGdvb2RTaWduLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Compte/Index.cshtml]

@@ -3,11 +3,6 @@ using BLL.Command;
 using BLL.Representation;
 using DAL;
 using DAL.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Services
 {
@@ -123,5 +118,56 @@ namespace BLL.Services
                 return null;
             }
         }
+
+        public CompteRepresentation sign(CompteCommand compteCommand)
+        {
+            List<Compte> list =  _db.comptes.ToList();
+            foreach(Compte compte in list)
+            {
+                if(compte.username.Equals(compteCommand.usernameCommand)  || compte.email.Equals(compteCommand.emailCommand))
+                {
+                    return null;
+                }
+            }
+
+            if (compteCommand.passwordCommand.Length >= 6)
+            {
+                if (System.Text.RegularExpressions.Regex.IsMatch(compteCommand.telephoneCommand, @"^\d+$"))
+                {
+                     _db.comptes.Add(_mapper.Map<Compte>(compteCommand));
+                     _db.SaveChanges();
+                    return _mapper.Map<CompteRepresentation>(compteCommand);
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+        public CompteRepresentation login(LoginCommand loginCommand)
+        {
+            List<Compte> list =  _db.comptes.ToList();
+            CompteRepresentation result = null;
+            foreach (Compte compte in list)
+            {
+                if (compte.username.Equals(loginCommand.usernameCommand) && compte.password.Equals(loginCommand.passwordCommand)
+                    )
+                {
+                    result = _mapper.Map<CompteRepresentation>(compte);
+                    break;
+                }
+
+            }
+            return result;
+        }
+
+
+
     }
 }
