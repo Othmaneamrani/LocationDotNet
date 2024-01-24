@@ -109,5 +109,19 @@ namespace BLL.Services
             }
             return ok;
         }
+
+
+        public List<CompteRepresentation> search(string search)
+        {
+            var compte = _db.comptes.Where(c => c.id.ToString() == search || c.username.Contains(search)).ToList();
+            if (compte != null)
+            {
+                return _mapper.Map<List<CompteRepresentation>>(compte);
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

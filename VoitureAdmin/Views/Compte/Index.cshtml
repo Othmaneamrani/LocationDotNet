@@ -1,5 +1,8 @@
 ﻿@model List<BLL.Representation.CompteRepresentation>
 
+<partial name="compteNavbar" />
+
+
 <h2 class="mt-5 mb-5">Comptes</h2>
 
 @if (Model == null || Model.Count == 0)
@@ -24,7 +27,7 @@ else
         {
                 <tr>
                 <th scope="row">@compte.idRepresentation</th>
-                <td class="align-middle">@compte.usernameRepresentation.First().ToString().ToUpper()@compte.usernameRepresentation.Substring(1)</td>
+                <td class="align-middle">@compte.usernameRepresentation</td>
                 <td class="align-middle">@compte.passwordRepresentation.First().ToString().ToUpper()@compte.passwordRepresentation.Substring(1)</td>
                 <td class="align-middle">@compte.emailRepresentation</td>
                 <td class="align-middle">@compte.telephoneRepresentation</td>

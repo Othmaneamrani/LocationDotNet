@@ -1,0 +1,45 @@
+﻿@model List<BLL.Representation.CompteRepresentation>
+
+<partial name="_navbarAdmin" />
+
+
+<h2 class="mt-5 mb-5">Comptes</h2>
+
+@if (Model == null || Model.Count == 0)
+{
+    <p>Aucun compte trouvé.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">Email</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var compte in Model)
+            {
+                <tr>
+                    <th scope="row">@compte.idRepresentation</th>
+                    <td class="align-middle">@compte.usernameRepresentation</td>
+                    <td class="align-middle">@compte.passwordRepresentation.First().ToString().ToUpper()@compte.passwordRepresentation.Substring(1)</td>
+                    <td class="align-middle">@compte.emailRepresentation</td>
+                    <td class="align-middle">@compte.telephoneRepresentation</td>
+
+                    <td class="text-center align-middle">
+                        <a class="btn btn-primary" href="updateCompte/@compte.idRepresentation">Modifier</a>
+                        <a class="btn ml-0 btn-danger" href="deleteCompteView/@compte.idRepresentation">Supprimer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+<a asp-controller="Compte" asp-action="Index" class="btn btn-primary">Retour</a>

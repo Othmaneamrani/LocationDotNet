@@ -1,12 +1,12 @@
 ﻿@model List<BLL.Representation.VehiculeRepresentation>
 
-<partial name="vehiculeNavbar" />
+<partial name="_navbarAdmin" />
 
 
 <h2 class="mt-5 mb-5">Véhicules</h2>
 
 
-@if (Model == null || Model.Count == 0)
+@if (Model == null || Model.Count == 0) 
 {
     <p>Aucun Véhicule trouvé.</p>
 }
@@ -44,8 +44,8 @@ else
                     <td class="align-middle">@vehicule.prixRepresentation</td>
                     <td class="align-middle">@vehicule.estDispoRepresentation.First().ToString().ToUpper()@vehicule.estDispoRepresentation.Substring(1)</td>
                     <td class="text-center align-middle">
-                        <a class="btn btn-primary" href="Vehicule/updateVehicule/@vehicule.idRepresentation">Modifier</a>
-                        <a class="btn ml-0 btn-danger" href="Vehicule/deleteVehiculeView/@vehicule.idRepresentation">Supprimer</a>
+                        <a class="btn btn-primary" href="updateVehicule/@vehicule.idRepresentation">Modifier</a>
+                        <a class="btn ml-0 btn-danger" href="deleteVehiculeView/@vehicule.idRepresentation">Supprimer</a>
                     </td>
                 </tr>
             }

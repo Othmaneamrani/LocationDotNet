@@ -1,0 +1,45 @@
+﻿@model BLL.Representation.DemandeRepresentation
+
+<partial name="_navbarAdmin" />
+
+
+<h2 class="mt-5 mb-5">Demandes</h2>
+
+@if (Model == null )
+{
+    <p>Aucun demande trouvé.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">DateDebut</th>
+                <th scope="col">DateFin</th>
+                <th scope="col">PrixTotal</th>
+                <th scope="col">CompteId</th>
+                <th scope="col">VehiculeId</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+
+                <tr>
+                    <th scope="row">@Model.idRepresentation</th>
+                <td class="align-middle">@Model.dateDebutRepresentation</td>
+                <td class="align-middle">@Model.dateFinRepresentation</td>
+                <td class="align-middle">@Model.prixTotalRepresentation</td>
+                <td class="align-middle">@Model.compteIdRepresentation</td>
+                <td class="align-middle">@Model.vehiculeIdRepresentation</td>
+
+                    <td class="text-center align-middle">
+                    <a class="btn btn-primary" href="updateDemande/@Model.idRepresentation">Modifier</a>
+                    <a class="btn ml-0 btn-danger" href="deleteDemandeView/@Model.idRepresentation">Supprimer</a>
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+}
+
+<a asp-controller="Demande" asp-action="Index" class="btn btn-primary">Retour</a>

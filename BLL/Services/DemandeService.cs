@@ -53,5 +53,20 @@ namespace BLL.Services
             await _db.SaveChangesAsync();
         }
 
+
+
+        public DemandeRepresentation search(long search)
+        {
+            Demande demande = _db.demandes.Find(search);
+            if (demande != null)
+            {
+                return _mapper.Map<DemandeRepresentation>(demande);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

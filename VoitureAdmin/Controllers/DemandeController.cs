@@ -61,5 +61,25 @@ namespace VoitureAdmin.Controllers
             await _iDemandeService.updateDemande(demandeCommand);
             return RedirectToAction("Index");
         }
+
+
+        [HttpPost]
+        public IActionResult search(long search)
+        {
+            var list = _iDemandeService.search(search);
+            if (list != null)
+            {
+                return View(list);
+            }
+            else
+            {
+                return View(null);
+            }
+
+        }
+
+
+
+
     }
 }

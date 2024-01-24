@@ -124,6 +124,23 @@ namespace VoitureAdmin.Controllers
             return Json(isIdAvailable);
         }
 
+        [HttpPost]
+        public IActionResult search(string search)
+        {
+            var list = _iCompteService.search(search);
+            if (list != null)
+            {
+                return View(list);
+            }
+            else
+            {
+                return View(null);
+            }
+
+        }
+
+
+
 
     }
 }

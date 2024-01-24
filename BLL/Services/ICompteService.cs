@@ -18,6 +18,8 @@ namespace BLL.Services
         public bool getUsername(string username);
         public bool getMail(string mail);
         public bool GetIds(long compteId);
+        public List<CompteRepresentation> search(string search);
+
 
 
     }

@@ -15,6 +15,7 @@ namespace BLL.Services
         public DemandeCommand getById(long id);
         public Task deleteDemande(long id);
         public Task updateDemande(DemandeCommand demandeCommand);
+        public DemandeRepresentation search(long search);
 
 
 
