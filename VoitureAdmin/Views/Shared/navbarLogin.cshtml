@@ -1,4 +1,7 @@
-﻿<style>
+﻿@model BLL.Representation.LoginRepresentation
+
+
+<style>
     body {
         margin: 0;
         font-family: Arial, sans-serif;
@@ -21,6 +24,7 @@
             padding: 10px 12px;
             text-decoration: none;
             border-radius: 5px;
+            cursor: pointer;
         }
 
             .navbar a:hover {
@@ -54,21 +58,33 @@
         height: 40px;
         margin-left: 10px;
         margin-right: 30px;
+        cursor: pointer;
     }
 
     .search {
         margin-left: 20px;
     }
 
+
+
 </style>
 
 <div class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <div class="navbar-collapse text-center">
-        <img class="logo" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-car-64.png?alt=media&token=f83e472d-9e59-490a-8636-8bc54f60a539" alt="Logo" />
-        <a href="#" class="navbar-center">AutoLoc</a>
-        <a href="#" class="navbar-center">Promotions</a>
-        <a href="#" class="navbar-center">About</a>
+        <img class="logo" onclick="redirigerVersClientIndex()" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-car-64.png?alt=media&token=f83e472d-9e59-490a-8636-8bc54f60a539" alt="Logo" />
+                <a onclick="redirigerVersClientIndex()" class="navbar-center">AutoLoc</a>
+
+                @*<form id="autoLocForm" asp-controller="Client" asp-action="redirectIndex" method="post">
+                    <input type="hidden" name="idRepresentation" value="@Model.idRepresentation" />
+                    <input type="hidden" name="usernameRepresentation" value="@Model.usernameRepresentation" />
+                    <a onclick="submitAutoLocForm()" class="navbar-right">AutoLoc</a>
+                </form> *@
+
+
+
+        <a onclick="redirigerVersClientPromo()" class="navbar-center">Promotions</a>
+        <a onclick="redirigerVersClientAbout()" class="navbar-center">About</a>
         <div class="search">
             <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Demande" asp-action="search">
                 <div class="input-group">
@@ -83,7 +99,52 @@
 
 
 
-    <div class="navbar-right">
-        <a href="#" class="navbar-right">Mon profil</a>
+ <div class="navbar-right">
+        <a onclick="redirigerVersClientProfil()" class="navbar-right">Mon profil</a>
     </div>
 </div>
+
+
+<script>
+    function redirigerVersClientIndex() {
+        var controller = "Client";
+        var action = "Index";
+
+        var url = "/" + controller + "/" + action + "?idRepresentation=" + encodeURIComponent('@Model.idRepresentation') + "&usernameRepresentation=" + encodeURIComponent('@Model.usernameRepresentation');
+
+        window.location.href = url;
+    }
+
+    function redirigerVersClientAbout() {
+        var controller = "Client";
+        var action = "AboutUser";
+
+        var url = "/" + controller + "/" + action + "?idRepresentation=" + encodeURIComponent('@Model.idRepresentation') + "&usernameRepresentation=" + encodeURIComponent('@Model.usernameRepresentation');
+
+        window.location.href = url;
+    }
+
+
+    function redirigerVersClientPromo() {
+        var controller = "Client";
+        var action = "Promo";
+
+        var url = "/" + controller + "/" + action + "?idRepresentation=" + encodeURIComponent('@Model.idRepresentation') + "&usernameRepresentation=" + encodeURIComponent('@Model.usernameRepresentation');
+
+        window.location.href = url;
+    }
+
+    function redirigerVersClientProfil() {
+        var controller = "Client";
+        var action = "Profil";
+
+        var url = "/" + controller + "/" + action + "?idRepresentation=" + encodeURIComponent('@Model.idRepresentation') + "&usernameRepresentation=" + encodeURIComponent('@Model.usernameRepresentation');
+
+        window.location.href = url;
+    }
+
+
+    //function submitAutoLocForm() {
+        //document.getElementById("autoLocForm").submit();
+    //}
+</script>
