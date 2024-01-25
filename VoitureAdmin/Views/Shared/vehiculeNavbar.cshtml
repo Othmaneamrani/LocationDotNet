@@ -1,8 +1,16 @@
 ﻿<header>
     <nav class="navbar navbar-expand-sm  navbar-toggleable-sm navbar-lightbg-lightgray border-bottom box-shadow mb-3">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <form asp-controller="Compte" asp-action="Logout" method="post">
+                    <button type="submit" class="nav-link font-weight-bold" style="font-size: 1rem;">Déconnexion</button>
+                </form>
+            </li>
+        </ul>
         <div class="container-fluid">
             <a class="navbar-brand mx-auto font-weight-bold"  style="font-size: 2rem;" asp-area="" asp-controller="Home" asp-action="Index">Admin Home</a>
         </div>
+
         <div class="ml-auto">
             <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Vehicule" asp-action="search">
                 <div class="input-group">
@@ -17,3 +25,9 @@
 </header>
 
 
+<style>
+    button {
+        background: transparent;
+        border: none;
+    }
+</style>

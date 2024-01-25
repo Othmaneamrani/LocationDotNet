@@ -1,9 +1,22 @@
 ﻿<header>
-    <nav class="navbar navbar-expand-sm  navbar-toggleable-sm navbar-lightbg-lightgray border-bottom box-shadow mb-3">
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-lightgray border-bottom box-shadow mb-3">
         <div class="container-fluid">
             <a class="navbar-brand mx-auto font-weight-bold" style="font-size: 2rem;" asp-area="" asp-controller="Home" asp-action="Index">Admin Home</a>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <form asp-controller="Compte"  asp-action="Logout" method="post">
+                        <button type="submit" class="nav-link font-weight-bold" style="font-size: 1rem;">Déconnexion</button>
+                    </form>
+                </li>
+            </ul>
         </div>
     </nav>
 </header>
 
 
+<style>
+    button{
+        background: transparent;
+        border: none;
+    }
+</style>

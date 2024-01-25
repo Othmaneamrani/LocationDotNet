@@ -233,7 +233,7 @@ namespace VoitureAdmin.Controllers
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
 
-            return View("Login");
+            return RedirectToAction("Login", "Compte");
         }
 
 
