@@ -1,13 +1,13 @@
 ﻿@model BLL.Representation.LoginRepresentation
 
 <div class="d-flex align-items-center justify-content-center" style="min-height: 70vh;">
-    <form asp-controller="Client" asp-action="client" method="post">
-        <div class="card " style="width: 18rem; padding: 35px;">
-            <div class="card-body text-center ">
-                <h5 class="card-title mb-4">Inscription réussie.</h5>
-                <input type="hidden" asp-for="idRepresentation" value="@Model.idRepresentation" />
-                <input type="hidden" asp-for="usernameRepresentation" value="@Model.usernameRepresentation" />
-                <button asp-controller="Client" asp-action="Index" type="submit" class="btn btn-primary m-lg-1">Ok</button>
+    <form asp-controller="Client" asp-action="Index" method="post">
+        <div class="card" style="width: 18rem; padding: 35px;">
+            <div class="card-body text-center">
+                <h5 class="card-title mb-4">Inscription réussie.  @Model.idRepresentation</h5>
+                <input type="hidden" asp-for="idRepresentation"/>
+                <input type="hidden" asp-for="usernameRepresentation" />
+                <button type="submit" class="btn btn-primary m-lg-1">Ok</button>
             </div>
         </div>
     </form>

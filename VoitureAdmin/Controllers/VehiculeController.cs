@@ -1,10 +1,12 @@
 ﻿using BLL.Command;
 using BLL.Representation;
 using BLL.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace VoitureAdmin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class VehiculeController : Controller
     {
         private readonly IVehiculeService _iVehiculeService;

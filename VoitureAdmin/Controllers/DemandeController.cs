@@ -3,10 +3,12 @@ using BLL.Command;
 using BLL.Representation;
 using BLL.Services;
 using DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace VoitureAdmin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class DemandeController : Controller
     {
         private readonly IDemandeService _iDemandeService;

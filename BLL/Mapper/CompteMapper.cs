@@ -9,7 +9,8 @@ namespace BLL.Mapper
     {
         public CompteMapper()
         {
-            CreateMap<Compte, CompteRepresentation>().ForMember(dest => dest.idRepresentation, opt => opt.MapFrom(src => src.id))
+            CreateMap<Compte, CompteRepresentation>()
+            .ForMember(dest => dest.idRepresentation, opt => opt.MapFrom(src => src.id))
             .ForMember(dest => dest.usernameRepresentation, opt => opt.MapFrom(src => src.username))
             .ForMember(dest => dest.passwordRepresentation, opt => opt.MapFrom(src => src.password))
             .ForMember(dest => dest.emailRepresentation, opt => opt.MapFrom(src => src.email))

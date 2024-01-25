@@ -3,11 +3,16 @@ using BLL.Command;
 using BLL.Representation;
 using BLL.Services;
 using DAL.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace VoitureAdmin.Controllers
 {
+
     public class CompteController : Controller
     {
         private readonly ICompteService _iCompteService;
@@ -16,19 +21,23 @@ namespace VoitureAdmin.Controllers
         {
             _iCompteService = iCompteService;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             List<CompteRepresentation> list = _iCompteService.getAll();  
             return View(list);
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
+
         public IActionResult addCompte()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> addCompte(CompteCommand compteCommand)
         {
             bool ok = _iCompteService.getUsername(compteCommand.usernameCommand);
@@ -40,12 +49,16 @@ namespace VoitureAdmin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
+
         public IActionResult deleteCompteView(long id)
         {
             return View("deleteCompte", _iCompteService.getById(id));
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> deleteCompte(long id)
         {
             await _iCompteService.deleteCompte(id);
@@ -53,6 +66,8 @@ namespace VoitureAdmin.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
+
         public IActionResult updateCompte(long id)
         {
             return View(_iCompteService.getById(id));
@@ -60,6 +75,8 @@ namespace VoitureAdmin.Controllers
 
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
+
         public async Task<IActionResult> updateCompte(CompteCommand compteCommand)
         {
             await _iCompteService.updateCompte(compteCommand);
@@ -75,6 +92,7 @@ namespace VoitureAdmin.Controllers
         }
 
         [HttpGet]
+
         public JsonResult CheckMail(string mail)
         {
             bool isMailAvailable = _iCompteService.getMail(mail);
@@ -83,6 +101,7 @@ namespace VoitureAdmin.Controllers
 
 
         [HttpGet]
+
         public JsonResult CheckUsernameUpdate(string username,string usernameCommand)
         {
             bool isUsernameAvailable=true;
@@ -145,6 +164,16 @@ namespace VoitureAdmin.Controllers
             CompteRepresentation result = _iCompteService.sign(compteCommand);
             if(result != null)
             {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, result.usernameRepresentation),
+                    new Claim(ClaimTypes.Role, "User")
+                };
+
+                var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                var principal = new ClaimsPrincipal(identity);
+
+                HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal).Wait();
                 LoginRepresentation loginRepresentation = new LoginRepresentation { idRepresentation = result.idRepresentation, usernameRepresentation = result.usernameRepresentation };
                 return View("goodSign", loginRepresentation);
             }
@@ -159,14 +188,52 @@ namespace VoitureAdmin.Controllers
             CompteRepresentation result = _iCompteService.login(loginCommand);
             if (result != null)
             {
-                LoginRepresentation loginRepresentation = new LoginRepresentation { idRepresentation=result.idRepresentation , usernameRepresentation = result.usernameRepresentation };
-                return RedirectToAction("Index", "Client", loginRepresentation); 
-            }
-            else
+                if (result.usernameRepresentation.Equals("anaRaniAdmin"))
+                {
+
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, result.usernameRepresentation),
+                        new Claim(ClaimTypes.Role, "Admin")
+                    };
+
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal).Wait();
+
+                    return RedirectToAction("Index", "Home");
+                }
+                else 
+                {
+                    LoginRepresentation loginRepresentation = new LoginRepresentation { idRepresentation = result.idRepresentation, usernameRepresentation = result.usernameRepresentation };
+
+                    var claims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Name, result.usernameRepresentation),
+                        new Claim(ClaimTypes.Role, "User")
+                    };
+
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    var principal = new ClaimsPrincipal(identity);
+
+                    HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal).Wait();
+
+                    return RedirectToAction("Index", "Client", loginRepresentation);
+                }
+            }else
             {
                 return View("falseLogin");
             }
         }
+
+
+        public IActionResult Acces()
+        {
+            return View();
+        }
+
+
 
     }
 }

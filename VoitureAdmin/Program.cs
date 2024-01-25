@@ -3,6 +3,7 @@ using BLL.Services;
 using DAL;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 namespace VoitureAdmin
@@ -32,7 +33,12 @@ namespace VoitureAdmin
                 });
             }
 
-
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/Compte/Login"; 
+                options.AccessDeniedPath = "/Compte/Acces"; 
+            });
 
 
             var app = builder.Build();
@@ -50,11 +56,12 @@ namespace VoitureAdmin
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Compte}/{action=Login}/{id?}");
 
             app.Run();
         }
