@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "D+H1WsiAkM9UZh6r18WIFA2TSJ0wU+DRt/yvCHhQszYB9V7M3xCrOG/d5+8Y/AxSCN7lLJjuZPWOBvyCQuXbsg==",
+  "dgSpecHash": "1lD4nugllfK3gXo30MpfoQgKn2NruX2DA5YFwzzu3/QMCEmaOWAHhmZVmLgVdss8gUhK8IJcIPKSVN4jsyhHWw==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\projets\\VoitureAdmin\\VoitureAdmin\\VoitureAdmin.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\user\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.1\\automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\firebaseadmin\\2.0.0\\firebaseadmin.2.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\google.api.gax\\3.2.0\\google.api.gax.3.2.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\google.api.gax.rest\\3.2.0\\google.api.gax.rest.3.2.0.nupkg.sha512",

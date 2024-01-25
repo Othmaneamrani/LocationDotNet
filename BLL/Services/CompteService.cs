@@ -3,6 +3,7 @@ using BLL.Command;
 using BLL.Representation;
 using DAL;
 using DAL.Models;
+using System.Globalization;
 
 namespace BLL.Services
 {
@@ -22,12 +23,17 @@ namespace BLL.Services
         {
             return _mapper.Map<List<CompteRepresentation>>(_db.comptes.ToList());
         }
+
+
+
         public async Task addComtpe(CompteCommand compteCommand)
         {
-            if (compteCommand.passwordCommand.Length > 6)
+            if (compteCommand.passwordCommand.Length >= 6)
             {
                 if (System.Text.RegularExpressions.Regex.IsMatch(compteCommand.telephoneCommand, @"^\d+$"))
                 {
+                    string hashPass = BCrypt.Net.BCrypt.HashPassword(compteCommand.passwordCommand);
+                    compteCommand.passwordCommand = hashPass;
                     await _db.comptes.AddAsync(_mapper.Map<Compte>(compteCommand));
                     await _db.SaveChangesAsync();
                 }
@@ -56,6 +62,8 @@ namespace BLL.Services
         public async Task updateCompte(CompteCommand compteCommand)
         {
             Compte compte = await _db.comptes.FindAsync(compteCommand.idCommand);
+            string hashPass = BCrypt.Net.BCrypt.HashPassword(compteCommand.passwordCommand);
+            compteCommand.passwordCommand = hashPass;
             _mapper.Map(compteCommand, compte);
             await _db.SaveChangesAsync();
         }
@@ -134,6 +142,8 @@ namespace BLL.Services
             {
                 if (System.Text.RegularExpressions.Regex.IsMatch(compteCommand.telephoneCommand, @"^\d+$"))
                 {
+                    string hashPass = BCrypt.Net.BCrypt.HashPassword(compteCommand.passwordCommand);
+                    compteCommand.passwordCommand = hashPass;
                      _db.comptes.Add(_mapper.Map<Compte>(compteCommand));
                      _db.SaveChanges();
                     return _mapper.Map<CompteRepresentation>(compteCommand);
@@ -156,8 +166,7 @@ namespace BLL.Services
             CompteRepresentation result = null;
             foreach (Compte compte in list)
             {
-                if (compte.username.Equals(loginCommand.usernameCommand) && compte.password.Equals(loginCommand.passwordCommand)
-                    )
+                if (compte.username.Equals(loginCommand.usernameCommand) && BCrypt.Net.BCrypt.Verify(loginCommand.passwordCommand , compte.password ))
                 {
                     result = _mapper.Map<CompteRepresentation>(compte);
                     break;
