@@ -23,6 +23,8 @@ namespace DAL.Models
         public double prix { get; set; }
         [Required]
         public string estDispo { get; set; } //vente ou location
+        public string promo { get; set; } = string.Empty;
+        public double promoPrix { get; set; }
 
         [InverseProperty("vehicule")]
         public List<Demande> demandes { get; set; }

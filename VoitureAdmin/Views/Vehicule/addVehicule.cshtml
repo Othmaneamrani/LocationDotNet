@@ -36,6 +36,21 @@
         </select>
     </div>
 
+    <div class="mb-3">
+        <label class="form-label">Promo</label>
+        <select class="form-control" asp-for="promoCommand" required>
+            <option value="Oui">Oui</option>
+            <option value="Non">Non</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Nouveau prix /jour</label>
+        <input id="prixPromo" type="number" class="form-control" oninput="inputValidation()" asp-for="promoPrixCommand" required>
+        <div id="prixPromoMismatch" style="color: red;"></div>
+    </div>
+
+
 
     <button type="submit" class="btn btn-primary">Ajouter</button>
     <a asp-controller="Vehicule" asp-action="Index" class="btn btn-primary m-md-1">Retour</a>
@@ -47,21 +62,36 @@
             function validationAlert()
             {
                 var prix = document.getElementById("prix").value;
+                var prixPromo = document.getElementById("prixPromo").value;
+                var prixPromoMismatch = document.getElementById("prixPromoMismatch").textContent;
                 var prixMismatch = document.getElementById("prixMismatch").textContent;
+
                 if (prixMismatch === "Le prix ne peut pas etre négatif.") {
                     alert("Le prix ne peut pas etre négatif.")
                     return false;
-                }else{
+                } else if (prixPromoMismatch === "Le nouveau prix ne peut pas etre plus grand ou identique à l'ancien.") {
+                    alert("Le nouveau prix ne peut pas etre plus grand que l'ancien.")
+                    return false;
+                } else{
                     return true;
                 }
+
             }
 
             function inputValidation() {
                 var prix = document.getElementById("prix").value;
+                var prixPromo = document.getElementById("prixPromo").value;
+
+
                 if(prix < 0){
                     document.getElementById("prixMismatch").textContent = "Le prix ne peut pas etre négatif.";
                 } else {
                     document.getElementById("prixMismatch").textContent = "";
+                }
+                if (prixPromo != 0 && prixPromo >= prix) {
+                    document.getElementById("prixPromoMismatch").textContent = "Le nouveau prix ne peut pas etre plus grand ou identique à l'ancien.";
+                } else {
+                    document.getElementById("prixPromoMismatch").textContent = "";
                 }
                 return true;
             }

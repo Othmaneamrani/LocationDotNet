@@ -18,6 +18,8 @@ namespace BLL.Command
         public string typeMoteurCommand { get; set; } 
         public double prixCommand { get; set; }
         public string estDispoCommand { get; set; }
+        public string promoCommand { get; set; } = string.Empty;
+        public double promoPrixCommand { get; set; }
 
         public List<Demande> demandesCommand { get; set; }
     }

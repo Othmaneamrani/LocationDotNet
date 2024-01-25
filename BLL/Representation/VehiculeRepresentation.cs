@@ -15,6 +15,9 @@ namespace BLL.Representation
         public string typeMoteurRepresentation { get; set; }
         public double prixRepresentation { get; set; }
         public string estDispoRepresentation { get; set; }
+        public string promoRepresentation { get; set; } = string.Empty;
+        public double promoPrixRepresentation { get; set; }
         public List<Demande> demandesRepresentation { get; set; }
+
     }
 }

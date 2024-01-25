@@ -21,6 +21,8 @@ else
                 <th scope="col">TypeMoteur</th>
                 <th scope="col">Prix /jour</th>
                 <th scope="col">Disponibilité</th>
+                <th scope="col">Promotion</th>
+                <th scope="col">Nouveau Prix /jour</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -43,6 +45,10 @@ else
                     <td class="align-middle">@vehicule.typeMoteurRepresentation.First().ToString().ToUpper()@vehicule.typeMoteurRepresentation.Substring(1)</td>
                     <td class="align-middle">@vehicule.prixRepresentation</td>
                     <td class="align-middle">@vehicule.estDispoRepresentation.First().ToString().ToUpper()@vehicule.estDispoRepresentation.Substring(1)</td>
+                    <td class="align-middle">@vehicule.promoRepresentation.First().ToString().ToUpper()@vehicule.promoRepresentation.Substring(1)</td>
+                    <td class="align-middle">@vehicule.promoPrixRepresentation</td>
+
+
                     <td class="text-center align-middle">
                         <a class="btn btn-primary" href="Vehicule/updateVehicule/@vehicule.idRepresentation">Modifier</a>
                         <a class="btn ml-0 btn-danger" href="Vehicule/deleteVehiculeView/@vehicule.idRepresentation">Supprimer</a>
