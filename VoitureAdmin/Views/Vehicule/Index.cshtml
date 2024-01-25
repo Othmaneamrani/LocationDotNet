@@ -50,8 +50,8 @@ else
 
 
                     <td class="text-center align-middle">
-                        <a class="btn btn-primary" href="Vehicule/updateVehicule/@vehicule.idRepresentation">Modifier</a>
-                        <a class="btn ml-0 btn-danger" href="Vehicule/deleteVehiculeView/@vehicule.idRepresentation">Supprimer</a>
+                        <a class="btn btn-primary" asp-controller="Vehicule" asp-action="updateVehicule" asp-route-id="@vehicule.idRepresentation" >Modifier</a>
+                        <a class="btn ml-0 btn-danger" asp-controller="Vehicule" asp-action="deleteVehiculeView" asp-route-id="@vehicule.idRepresentation" >Supprimer</a>
                     </td>
                 </tr>
             }

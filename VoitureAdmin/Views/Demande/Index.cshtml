@@ -35,8 +35,8 @@ else
                 <td class="align-middle">@demande.vehiculeIdRepresentation</td>
 
                     <td class="text-center align-middle">
-                        <a class="btn btn-primary" href="Demande/updateDemande/@demande.idRepresentation">Modifier</a>
-                        <a class="btn ml-0 btn-danger" href="Demande/deleteDemandeView/@demande.idRepresentation">Supprimer</a>
+                        <a asp-controller="Demande" asp-action="updateDemande" asp-route-id="@demande.idRepresentation" class="btn btn-primary">Modifier</a>
+                        <a class="btn ml-0 btn-danger" asp-controller="Demande" asp-action="deleteDemandeView" asp-route-id="@demande.idRepresentation" >Supprimer</a>
                     </td>
                 </tr>
             }

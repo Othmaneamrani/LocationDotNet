@@ -228,6 +228,17 @@ namespace VoitureAdmin.Controllers
         }
 
 
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
+
+            return View("Login");
+        }
+
+
+
+
         public IActionResult Acces()
         {
             return View();

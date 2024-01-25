@@ -16,10 +16,14 @@
         .input-group button {
             margin-left: 10px;
         }
+.eye {
+        width: 25px;
+        height: 25px;
+    }
 </style>
 
 
-<h2 class="mt-5">Ajouter un nouveau véhicule</h2>
+<h2 class="mt-5">Ajouter un nouveau compte</h2>
 
 <form method="post" action="addCompte" onsubmit="return validationAlert();" class="mt-5">
 
@@ -36,7 +40,9 @@
         <label class="form-label">Password</label>
         <div class="input-group">
             <input type="password" class="form-control" id="password" oninput="inputValidation()" asp-for="passwordCommand" required>
-            <button class="btn btn-outline-secondary" type="button" id="togglePassword">Show</button>
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                <img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c" alt="eyeOpen" />
+            </button>
         </div>
         <div id="passwordLongueur" style="color: red;"></div>
         <div id="espacePassword" style="color: red;"></div>
@@ -48,7 +54,9 @@
         <label class="form-label">Confirmation password</label>
         <div class="input-group">
             <input type="password" class="form-control" id="confirmPassword" oninput="inputValidation()" required>
-            <button class="btn btn-outline-secondary" type="button" id="togglePasswordConfirm">Show</button>
+            <button class="btn btn-outline-secondary" type="button" id="togglePasswordConfirm">
+                <img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c" alt="eyeOpen" />
+            </button>
         </div>
     <div id="passwordMismatch" style="color: red;"></div>
     </div>
@@ -200,11 +208,11 @@
 
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
-                toggleButton.textContent = "Hide";
+                toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-eye-50.png?alt=media&token=1a528adb-1c31-44c0-abcb-6225adce0717"alt="eyeOpen" />';
             } else {
                 passwordInput.type = "password";
-                toggleButton.textContent = "Show";
-            }
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c"alt="eyeClose" />';
+        }
         });
 
 
@@ -214,10 +222,10 @@
 
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
-            toggleButton.textContent = "Hide";
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-eye-50.png?alt=media&token=1a528adb-1c31-44c0-abcb-6225adce0717"alt="eyeOpen" />';
         } else {
             passwordInput.type = "password";
-            toggleButton.textContent = "Show";
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c"alt="eyeClose" />';
         }
     });
 

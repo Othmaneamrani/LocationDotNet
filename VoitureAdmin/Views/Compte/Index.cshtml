@@ -33,8 +33,8 @@ else
                 <td class="align-middle">@compte.telephoneRepresentation</td>
 
                     <td class="text-center align-middle">
-                    <a class="btn btn-primary" href="Compte/updateCompte/@compte.idRepresentation">Modifier</a>
-                    <a class="btn ml-0 btn-danger" href="Compte/deleteCompteView/@compte.idRepresentation">Supprimer</a>
+                        <a class="btn btn-primary" asp-controller="Compte" asp-action="updateCompte" asp-route-id="@compte.idRepresentation" >Modifier</a>
+                        <a class="btn ml-0 btn-danger" asp-controller="Compte" asp-action="deleteCompteView" asp-route-id="@compte.idRepresentation" >Supprimer</a>
                 </td>
                 </tr>
             }
