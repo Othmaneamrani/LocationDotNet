@@ -8,6 +8,8 @@ namespace VoitureAdmin.Controllers
 
     public class ClientController : Controller
     {
+        [Authorize(Roles = "User")]
+
         public IActionResult Index(LoginRepresentation loginRepresentation)
         {
             return View(loginRepresentation);
@@ -23,6 +25,7 @@ namespace VoitureAdmin.Controllers
 
 
         [HttpPost]
+
         public IActionResult redirectIndex(LoginRepresentation loginRepresentation)
         {
 
@@ -39,10 +42,38 @@ namespace VoitureAdmin.Controllers
 
 
         [HttpGet]
+        [Authorize(Roles = "User")]
+
         public IActionResult AboutUser(LoginRepresentation loginRepresentation)
         {
             return View(loginRepresentation);
         }
+
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+
+        public IActionResult Profil(LoginRepresentation loginRepresentation)
+        {
+            return View(loginRepresentation);
+        }
+
+
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+
+        public IActionResult PromoUser(LoginRepresentation loginRepresentation)
+        {
+            return View(loginRepresentation);
+        }
+
+        [HttpGet]
+        public IActionResult Promo()
+        {
+            return View();
+        }
+
 
 
     }
