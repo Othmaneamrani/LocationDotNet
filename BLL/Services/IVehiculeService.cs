@@ -18,7 +18,10 @@ namespace BLL.Services
         public bool GetIds(long vehiculeId);
         public VehiculeRepresentation getPrix(long vehiculeId);
         public List<VehiculeRepresentation> search (string search);
+        public List<VehiculeRepresentation> searchUser(string search);
         public List<VehiculeRepresentation> getAllPromo();
+        public VehiculeRepresentation getByIdRepresentation(long id);
+
 
 
     }

@@ -344,3 +344,6 @@ tbody:hover tr:hover td {
     height: 25px;
 }
 
+.card{
+    max-height: 342px;
+}

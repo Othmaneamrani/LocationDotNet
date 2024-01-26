@@ -8,71 +8,77 @@
 @if (Model == null || Model.Count == 0)
 {
     <p>Aucun Véhicule trouvé.</p>
+    <a asp-controller="Client" asp-action="Depart" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
+
 }
 else
 {
+    <a asp-controller="Client" asp-action="Depart" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
 
+    @if (Model.Any(v => v.estDispoRepresentation.Equals("Oui")))
+    {
     <h2 class="titre">Available Vehicles</h2>
 
 
-
-<div class="container">
-    <div class="row">
-        @foreach (var vehicule in @Model)
-        {
-            if (@vehicule.estDispoRepresentation.Equals("Oui") && @vehicule.promoRepresentation.Equals("Non"))
+    <div class="container">
+        <div class="row">
+            @foreach (var vehicule in @Model)
             {
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                    <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
-                    <div class="card-body">
-                        <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-                        <p>
-                             <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary" style="float: left;">Détails</a>
-                            <span style="float: right;">
-                            <span class="card-text" >@vehicule.prixRepresentation</span>
-                            <span class="card-dh" >DHs/jour</span>
-                            </span>
-                        </p>
-                    </div>
-                </div>
-                </div>
-            }
-                if (@vehicule.estDispoRepresentation.Equals("Oui") && @vehicule.promoRepresentation.Equals("Oui") && @vehicule.promoPrixRepresentation > 0)
-            {
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
-                        <div class="card-body">
-                            <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-                            <p>
-                                    <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
-                                <span style="float: right;">
-                                    <span class="card-text-before">@vehicule.prixRepresentation</span>
-                                    <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
-                                </span>
-                                <span style="float: right;">
-                                    <span class="card-text">@vehicule.promoPrixRepresentation</span>
-                                    <span class="card-dh">DHs/jour</span>
-                                </span>
-                            </p>
+                if (@vehicule.estDispoRepresentation.Equals("Oui") && @vehicule.promoRepresentation.Equals("Non"))
+                {
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                            <div class="card-body">
+                                <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                <p>
+                                    <a href="#" class="btn btn-primary" style="float: left;">Détails</a>
+                                    <span style="float: right;">
+                                        <span class="card-text">@vehicule.prixRepresentation</span>
+                                        <span class="card-dh">DHs/jour</span>
+                                    </span>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                }
+                if (@vehicule.estDispoRepresentation.Equals("Oui") && @vehicule.promoRepresentation.Equals("Oui") && @vehicule.promoPrixRepresentation > 0)
+                {
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                            <div class="card-body">
+                                <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                <p>
+                                    <a href="#" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                    <span style="float: right;">
+                                        <span class="card-text-before">@vehicule.prixRepresentation</span>
+                                        <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
+                                    </span>
+                                    <span style="float: right;">
+                                        <span class="card-text">@vehicule.promoPrixRepresentation</span>
+                                        <span class="card-dh">DHs/jour</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                }
+
             }
 
-        }
 
-
+        </div>
     </div>
-</div>
 
-
+}
 
     @if (Model.Any(v => v.estDispoRepresentation.Equals("Non")))
     {
-
-        <div class="separator-line"></div>
+        @if (Model.Any(v => v.estDispoRepresentation.Equals("Oui")))
+        {
+            <div class="separator-line"></div>
+        }
 
         <h2 class="titre">Unavailable Vehicles</h2>
 
@@ -89,7 +95,7 @@ else
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
                                     <p>
-                                        <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary" style="float: left;">Détails</a>
+                                        <a href="#" class="btn btn-primary" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text">@vehicule.prixRepresentation</span>
                                             <span class="card-dh">DHs/jour</span>
@@ -109,7 +115,7 @@ else
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
                                     <p>
-                                        <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <a href="#" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text-before">@vehicule.prixRepresentation</span>
                                             <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
@@ -160,9 +166,9 @@ else
     }
 
     .card {
-        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-        transition: box-shadow 0.3s ease-in-out; 
-        margin-bottom:40px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease-in-out;
+        margin-bottom: 40px;
     }
 
         .card:hover {
@@ -177,7 +183,7 @@ else
         text-decoration: line-through;
     }
 
-        .separator-line {
+    .separator-line {
         width: 60%;
         height: 1px;
         background-color: #ccc;

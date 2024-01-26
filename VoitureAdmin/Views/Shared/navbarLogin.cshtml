@@ -1,7 +1,4 @@
-﻿@model BLL.Representation.LoginRepresentation
-
-
-<style>
+﻿<style>
     body {
         margin: 0;
         font-family: Arial, sans-serif;
@@ -12,7 +9,7 @@
         overflow: hidden;
         width: 100%;
         border-bottom: 2px solid #ddd;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
     }
 
@@ -48,7 +45,7 @@
 
 
         .navbar-right a:last-child {
-            background-color: #CCCCCC;
+            background-color: white;
             color: black;
             margin-right: 5px;
         }
@@ -66,27 +63,28 @@
     }
 
 
+    .navbar-right a.selected-button {
+        background-color: #555555;
+        color: white;
+    }
 
+    .navbar-center a.selected-button {
+        background-color: #555555;
+        color: white;
+    }
 </style>
 
 <div class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <div class="navbar-collapse text-center">
         <img class="logo" onclick="redirigerVersClientIndex()" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-car-64.png?alt=media&token=f83e472d-9e59-490a-8636-8bc54f60a539" alt="Logo" />
-                <a onclick="redirigerVersClientIndex()" class="navbar-center">AutoLoc</a>
-
-                @*<form id="autoLocForm" asp-controller="Client" asp-action="redirectIndex" method="post">
-                    <input type="hidden" name="idRepresentation" value="@Model.idRepresentation" />
-                    <input type="hidden" name="usernameRepresentation" value="@Model.usernameRepresentation" />
-                    <a onclick="submitAutoLocForm()" class="navbar-right">AutoLoc</a>
-                </form> *@
-
-
-
-        <a onclick="redirigerVersClientPromo()" class="navbar-center">Promotions</a>
-        <a onclick="redirigerVersClientAbout()" class="navbar-center">About</a>
+        <div class="navbar-center">
+            <a class="nav-link" href="/Client/Index">AutoLoc</a>
+            <a class="nav-link" href="/Client/PromoUser">Promotions</a>
+            <a class="nav-link" href="/Client/AboutUser">About</a>
+        </div>
         <div class="search">
-            <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Demande" asp-action="search">
+            <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Client" asp-action="searchUser">
                 <div class="input-group">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="search" name="search" />
                     <div class="input-group-append">
@@ -99,8 +97,8 @@
 
 
 
- <div class="navbar-right">
-        <a onclick="redirigerVersClientProfil()" class="navbar-right">Mon profil</a>
+    <div class="navbar-right">
+        <a asp-controller="Client" asp-action="Profil" class="navbar-right">Mon profil</a>
     </div>
 </div>
 
@@ -108,43 +106,40 @@
 <script>
     function redirigerVersClientIndex() {
         var controller = "Client";
-        var action = "Index";
+        var action = "Depart";
 
-        var url = "/" + controller + "/" + action + "?idRepresentation=" + encodeURIComponent('@Model.idRepresentation') + "&usernameRepresentation=" + encodeURIComponent('@Model.usernameRepresentation');
-
-        window.location.href = url;
-    }
-
-    function redirigerVersClientAbout() {
-        var controller = "Client";
-        var action = "AboutUser";
-
-        var url = "/" + controller + "/" + action + "?idRepresentation=" + encodeURIComponent('@Model.idRepresentation') + "&usernameRepresentation=" + encodeURIComponent('@Model.usernameRepresentation');
+        var url = "/" + controller + "/" + action;
 
         window.location.href = url;
     }
 
 
-    function redirigerVersClientPromo() {
-        var controller = "Client";
-        var action = "PromoUser";
+    document.addEventListener("DOMContentLoaded", function () {
+        selectedButton();
+    });
 
-        var url = "/" + controller + "/" + action + "?idRepresentation=" + encodeURIComponent('@Model.idRepresentation') + "&usernameRepresentation=" + encodeURIComponent('@Model.usernameRepresentation');
+    function selectedButton() {
+        var currentUrl = window.location.pathname.toLowerCase();
 
-        window.location.href = url;
+        var profilButton = document.querySelector('.navbar-right a[href$="/Client/Profil"]');
+        var indexButton = document.querySelector('.navbar-center a[href$="/Client/Index"]');
+        var aboutButton = document.querySelector('.navbar-center a[href$="/Client/AboutUser"]');
+        var promoButton = document.querySelector('.navbar-center a[href$="/Client/PromoUser"]');
+
+
+        if (currentUrl.indexOf('/compte/profil') !== -1) {
+            profilButton.classList.add('selected-button');
+        }
+        if (currentUrl.indexOf('/client/promouser') !== -1) {
+            promoButton.classList.add('selected-button');
+        }
+        if (currentUrl.indexOf('/client/index') !== -1) {
+            indexButton.classList.add('selected-button');
+        }
+        if (currentUrl.indexOf('/client/aboutuser') !== -1) {
+            aboutButton.classList.add('selected-button');
+        }
     }
 
-    function redirigerVersClientProfil() {
-        var controller = "Client";
-        var action = "Profil";
 
-        var url = "/" + controller + "/" + action + "?idRepresentation=" + encodeURIComponent('@Model.idRepresentation') + "&usernameRepresentation=" + encodeURIComponent('@Model.usernameRepresentation');
-
-        window.location.href = url;
-    }
-
-
-    //function submitAutoLocForm() {
-        //document.getElementById("autoLocForm").submit();
-    //}
 </script>

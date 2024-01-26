@@ -28,6 +28,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XERlcGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XERldGFpbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/DetailUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XERldGFpbFVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -42,6 +50,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/PromoUser.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFByb21vVXNlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XHNlYXJjaC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/searchUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XHNlYXJjaFVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Compte/Acces.cshtml]

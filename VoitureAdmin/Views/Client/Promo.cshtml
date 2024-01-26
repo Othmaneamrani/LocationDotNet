@@ -5,35 +5,98 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
 
 <partial name="navbarHome" />
+@if (Model == null || Model.Count == 0)
+{
+    <p>Aucun Véhicule trouvé.</p>
+}
+else
+{
 
-<h2 class="titre">Car Promotions</h2>
+    <h2 class="titre">Vehicles Promotions</h2>
 
-<div class="container">
-    <div class="row">
-        @foreach (var vehicule in @Model)
-        {
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
-                    <div class="card-body">
-                        <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-                        <p>
-                            <a href="#" class="btn btn-primary mt-2" style="float: left;">Détails</a>
-                            <span style="float: right;">
-                                <span class="card-text-before">@vehicule.prixRepresentation</span>
-                                <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
-                            </span>
-                            <span style="float: right;">
-                            <span class="card-text">@vehicule.promoPrixRepresentation</span>
-                            <span class="card-dh">DHs/jour</span>
-                            </span>
-                        </p>
+
+
+    <div class="container">
+        <div class="row">
+            @foreach (var vehicule in @Model)
+            {
+                if (@vehicule.estDispoRepresentation.Equals("Oui"))
+                {
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                            <div class="card-body">
+                                <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                <p>
+                                    <a asp-controller="Client" asp-action="Detail"  asp-route-id="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                    <span style="float: right;">
+                                        <span class="card-text-before">@vehicule.prixRepresentation</span>
+                                        <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
+                                    </span>
+                                    <span style="float: right;">
+                                        <span class="card-text">@vehicule.promoPrixRepresentation</span>
+                                        <span class="card-dh">DHs/jour</span>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        }
+                }
+
+
+            }
+
+
+        </div>
     </div>
-</div>
+
+
+
+    @if (Model.Where(v => v.estDispoRepresentation.Equals("Non")).Count() > 0)
+    {
+
+        <div class="separator-line"></div>
+
+        <h2 class="titre">Unavailable Vehicles</h2>
+
+        <div class="container">
+            <div class="row">
+
+                @foreach (var vehicule in @Model)
+                {
+                    if (@vehicule.estDispoRepresentation.Equals("Non"))
+                    {
+                        <div class="col-md-3 mb-4">
+                            <div class="card">
+                                <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                                <div class="card-body">
+                                    <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                    <p>
+                                        <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <span style="float: right;">
+                                            <span class="card-text-before">@vehicule.prixRepresentation</span>
+                                            <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
+                                        </span>
+                                        <span style="float: right;">
+                                            <span class="card-text">@vehicule.promoPrixRepresentation</span>
+                                            <span class="card-dh">DHs/jour</span>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+        </div>
+    }
+
+
+}
+
+
 
 <style>
     .titre {
@@ -70,14 +133,20 @@
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
         }
 
-    .card-text-before{
+
+    .card-text-before {
         font-family: 'Gluten', cursive;
         font-size: 1em;
         font-weight: bold;
         text-decoration: line-through;
     }
 
-
-
+    .separator-line {
+        width: 60%;
+        height: 1px;
+        background-color: #ccc;
+        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        margin: 0 auto 40px;
+    }
 
 </style>

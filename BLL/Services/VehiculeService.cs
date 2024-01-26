@@ -34,6 +34,12 @@ namespace BLL.Services
             return _mapper.Map<VehiculeCommand>(_db.vehicules.Find(id));
         }
 
+
+        public VehiculeRepresentation getByIdRepresentation(long id)
+        {
+            return _mapper.Map<VehiculeRepresentation>(_db.vehicules.Find(id));
+        }
+
         public async Task deleteVehicule(long id)
         {
             _db.Remove(await _db.vehicules.FindAsync(id));
@@ -93,12 +99,23 @@ namespace BLL.Services
 
         public List<VehiculeRepresentation> getAllPromo()
         {
-            List<Vehicule> vehiculesFiltre = _db.vehicules.Where(v => v.promo.Equals("oui")).ToList();
+            List<Vehicule> vehiculesFiltre = _db.vehicules.Where(v => v.promo.Equals("Oui")).ToList();
             return _mapper.Map <List<VehiculeRepresentation> > (vehiculesFiltre);
         }
 
 
-
+        public List<VehiculeRepresentation> searchUser(string search)
+        {
+            var vehicule = _db.vehicules.Where(v => v.marque.Contains(search)).ToList();
+            if (vehicule != null)
+            {
+                return _mapper.Map<List<VehiculeRepresentation>>(vehicule);
+            }
+            else
+            {
+                return null;
+            }
+        }
 
 
 

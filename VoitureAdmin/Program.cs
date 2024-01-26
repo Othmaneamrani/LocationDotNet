@@ -61,7 +61,7 @@ namespace VoitureAdmin
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Compte}/{action=Login}/{id?}");
+                pattern: "{controller=Client}/{action=Depart}/{id?}");
 
             app.Run();
         }

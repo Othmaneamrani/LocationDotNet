@@ -62,17 +62,29 @@
         margin-left: 20px;
     }
 
+
+    .navbar-right a.selected-button {
+        background-color: #555555;
+        color: white;
+    }
+
+    .navbar-center a.selected-button {
+        background-color: #555555;
+        color: white;
+    }
 </style>
 
 <div class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <div class="navbar-collapse text-center">
         <img class="logo" onclick="redirigerVersClientIndex()" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-car-64.png?alt=media&token=f83e472d-9e59-490a-8636-8bc54f60a539" alt="Logo" />
-        <a asp-controller="Client" asp-action="Depart" class="navbar-center">AutoLoc</a>
-        <a asp-controller="Client" asp-action="Promo" class="navbar-center">Promotions</a>
-        <a asp-controller="Client" asp-action="About" class="navbar-center">About</a>
+        <div class="navbar-center">
+            <a class="nav-link" href="/Client/Depart">AutoLoc</a>
+            <a class="nav-link" href="/Client/Promo">Promotions</a>
+            <a class="nav-link" href="/Client/About">About</a>
+        </div>
         <div class="search">
-            <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Demande" asp-action="search">
+            <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Client" asp-action="search">
                 <div class="input-group">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="search" name="search" />
                     <div class="input-group-append">
@@ -97,9 +109,42 @@
         var controller = "Client";
         var action = "Depart";
 
-        var url = "/" + controller + "/" + action ;
+        var url = "/" + controller + "/" + action;
 
         window.location.href = url;
     }
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        selectedButton();
+    });
+
+    function selectedButton() {
+        var currentUrl = window.location.pathname.toLowerCase();
+
+        var loginButton = document.querySelector('.navbar-right a[href$="/Compte/Login"]');
+        var signButton = document.querySelector('.navbar-right a[href$="/Compte/Sign"]');
+        var departButton = document.querySelector('.navbar-center a[href$="/Client/Depart"]');
+        var aboutButton = document.querySelector('.navbar-center a[href$="/Client/About"]');
+        var promoButton = document.querySelector('.navbar-center a[href$="/Client/Promo"]');
+
+
+        if (currentUrl.indexOf('/compte/login') !== -1) {
+            loginButton.classList.add('selected-button');
+        }
+        if (currentUrl.indexOf('/compte/sign') !== -1) {
+            signButton.classList.add('selected-button');
+        }
+        if (currentUrl.indexOf('/client/about') !== -1) {
+            aboutButton.classList.add('selected-button');
+        }
+        if (currentUrl.indexOf('/client/depart') !== -1 || currentUrl === ('/')) {
+            departButton.classList.add('selected-button');
+        }
+        if (currentUrl.indexOf('/client/promo') !== -1) {
+            promoButton.classList.add('selected-button');
+        }
+    }
+
 
 </script>

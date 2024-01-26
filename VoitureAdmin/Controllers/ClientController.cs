@@ -34,14 +34,6 @@ namespace VoitureAdmin.Controllers
         }
 
 
-        [HttpPost]
-
-        public IActionResult redirectIndex(LoginRepresentation loginRepresentation)
-        {
-
-            return RedirectToAction("Index" , loginRepresentation);
-        }
-
 
         [HttpGet]
         public IActionResult About()
@@ -84,6 +76,50 @@ namespace VoitureAdmin.Controllers
             return View(_iVehiculeService.getAllPromo());
         }
 
+        [HttpPost]
+        public IActionResult search(string search)
+        {
+            var list = _iVehiculeService.searchUser(search);
+            if (list != null)
+            {
+                return View(list);
+            }
+            else
+            {
+                return View(null);
+            }
+
+        }
+
+        [HttpPost]
+        public IActionResult searchUser(string search)
+        {
+            var list = _iVehiculeService.searchUser(search);
+            if (list != null)
+            {
+                return View(list);
+            }
+            else
+            {
+                return View(null);
+            }
+
+        }
+
+
+
+        [HttpGet]
+        public IActionResult Detail(long id)
+        {
+            return View(_iVehiculeService.getByIdRepresentation(id));
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IActionResult DetailUser(long id)
+        {
+            return View(_iVehiculeService.getByIdRepresentation(id));
+        }
 
 
     }
