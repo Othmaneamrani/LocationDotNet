@@ -90,5 +90,17 @@ namespace BLL.Services
                 return null;
             }
         }
+
+        public List<VehiculeRepresentation> getAllPromo()
+        {
+            List<Vehicule> vehiculesFiltre = _db.vehicules.Where(v => v.promo.Equals("oui")).ToList();
+            return _mapper.Map <List<VehiculeRepresentation> > (vehiculesFiltre);
+        }
+
+
+
+
+
+
     }
 }

@@ -94,5 +94,11 @@ namespace VoitureAdmin.Controllers
 
         }
 
+
+        public JsonResult GetVehicules()
+        {
+            return Json(_iVehiculeService.getAll());
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using BLL.Representation;
+using BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +8,16 @@ namespace VoitureAdmin.Controllers
 
     public class ClientController : Controller
     {
+
+        private readonly IVehiculeService _iVehiculeService;
+
+
+        public ClientController(IVehiculeService iVehiculeService)
+        {
+            _iVehiculeService = iVehiculeService;
+        }
+
+
         [Authorize(Roles = "User")]
 
         public IActionResult Index(LoginRepresentation loginRepresentation)
@@ -19,7 +30,7 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         public IActionResult Depart()
         {
-            return View();
+            return View(_iVehiculeService.getAll());
         }
 
 
@@ -70,7 +81,7 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         public IActionResult Promo()
         {
-            return View();
+            return View(_iVehiculeService.getAllPromo());
         }
 
 

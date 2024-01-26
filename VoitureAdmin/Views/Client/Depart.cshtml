@@ -1,1 +1,70 @@
-﻿<partial name="navbarHome" />
+﻿@model List<BLL.Representation.VehiculeRepresentation>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
+
+<partial name="navbarHome" />
+
+<h2 class="titre">Available Cars</h2>
+
+<div class="container">
+    <div class="row">
+        @foreach (var vehicule in @Model)
+        {
+            <div class="col-md-3 mb-4">
+                <div class="card">
+                    <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                    <div class="card-body">
+                        <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                        <p>
+                            <a href="#" class="btn btn-primary" style="float: left;">Détails</a>
+                            <span style="float: right;">
+                            <span class="card-text" >@vehicule.prixRepresentation</span>
+                            <span class="card-dh" >DHs/jour</span>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<style>
+    .titre {
+        font-family: 'Gluten', cursive;
+        margin-right: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .card-title {
+        font-weight: bold;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card-text {
+        font-family: 'Gluten', cursive;
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+
+    .card-dh {
+        font-family: 'Gluten', cursive;
+    }
+
+    .card {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+        transition: box-shadow 0.3s ease-in-out; 
+        margin-bottom:40px;
+    }
+
+        .card:hover {
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+
+</style>

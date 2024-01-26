@@ -88,7 +88,7 @@
                 } else {
                     document.getElementById("prixMismatch").textContent = "";
                 }
-                if (prixPromo != 0 && prixPromo >= prix) {
+                if (prixPromo !== "" && parseFloat(prixPromo) >= parseFloat(prix)) {
                     document.getElementById("prixPromoMismatch").textContent = "Le nouveau prix ne peut pas etre plus grand ou identique à l'ancien.";
                 } else {
                     document.getElementById("prixPromoMismatch").textContent = "";
