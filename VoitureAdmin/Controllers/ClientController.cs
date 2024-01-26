@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace VoitureAdmin.Controllers
 {
-    [Authorize(Roles = "User")]
 
     public class ClientController : Controller
     {
