@@ -11,7 +11,7 @@ namespace BLL.Services
     public interface ICompteService
     {
         public List<CompteRepresentation> getAll();
-        public Task addComtpe(CompteCommand compteCommand);
+        public Task addCompte(CompteCommand compteCommand);
         public CompteCommand getById(long id);
         public Task deleteCompte(long id);
         public Task updateCompte(CompteCommand compteCommand);
@@ -23,6 +23,11 @@ namespace BLL.Services
         public CompteRepresentation sign (CompteCommand compteCommand);
         public CompteRepresentation login(LoginCommand loginCommand);
         public bool favoris(long idCompte , long idVehicule);
+
+        public Task addFav(long idCompte, long idVehicule);
+        public Task deleteFav(long idCompte, long idVehicule);
+
+
 
     }
 }

@@ -214,5 +214,28 @@ namespace VoitureAdmin.Controllers
         }
 
 
+        [HttpGet]
+        [Authorize(Roles = "User")]
+
+        public async Task<IActionResult> addFav(string loginJson)
+        {
+            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            await _iCompteService.addFav(loginRepresentation.compteRepresentation.idRepresentation, loginRepresentation.idVehicule.idRepresentation);
+            return View("DetailUser", loginRepresentation);
+
+        }
+
+
+        [Authorize(Roles = "User")]
+        [HttpGet]
+        public async Task<IActionResult> deleteFav(string loginJson)
+        {
+            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            await _iCompteService.deleteFav(loginRepresentation.compteRepresentation.idRepresentation, loginRepresentation.idVehicule.idRepresentation);
+            return View("DetailUser", loginRepresentation);
+
+        }
+
+
     }
 }

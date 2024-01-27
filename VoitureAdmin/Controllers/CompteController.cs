@@ -45,7 +45,7 @@ namespace VoitureAdmin.Controllers
             bool ok = _iCompteService.getUsername(compteCommand.usernameCommand);
             if (ok)
             {
-                await _iCompteService.addComtpe(compteCommand);
+                await _iCompteService.addCompte(compteCommand);
             }
             return RedirectToAction("Index");
         }

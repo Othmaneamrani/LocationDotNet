@@ -4,6 +4,7 @@ using BLL.Representation;
 using DAL;
 using DAL.Migrations;
 using DAL.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 
 namespace BLL.Services
@@ -27,7 +28,7 @@ namespace BLL.Services
 
 
 
-        public async Task addComtpe(CompteCommand compteCommand)
+        public async Task addCompte(CompteCommand compteCommand)
         {
             if (compteCommand.passwordCommand.Length >= 6)
             {
@@ -210,6 +211,27 @@ namespace BLL.Services
             return ok;
         }
 
+        public async Task addFav(long idCompte, long idVehicule)
+        {
+            Favoris favoris = new Favoris();
+            favoris.compteId = idCompte;
+            favoris.vehiculeId = idVehicule;
+            await _db.favoris.AddAsync(favoris);
+            await _db.SaveChangesAsync();
+        }
 
+        public async Task deleteFav(long idCompte, long idVehicule)
+        {
+            List<Favoris> list = await _db.favoris.ToListAsync();
+            foreach (Favoris favoris in list)
+            {
+                if (favoris.compteId == idCompte && favoris.vehiculeId == idVehicule)
+                {
+                    _db.favoris.Remove(favoris);
+                    await _db.SaveChangesAsync();
+                    break;
+                }
+            }
+        }
     }
 }

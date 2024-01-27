@@ -54,9 +54,12 @@ else
 
                             }
                             <p class="text-right">
-                                <a asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-3 mb-3 ">Commander</a>
-                                <a class="btn btn-primary m-lg-3 mb-3 ">
-                                    <img id="heart" class="heart" alt="heart" />
+                                <a class="btn btn-primary m-lg-3 mb-3 " asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
+                                <a id="bien" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="addFav" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" class="heart" alt="heart" />
+                                </a>
+                                <a id="broke" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="deleteFav"  asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-broken-heart-94.png?alt=media&token=aaa11b3e-e1f9-4723-a03f-e44fafecf516" class="heart" alt="heartBroke" />
                                 </a>
 
                             </p>
@@ -73,7 +76,7 @@ else
             <div class="card">
                 <div class="row no-gutters">
                     <div class="col-md-6">
-                        <img style="height: 112%;width: 116%;" src="@Model.idVehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                        <img style="height: 101%;width: 101%;" src="@Model.idVehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
@@ -110,9 +113,12 @@ else
                                 }
 
                             <p class="text-right mt-3">
-                                <a class="btn btn-primary" asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
-                                <a class="btn btn-primary ">
-                                    <img id="heart" class="heart"  alt="heart" />
+                                <a class="btn btn-primary" style="margin-left:20px;" asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
+                                <a class="btn btn-primary m-lg-3 mb-3 " id="bien" asp-controller="Client" asp-action="addFav" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" class="heart" alt="heart" />
+                                </a>
+                                <a class="btn btn-primary m-lg-3 mb-3 " id="broke" asp-controller="Client" asp-action="deleteFav"  asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-broken-heart-94.png?alt=media&token=aaa11b3e-e1f9-4723-a03f-e44fafecf516" class="heart" alt="heartBroke" />
                                 </a>
                             </p>
                         </div>
@@ -193,12 +199,15 @@ else
             vehiculeId: vehiculeId
         },
         success: function (result) {
-            var heartImg = document.getElementById("heart");
+            var heartImg = document.getElementById("bien");
+            var heartBrokeImg = document.getElementById("broke");
 
             if (result) {
-                heartImg.src = "https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-broken-heart-94.png?alt=media&token=aaa11b3e-e1f9-4723-a03f-e44fafecf516";
+                heartBrokeImg.style.display = "inline-block";
+                heartImg.style.display = "none";
             } else {
-                heartImg.src = "https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a";
+                heartImg.style.display = "inline-block";
+                heartBrokeImg.style.display = "none";
             }
         },
         error: function (error) {
