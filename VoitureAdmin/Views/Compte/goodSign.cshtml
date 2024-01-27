@@ -1,18 +1,15 @@
-﻿@model BLL.Representation.LoginRepresentation
+﻿@using Newtonsoft.Json;
+@model BLL.Representation.LoginRepresentation
 
 
 <partial name="navbarGoodSign" />
 
 
 <div class="d-flex align-items-center justify-content-center" style="min-height: 70vh;">
-    <form asp-controller="Client" asp-action="Index" method="post">
         <div class="card" style="width: 18rem; padding: 35px;">
             <div class="card-body text-center">
                 <h5 class="card-title mb-4">Inscription réussie.</h5>
-                <input type="hidden" asp-for="idRepresentation"/>
-                <input type="hidden" asp-for="usernameRepresentation" />
-                <button type="submit" class="btn btn-primary m-lg-1">Ok</button>
-            </div>
+            <a asp-controller="Client" asp-action="IndexJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-1">Ok</a>
         </div>
-    </form>
+        </div>
 </div>

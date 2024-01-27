@@ -2,6 +2,7 @@
 using BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace VoitureAdmin.Controllers
 {
@@ -19,12 +20,19 @@ namespace VoitureAdmin.Controllers
 
 
         [Authorize(Roles = "User")]
-
         public IActionResult Index(LoginRepresentation loginRepresentation)
         {
             return View(loginRepresentation);
         }
 
+
+        [Authorize(Roles = "User")]
+        public IActionResult IndexJson(string loginJson)
+        {
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+
+            return View("Index" ,loginRepresentation);
+        }
 
 
         [HttpGet]

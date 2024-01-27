@@ -8,7 +8,9 @@ namespace BLL.Representation
 {
     public class LoginRepresentation
     {
-        public long idRepresentation { get; set; }
-        public string usernameRepresentation { get; set; }
+        public CompteRepresentation compteRepresentation { get; set; }
+        public List<VehiculeRepresentation> vehiculesRepresentation { get; set; }
+
+
     }
 }

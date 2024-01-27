@@ -16,10 +16,12 @@ namespace VoitureAdmin.Controllers
     public class CompteController : Controller
     {
         private readonly ICompteService _iCompteService;
+        private readonly IVehiculeService _iVehiculeService;
 
-        public CompteController(ICompteService iCompteService)
+        public CompteController(ICompteService iCompteService , IVehiculeService iVehiculeService)
         {
             _iCompteService = iCompteService;
+            _iVehiculeService = iVehiculeService;
         }
         [Authorize(Roles = "Admin")]
         public IActionResult Index()
@@ -174,7 +176,12 @@ namespace VoitureAdmin.Controllers
                 var principal = new ClaimsPrincipal(identity);
 
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal).Wait();
-                LoginRepresentation loginRepresentation = new LoginRepresentation { idRepresentation = result.idRepresentation, usernameRepresentation = result.usernameRepresentation };
+
+                List<VehiculeRepresentation> vehiculesRepresentation = _iVehiculeService.getAll();
+                LoginRepresentation loginRepresentation = new LoginRepresentation();
+                loginRepresentation.compteRepresentation = result;
+                loginRepresentation.vehiculesRepresentation = vehiculesRepresentation;
+
                 return View("goodSign", loginRepresentation);
             }
             return View();
@@ -206,8 +213,10 @@ namespace VoitureAdmin.Controllers
                 }
                 else 
                 {
-                    LoginRepresentation loginRepresentation = new LoginRepresentation { idRepresentation = result.idRepresentation, usernameRepresentation = result.usernameRepresentation };
-
+                    List<VehiculeRepresentation> vehiculesRepresentation = _iVehiculeService.getAll();
+                    LoginRepresentation loginRepresentation = new LoginRepresentation();
+                    loginRepresentation.compteRepresentation = result;
+                    loginRepresentation.vehiculesRepresentation = vehiculesRepresentation;
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, result.usernameRepresentation),
@@ -219,7 +228,7 @@ namespace VoitureAdmin.Controllers
 
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal).Wait();
 
-                    return RedirectToAction("Index", "Client", loginRepresentation);
+                    return View("~/Views/Client/Index.cshtml", loginRepresentation);
                 }
             }else
             {
