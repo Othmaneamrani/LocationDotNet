@@ -6,6 +6,12 @@
 
 <partial name="navbarLogin" model="Model" />
 
+@if (@Model != null)
+{
+    <div style="text-align: center;">
+        <h2 class="titre">Bienvenue M.@Model.compteRepresentation.usernameRepresentation</h2>
+    </div>
+}
 
 @if (Model.vehiculesRepresentation == null || Model.vehiculesRepresentation.Count == 0)
 {
@@ -189,7 +195,3 @@ else
 
 </style>
 
-
-<script>
-    console.log(@Html.Raw(Json.Serialize(Model)));
-</script>

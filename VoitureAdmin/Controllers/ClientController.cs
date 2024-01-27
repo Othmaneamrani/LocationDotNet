@@ -34,6 +34,24 @@ namespace VoitureAdmin.Controllers
             return View("Index" ,loginRepresentation);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "User")]
+
+        public IActionResult PromoUserJson(string loginJson)
+        {
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            return View("PromoUser",loginRepresentation);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+
+        public IActionResult AboutUserJson(string loginJson)
+        {
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            return View("AboutUser",loginRepresentation);
+        }
+
 
         [HttpGet]
         public IActionResult Depart()
@@ -83,6 +101,8 @@ namespace VoitureAdmin.Controllers
         {
             return View(_iVehiculeService.getAllPromo());
         }
+
+
 
         [HttpPost]
         public IActionResult search(string search)

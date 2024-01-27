@@ -1,4 +1,7 @@
-﻿<style>
+﻿@using Newtonsoft.Json;
+@model BLL.Representation.LoginRepresentation
+
+<style>
     body {
         margin: 0;
         font-family: Arial, sans-serif;
@@ -72,19 +75,32 @@
         background-color: #555555;
         color: white;
     }
+
+
+    a.reset-style,
+    a.reset-style:hover {
+        background-color: transparent;
+        color: inherit;
+        border-radius: 0;
+        padding:0;
+    }
+
 </style>
 
 <div class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     <div class="navbar-collapse text-center">
-        <img class="logo" onclick="redirigerVersClientIndex()" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-car-64.png?alt=media&token=f83e472d-9e59-490a-8636-8bc54f60a539" alt="Logo" />
+
+        <a class="reset-style" asp-controller="Client" asp-action="IndexJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
+            <img class="logo" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-car-64.png?alt=media&token=f83e472d-9e59-490a-8636-8bc54f60a539" alt="Logo" />
+        </a>
         <div class="navbar-center">
-            <a class="nav-link" href="/Client/Index">AutoLoc</a>
-            <a class="nav-link" href="/Client/PromoUser">Promotions</a>
-            <a class="nav-link" href="/Client/AboutUser">About</a>
+            <a class="nav-link" asp-controller="Client" asp-action="IndexJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" >AutoLoc</a>
+            <a class="nav-link" asp-controller="Client" asp-action="PromoUserJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Promotions</a>
+            <a class="nav-link" asp-controller="Client" asp-action="AboutUserJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">About</a>
         </div>
         <div class="search">
-            <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Client" asp-action="searchUser">
+            <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Client" asp-action="searchUser" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" >
                 <div class="input-group">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="search" name="search" />
                     <div class="input-group-append">
@@ -106,7 +122,7 @@
 <script>
     function redirigerVersClientIndex() {
         var controller = "Client";
-        var action = "Depart";
+        var action = "Index";
 
         var url = "/" + controller + "/" + action;
 

@@ -1,7 +1,10 @@
 ﻿@model BLL.Representation.VehiculeRepresentation
 
-<partial name="navbarHome" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
 
+<partial name="navbarHome" />
 
 @if (Model == null)
 {
@@ -10,4 +13,162 @@
 else
 {
 
+    <h2 class="titre">Details</h2>
+
+    @if (Model.promoRepresentation.Equals("Non"))
+    {
+        <div class="col-md-6 mb-4 mx-auto text-center">
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-md-6">
+                        <img style="height: 118%;width: 116%;" src="@Model.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title" style="font-size: 2em;">@Model.marqueRepresentation.First().ToString().ToUpper()@Model.marqueRepresentation.Substring(1)</h5>
+                            <p class="text-right">
+                                <span class="card-text">@Model.prixRepresentation</span>
+                                <span class="card-dh">DHs/jour</span>
+                            </p>
+                            @if (Model.typeMoteurRepresentation.Equals("Manuel"))
+                            {
+                                <span class="card-text">Moteur Manuel</span>
+
+                            }
+                            @if (Model.typeMoteurRepresentation.Equals("Automatique"))
+                            {
+                                <span class="card-text">Moteur Automatique</span>
+
+                            }
+                            @if (Model.estDispoRepresentation.Equals("Oui"))
+                            {
+                                <span class="card-text">Disponible !</span>
+
+                            }
+                            @if (Model.estDispoRepresentation.Equals("Non"))
+                            {
+                                <span class="card-text">Non Disponible</span>
+
+                            }
+                            <p class="text-right">
+                                <a class="btn mt-3 btn-primary" onclick="onCommanderClick()">Commander</a>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.promoRepresentation.Equals("Oui"))
+    {
+        <div class="col-md-6 mb-4 mx-auto text-center">
+            <div class="card">
+                <div class="row no-gutters">
+                    <div class="col-md-6">
+                        <img style="height: 113.5%;width: 116%;" src="@Model.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5  style="font-size: 2em;" class="card-title">@Model.marqueRepresentation.First().ToString().ToUpper()@Model.marqueRepresentation.Substring(1)</h5>
+                            <p class="text-right">
+                                <span style="float: right;">
+                                    <span class="card-text-before">@Model.prixRepresentation</span>
+                                    <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
+                                </span>
+                                <p></p>
+                                <span style="float: right;">
+                                    <span class="card-text">@Model.promoPrixRepresentation</span>
+                                    <span class="card-dh">DHs/jour</span>
+                                </span>
+                                @if (Model.typeMoteurRepresentation.Equals("Manuel"))
+                                {
+                                <span class="card-text">Moteur Manuel</span>
+
+                                }
+                                @if (Model.typeMoteurRepresentation.Equals("Automatique"))
+                                {
+                                <span class="card-text">Moteur Automatique</span>
+
+                                }
+                                @if (Model.estDispoRepresentation.Equals("Oui"))
+                                {
+                                <span class="card-text">Disponible !</span>
+
+                                }
+                                @if (Model.estDispoRepresentation.Equals("Non"))
+                                {
+                                <span class="card-text">Non Disponible</span>
+
+                                }
+
+                            <p class="text-right">
+                                <a class="btn mt-3 btn-primary" onclick="onCommanderClick()">Commander</a>
+                            </p>                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 }
+<a asp-controller="Client" asp-action="Depart" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
+
+
+<style>
+    .titre {
+        font-family: 'Gluten', cursive;
+        margin-right: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .card-title {
+        font-weight: bold;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card-text {
+        font-family: 'Gluten', cursive;
+        font-size: 1.3em;
+        font-weight: bold;
+    }
+
+    .card-dh {
+        font-family: 'Gluten', cursive;
+    }
+
+    .card {
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease-in-out;
+        margin-bottom: 40px;
+        margin-top: 70px;
+        height: 700px;
+    }
+
+        .card:hover {
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .card-text-before {
+        font-family: 'Gluten', cursive;
+        font-size: 1em;
+        font-weight: bold;
+        text-decoration: line-through;
+    }
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+    }
+</style>
+
+<script>
+    function onCommanderClick() {
+        alert("Veuillez vous connecter.");
+    }
+</script>
