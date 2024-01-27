@@ -7,7 +7,7 @@
 
 <partial name="navbarLogin" model="Model" />
 
-@if (@Model != null)
+@if (@Model.compteRepresentation != null)
 {
     <div style="text-align: center;">
         <h2 class="titre">Bienvenue M.@Model.compteRepresentation.usernameRepresentation</h2>

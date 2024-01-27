@@ -95,9 +95,9 @@
             <img class="logo" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-car-64.png?alt=media&token=f83e472d-9e59-490a-8636-8bc54f60a539" alt="Logo" />
         </a>
         <div class="navbar-center">
-            <a class="nav-link" asp-controller="Client" asp-action="IndexJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" >AutoLoc</a>
-            <a class="nav-link" asp-controller="Client" asp-action="PromoUserJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Promotions</a>
-            <a class="nav-link" asp-controller="Client" asp-action="AboutUserJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">About</a>
+            <a id="indexButton" class="nav-link" asp-controller="Client" asp-action="IndexJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">AutoLoc</a>
+            <a id="promoButton" class="nav-link" asp-controller="Client" asp-action="PromoUserJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Promotions</a>
+            <a id="aboutButton" class="nav-link" asp-controller="Client" asp-action="AboutUserJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">About</a>
         </div>
         <div class="search">
             <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Client" asp-action="searchUser"  asp-route-loginJson="@JsonConvert.SerializeObject(Model)" >
@@ -114,7 +114,7 @@
 
 
     <div class="navbar-right">
-        <a asp-controller="Client" asp-action="Profil" class="navbar-right">Mon profil</a>
+        <a id="profilButton" asp-controller="Client" asp-action="Profil" class="navbar-right">Mon profil</a>
     </div>
 </div>
 
@@ -123,12 +123,9 @@
     function redirigerVersClientIndex() {
         var controller = "Client";
         var action = "Index";
-
         var url = "/" + controller + "/" + action;
-
         window.location.href = url;
     }
-
 
     document.addEventListener("DOMContentLoaded", function () {
         selectedButton();
@@ -136,26 +133,32 @@
 
     function selectedButton() {
         var currentUrl = window.location.pathname.toLowerCase();
+        var profilButton = document.getElementById('profilButton');
+        var indexButton = document.getElementById('indexButton');
+        var aboutButton = document.getElementById('aboutButton');
+        var promoButton = document.getElementById('promoButton');
 
-        var profilButton = document.querySelector('.navbar-right a[href$="/Client/Profil"]');
-        var indexButton = document.querySelector('.navbar-center a[href$="/Client/Index"]');
-        var aboutButton = document.querySelector('.navbar-center a[href$="/Client/AboutUser"]');
-        var promoButton = document.querySelector('.navbar-center a[href$="/Client/PromoUser"]');
+        profilButton.classList.remove('selected-button');
+        indexButton.classList.remove('selected-button');
+        aboutButton.classList.remove('selected-button');
+        promoButton.classList.remove('selected-button');
 
-
-        if (currentUrl.indexOf('/compte/profil') !== -1) {
+        if (currentUrl.includes('/compte/profil')) {
             profilButton.classList.add('selected-button');
         }
-        if (currentUrl.indexOf('/client/promouser') !== -1) {
+        
+        if (currentUrl.includes('/client/promouserjson')) {
             promoButton.classList.add('selected-button');
         }
-        if (currentUrl.indexOf('/client/index') !== -1) {
+        if (currentUrl.includes('/client/indexjson')) {
             indexButton.classList.add('selected-button');
         }
-        if (currentUrl.indexOf('/client/aboutuser') !== -1) {
+        if (currentUrl.includes('/compte/login')) {
+            indexButton.classList.add('selected-button');
+        }
+
+        if (currentUrl.includes('/client/aboutuserjson')) {
             aboutButton.classList.add('selected-button');
         }
     }
-
-
 </script>
