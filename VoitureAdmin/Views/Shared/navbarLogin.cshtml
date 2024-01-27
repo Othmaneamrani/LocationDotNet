@@ -100,7 +100,7 @@
             <a class="nav-link" asp-controller="Client" asp-action="AboutUserJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">About</a>
         </div>
         <div class="search">
-            <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Client" asp-action="searchUser" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" >
+            <form class="form-inline my-2 my-lg-0" method="post" asp-controller="Client" asp-action="searchUser"  asp-route-loginJson="@JsonConvert.SerializeObject(Model)" >
                 <div class="input-group">
                     <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="search" name="search" />
                     <div class="input-group-append">

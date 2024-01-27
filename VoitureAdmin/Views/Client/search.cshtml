@@ -32,8 +32,8 @@ else
                             <div class="card-body">
                                 <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
                                 <p>
-                                    <a href="#" class="btn btn-primary" style="float: left;">Détails</a>
-                                    <span style="float: right;">
+                                        <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary" style="float: left;">Détails</a>
+                                        <span style="float: right;">
                                         <span class="card-text">@vehicule.prixRepresentation</span>
                                         <span class="card-dh">DHs/jour</span>
                                     </span>
@@ -50,8 +50,8 @@ else
                             <div class="card-body">
                                 <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
                                 <p>
-                                    <a href="#" class="btn btn-primary mt-2" style="float: left;">Détails</a>
-                                    <span style="float: right;">
+                                        <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary" style="float: left;">Détails</a>
+                                        <span style="float: right;">
                                         <span class="card-text-before">@vehicule.prixRepresentation</span>
                                         <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
                                     </span>
@@ -95,7 +95,7 @@ else
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
                                     <p>
-                                        <a href="#" class="btn btn-primary" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text">@vehicule.prixRepresentation</span>
                                             <span class="card-dh">DHs/jour</span>
@@ -115,7 +115,7 @@ else
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
                                     <p>
-                                        <a href="#" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text-before">@vehicule.prixRepresentation</span>
                                             <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>

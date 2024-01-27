@@ -1,4 +1,5 @@
-﻿@model BLL.Representation.LoginRepresentation
+﻿@using Newtonsoft.Json;
+@model BLL.Representation.LoginRepresentation
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,8 +38,12 @@ else
                             <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                             <div class="card-body">
                                 <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                @{
+                                    long idVehicule = @vehicule.idRepresentation;
+                                    string loginJson = JsonConvert.SerializeObject(Model);
+                                }
                                 <p>
-                                    <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                    <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                     <span style="float: right;">
                                         <span class="card-text-before">@vehicule.prixRepresentation</span>
                                         <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
@@ -81,8 +86,12 @@ else
                                 <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                    @{
+                                        long idVehicule = @vehicule.idRepresentation;
+                                        string loginJson = JsonConvert.SerializeObject(Model);
+                                    }
                                     <p>
-                                        <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text-before">@vehicule.prixRepresentation</span>
                                             <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
@@ -104,8 +113,12 @@ else
                                 <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                    @{
+                                        long idVehicule = @vehicule.idRepresentation;
+                                        string loginJson = JsonConvert.SerializeObject(Model);
+                                    }
                                     <p>
-                                        <a asp-controller="Client" asp-action="Detail" asp-route-id="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text-before">@vehicule.prixRepresentation</span>
                                             <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>

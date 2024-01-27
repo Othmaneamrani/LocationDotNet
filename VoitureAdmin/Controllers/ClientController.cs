@@ -120,12 +120,13 @@ namespace VoitureAdmin.Controllers
         }
 
         [HttpPost]
-        public IActionResult searchUser(string search)
+        public IActionResult searchUser(string search , string loginJson)
         {
-            var list = _iVehiculeService.searchUser(search);
-            if (list != null)
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            loginRepresentation.vehiculesSearch = _iVehiculeService.searchUser(search);
+            if (loginRepresentation.vehiculesSearch != null)
             {
-                return View(list);
+                return View(loginRepresentation);
             }
             else
             {
@@ -144,9 +145,12 @@ namespace VoitureAdmin.Controllers
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult DetailUser(long id)
+        public IActionResult DetailUser(long idVehicule, string loginJson)
         {
-            return View(_iVehiculeService.getByIdRepresentation(id));
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            VehiculeRepresentation vehiculeRepresentation = _iVehiculeService.getByIdRepresentation(idVehicule);
+            loginRepresentation.idVehicule = vehiculeRepresentation;
+            return View(loginRepresentation);
         }
 
 

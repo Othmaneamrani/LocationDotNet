@@ -1,28 +1,42 @@
-﻿@model List<BLL.Representation.VehiculeRepresentation>
+﻿@using BLL.Representation;
+@using Newtonsoft.Json;
+@model BLL.Representation.LoginRepresentation
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
 
-<partial name="navbarLogin" />
-@if (Model == null || Model.Count == 0)
+<partial name="navbarLogin" model="Model" />
+@if (Model.vehiculesSearch == null || Model.vehiculesSearch.Count == 0)
 {
     <p>Aucun Véhicule trouvé.</p>
-    <a asp-controller="Client" asp-action="Index" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
+
+    LoginRepresentation loginJson1 = new LoginRepresentation();
+    loginJson1.compteRepresentation = Model.compteRepresentation;
+    loginJson1.vehiculesRepresentation = Model.vehiculesRepresentation;
+
+
+
+    <a asp-controller="Client" asp-action="IndexJson" asp-route-loginJson="@JsonConvert.SerializeObject(loginJson1)" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
 
 }
 else
 {
-    <a asp-controller="Client" asp-action="Index" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
 
-    @if (Model.Any(v => v.estDispoRepresentation.Equals("Oui")))
+
+    LoginRepresentation loginJson2 = new LoginRepresentation();
+    loginJson2.compteRepresentation = Model.compteRepresentation;
+    loginJson2.vehiculesRepresentation = Model.vehiculesRepresentation;
+    <a asp-controller="Client" asp-action="IndexJson" asp-route-loginJson="@JsonConvert.SerializeObject(loginJson2)" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
+
+    @if (Model.vehiculesSearch.Any(v => v.estDispoRepresentation.Equals("Oui")))
     {
         <h2 class="titre">Available Vehicles</h2>
 
 
         <div class="container">
             <div class="row">
-                @foreach (var vehicule in @Model)
+                @foreach (var vehicule in @Model.vehiculesSearch)
                 {
                     if (@vehicule.estDispoRepresentation.Equals("Oui") && @vehicule.promoRepresentation.Equals("Non"))
                     {
@@ -31,8 +45,15 @@ else
                                 <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                    @{
+                                        long idVehicule = @vehicule.idRepresentation;
+                                        LoginRepresentation loginJson3 = new LoginRepresentation();
+                                        loginJson3.compteRepresentation = Model.compteRepresentation;
+                                        loginJson3.vehiculesRepresentation = Model.vehiculesRepresentation;
+                                        string loginJson = JsonConvert.SerializeObject(loginJson3);
+                                    }
                                     <p>
-                                        <a href="#" class="btn btn-primary" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text">@vehicule.prixRepresentation</span>
                                             <span class="card-dh">DHs/jour</span>
@@ -49,8 +70,15 @@ else
                                 <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                    @{
+                                        long idVehicule = @vehicule.idRepresentation;
+                                        LoginRepresentation loginJson3 = new LoginRepresentation();
+                                        loginJson3.compteRepresentation = Model.compteRepresentation;
+                                        loginJson3.vehiculesRepresentation = Model.vehiculesRepresentation;
+                                        string loginJson = JsonConvert.SerializeObject(loginJson3);
+                                    }
                                     <p>
-                                        <a href="#" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text-before">@vehicule.prixRepresentation</span>
                                             <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
@@ -73,9 +101,9 @@ else
 
     }
 
-    @if (Model.Any(v => v.estDispoRepresentation.Equals("Non")))
+    @if (Model.vehiculesSearch.Any(v => v.estDispoRepresentation.Equals("Non")))
     {
-        @if (Model.Any(v => v.estDispoRepresentation.Equals("Oui")))
+        @if (Model.vehiculesSearch.Any(v => v.estDispoRepresentation.Equals("Oui")))
         {
             <div class="separator-line"></div>
         }
@@ -85,7 +113,7 @@ else
         <div class="container">
             <div class="row">
 
-                @foreach (var vehicule in @Model)
+                @foreach (var vehicule in @Model.vehiculesSearch)
                 {
                     if (@vehicule.estDispoRepresentation.Equals("Non") && @vehicule.promoRepresentation.Equals("Non"))
                     {
@@ -94,8 +122,15 @@ else
                                 <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                    @{
+                                        long idVehicule = @vehicule.idRepresentation;
+                                        LoginRepresentation loginJson3 = new LoginRepresentation();
+                                        loginJson3.compteRepresentation = Model.compteRepresentation;
+                                        loginJson3.vehiculesRepresentation = Model.vehiculesRepresentation;
+                                        string loginJson = JsonConvert.SerializeObject(loginJson3);
+                                    }
                                     <p>
-                                        <a href="#" class="btn btn-primary" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text">@vehicule.prixRepresentation</span>
                                             <span class="card-dh">DHs/jour</span>
@@ -114,8 +149,15 @@ else
                                 <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                                    @{
+                                        long idVehicule = @vehicule.idRepresentation;
+                                        LoginRepresentation loginJson3 = new LoginRepresentation();
+                                        loginJson3.compteRepresentation = Model.compteRepresentation;
+                                        loginJson3.vehiculesRepresentation = Model.vehiculesRepresentation;
+                                        string loginJson = JsonConvert.SerializeObject(loginJson3);
+                                    }
                                     <p>
-                                        <a href="#" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text-before">@vehicule.prixRepresentation</span>
                                             <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>

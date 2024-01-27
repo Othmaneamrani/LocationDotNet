@@ -10,7 +10,8 @@ namespace BLL.Representation
     {
         public CompteRepresentation compteRepresentation { get; set; }
         public List<VehiculeRepresentation> vehiculesRepresentation { get; set; }
-
+        public VehiculeRepresentation idVehicule {  get; set; }
+        public List<VehiculeRepresentation> vehiculesSearch { get; set; }
 
     }
 }
