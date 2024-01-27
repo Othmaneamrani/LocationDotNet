@@ -1,0 +1,119 @@
+﻿@using BLL.Command;
+@using BLL.Representation;
+@using Newtonsoft.Json;
+@model BLL.Representation.LoginRepresentation
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<style>
+    .titre {
+        font-family: 'Gluten', cursive;
+        margin-right: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+</style>
+
+<partial name="navbarLogin" model="Model" />
+
+<h2 class="mt-5 titre" >Commandez !</h2>
+
+<form method="post" asp-controller="Client" asp-action="addDemande" asp-route-demandeCommand="@Model.DemandeCommand" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" onsubmit="return validationAlert();" class="mt-5">
+
+    <div class="mb-3">
+        <label class="form-label">Date de début</label>
+        <input id="dateDebut" type="datetime-local" class="form-control" oninput="demandeValidation()" name="dateDebutCommand" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Date de fin</label>
+        <input id="dateFin" type="datetime-local" class="form-control" oninput="demandeValidation()" name="dateFinCommand" required>
+        <div id="dateMismatch" style="color: red;"></div>
+    </div>
+
+    <div class="mb-3">
+        <input id="compteId" type="number" class="form-control" oninput="demandeValidation()" name="compteIdCommand" required readonly hidden>
+
+    </div>
+    <div class="mb-3">
+        <input id="vehiculeId" type="number" oninput="demandeValidation()" class="form-control" name="vehiculeIdCommand" required readonly hidden>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Prix total</label>
+        <input id="prix" type="number" class="form-control" oninput="demandeValidation()" name="prixTotalCommand" required readonly>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Commander</button>
+
+    @{LoginRepresentation loginJson1 = new LoginRepresentation();
+    loginJson1.compteRepresentation = Model.compteRepresentation;
+    loginJson1.vehiculesRepresentation = Model.vehiculesRepresentation;
+    }
+    <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(loginJson1)" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
+</form>
+
+
+<script>
+
+    var prixTotal = 0;
+
+    document.getElementById("compteId").value = "@Model.compteRepresentation.idRepresentation" ;
+    document.getElementById("vehiculeId").value = "@Model.idVehicule.idRepresentation" ;
+
+    function validationAlert() {
+        var dateMismatch = document.getElementById("dateMismatch").textContent;
+
+        if (dateMismatch === "Les dates sont invalides.") {
+            alert("Les dates sont invalides.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function demandeValidation() {
+        var compteId = document.getElementById("compteId").value;
+        var vehiculeId = document.getElementById("vehiculeId").value;
+        var prix = document.getElementById("prix").value;
+        var dateDebut = new Date(document.getElementById("dateDebut").value);
+        var dateFin = new Date(document.getElementById("dateFin").value);
+
+
+        if (dateDebut >= dateFin) {
+            document.getElementById("dateMismatch").textContent = "Les dates sont invalides.";
+        } else {
+            document.getElementById("dateMismatch").textContent = "";
+        }
+
+        if (vehiculeId.trim() !== "" && dateDebut !== null && dateFin !== null) {
+            $.ajax({
+                url: "/Client/getPrix",
+                type: "GET",
+                data: { vehiculeId: vehiculeId },
+                success: function (result) {
+                    if (result) {
+                        if (result.promoRepresentation.includes("Non")) {
+                            var prixVehicule = result.prixRepresentation;
+                            prixTotal = prixVehicule * ((dateFin - dateDebut) / (1000 * 60 * 60 * 24));
+                            document.getElementById("prix").value = prixTotal;
+                        }
+                        if (result.promoRepresentation.includes("Oui")) {
+                            var prixVehicule = result.promoPrixRepresentation;
+                            prixTotal = prixVehicule * ((dateFin - dateDebut) / (1000 * 60 * 60 * 24));
+                            document.getElementById("prix").value = prixTotal;
+                        }
+                    }
+                },
+                error: function (error) {
+                    console.error("Erreur  : ", error);
+                },
+                async: false
+            });
+        }
+        return true;
+    }
+
+</script>

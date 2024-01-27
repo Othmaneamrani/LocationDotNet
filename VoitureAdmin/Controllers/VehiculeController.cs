@@ -72,10 +72,10 @@ namespace VoitureAdmin.Controllers
             bool isIdAvailable = _iVehiculeService.GetIds(vehiculeId);
             return Json(isIdAvailable);
         }
-
-        public VehiculeRepresentation getPrix(long vehiculeId)
+        [HttpGet]
+        public JsonResult getPrix(long vehiculeId)
         {
-            return _iVehiculeService.getPrix(vehiculeId);
+            return Json(_iVehiculeService.getPrix(vehiculeId) );
 
         }
 

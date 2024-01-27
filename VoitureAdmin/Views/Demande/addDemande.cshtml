@@ -33,7 +33,7 @@
     </div>
     <div class="mb-3">
         <label class="form-label">Prix total</label>
-        <input id="prix" type="number" class="form-control" oninput="demandeValidation()" asp-for="prixTotalCommand" readonly>
+        <input id="prix" type="number" class="form-control" oninput="demandeValidation()" asp-for="prixTotalCommand" required readonly>
         <div id="prixMismatch" style="color: red;"></div>
     </div>
     <button type="submit" class="btn btn-primary">Ajouter</button>
@@ -124,7 +124,7 @@
             document.getElementById("prixMismatch").textContent = "";
         }
 
-        if (dateDebut > dateFin) {
+        if (dateDebut >= dateFin) {
             document.getElementById("dateMismatch").textContent = "Les dates sont invalides.";
         } else {
             document.getElementById("dateMismatch").textContent = "";

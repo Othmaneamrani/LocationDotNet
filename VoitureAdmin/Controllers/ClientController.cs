@@ -1,4 +1,5 @@
-﻿using BLL.Representation;
+﻿using BLL.Command;
+using BLL.Representation;
 using BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,14 @@ namespace VoitureAdmin.Controllers
     {
 
         private readonly IVehiculeService _iVehiculeService;
+        private readonly IDemandeService _iDemandeService;
 
 
-        public ClientController(IVehiculeService iVehiculeService)
+        public ClientController(IVehiculeService iVehiculeService, IDemandeService iDemandeService)
         {
             _iVehiculeService = iVehiculeService;
+            _iDemandeService = iDemandeService; ;
+
         }
 
 
@@ -25,13 +29,22 @@ namespace VoitureAdmin.Controllers
             return View(loginRepresentation);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "User")]
+
+        public JsonResult getPrix(long vehiculeId)
+        {
+            return Json(_iVehiculeService.getPrix(vehiculeId));
+
+        }
+
 
         [Authorize(Roles = "User")]
         public IActionResult IndexJson(string loginJson)
         {
             var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
 
-            return View("Index" ,loginRepresentation);
+            return View("Index", loginRepresentation);
         }
 
         [HttpGet]
@@ -40,7 +53,7 @@ namespace VoitureAdmin.Controllers
         public IActionResult PromoUserJson(string loginJson)
         {
             var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            return View("PromoUser",loginRepresentation);
+            return View("PromoUser", loginRepresentation);
         }
 
         [HttpGet]
@@ -49,7 +62,7 @@ namespace VoitureAdmin.Controllers
         public IActionResult AboutUserJson(string loginJson)
         {
             var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            return View("AboutUser",loginRepresentation);
+            return View("AboutUser", loginRepresentation);
         }
 
 
@@ -120,7 +133,7 @@ namespace VoitureAdmin.Controllers
         }
 
         [HttpPost]
-        public IActionResult searchUser(string search , string loginJson)
+        public IActionResult searchUser(string search, string loginJson)
         {
             var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
             loginRepresentation.vehiculesSearch = _iVehiculeService.searchUser(search);
@@ -153,6 +166,43 @@ namespace VoitureAdmin.Controllers
             return View(loginRepresentation);
         }
 
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IActionResult CommandeUser(long idVehicule, string loginJson)
+        {
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            VehiculeRepresentation vehiculeRepresentation = _iVehiculeService.getByIdRepresentation(idVehicule);
+            loginRepresentation.idVehicule = vehiculeRepresentation;
+            return View(loginRepresentation);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> addDemande(string loginJson,
+                                           [FromForm(Name = "compteIdCommand")] long compteIdCommand,
+                                           [FromForm(Name = "vehiculeIdCommand")] long vehiculeIdCommand,
+                                           [FromForm(Name = "prixTotalCommand")] double prixTotalCommand,
+                                           [FromForm(Name = "dateDebutCommand")] DateTime dateDebutCommand,
+                                           [FromForm(Name = "dateFinCommand")] DateTime dateFinCommand)
+        {
+            DemandeCommand demandeCommand = new DemandeCommand();
+            demandeCommand.compteIdCommand = compteIdCommand;
+            demandeCommand.dateDebutCommand = dateDebutCommand;
+            demandeCommand.dateFinCommand = dateFinCommand;
+            demandeCommand.vehiculeIdCommand = vehiculeIdCommand;
+            demandeCommand.prixTotalCommand = prixTotalCommand;
+            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            await _iDemandeService.addDemande(demandeCommand);
+            return View("DemandeAdded",loginRepresentation);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IActionResult DemandeAdded(LoginRepresentation loginRepresentation)
+        {
+            return View(loginRepresentation);
+        }
 
     }
 }

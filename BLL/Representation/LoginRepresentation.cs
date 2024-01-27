@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BLL.Command;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace BLL.Representation
         public List<VehiculeRepresentation> vehiculesRepresentation { get; set; }
         public VehiculeRepresentation idVehicule {  get; set; }
         public List<VehiculeRepresentation> vehiculesSearch { get; set; }
+        public DemandeCommand DemandeCommand { get; set; }
 
     }
 }
