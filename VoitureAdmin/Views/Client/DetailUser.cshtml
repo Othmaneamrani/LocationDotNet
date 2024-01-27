@@ -53,6 +53,10 @@ else
                             }
                             <p class="text-right">
                                 <a asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-3 mb-3 ">Commander</a>
+                                <a class="btn btn-primary m-lg-3 mb-3 ">
+                                    <img class="heart" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" alt="heart" />
+                                </a>
+
                             </p>
 
                         </div>
@@ -67,7 +71,7 @@ else
             <div class="card">
                 <div class="row no-gutters">
                     <div class="col-md-6">
-                        <img style="height: 113.5%;width: 116%;" src="@Model.idVehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                        <img style="height: 112%;width: 116%;" src="@Model.idVehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
@@ -103,8 +107,11 @@ else
 
                                 }
 
-                            <p class="text-right">
-                                <a class="btn mt-3 btn-primary" asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
+                            <p class="text-right mt-3">
+                                <a class="btn btn-primary" asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
+                                <a class="btn btn-primary ">
+                                    <img class="heart" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" alt="heart" />
+                                </a>
                             </p>
                         </div>
                     </div>
@@ -163,5 +170,10 @@ else
         flex-direction: column;
         justify-content: space-between;
         height: 100%;
+    }
+
+    .heart{
+        width: 25px;
+        height: 25px;
     }
 </style>
