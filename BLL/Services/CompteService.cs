@@ -195,6 +195,20 @@ namespace BLL.Services
             return result;
         }
 
+        public bool favoris(long idCompte, long idVehicule)
+        {
+            bool ok = false;
+            List<Favoris> list = _db.favoris.ToList();
+            foreach (Favoris favoris in list)
+            {
+                if(favoris.compteId == idCompte && favoris.vehiculeId == idVehicule)
+                {
+                    ok = true;
+                    break;
+                }
+            }
+            return ok;
+        }
 
 
     }

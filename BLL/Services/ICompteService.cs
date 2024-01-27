@@ -22,9 +22,7 @@ namespace BLL.Services
 
         public CompteRepresentation sign (CompteCommand compteCommand);
         public CompteRepresentation login(LoginCommand loginCommand);
-
-
-
+        public bool favoris(long idCompte , long idVehicule);
 
     }
 }

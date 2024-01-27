@@ -13,12 +13,14 @@ namespace VoitureAdmin.Controllers
 
         private readonly IVehiculeService _iVehiculeService;
         private readonly IDemandeService _iDemandeService;
+        private readonly ICompteService _iCompteService;
 
 
-        public ClientController(IVehiculeService iVehiculeService, IDemandeService iDemandeService)
+        public ClientController(IVehiculeService iVehiculeService, IDemandeService iDemandeService , ICompteService iCompteService)
         {
             _iVehiculeService = iVehiculeService;
-            _iDemandeService = iDemandeService; ;
+            _iDemandeService = iDemandeService;
+            _iCompteService = iCompteService;
 
         }
 
@@ -203,6 +205,14 @@ namespace VoitureAdmin.Controllers
         {
             return View(loginRepresentation);
         }
+
+        [HttpGet]
+        public JsonResult getFavoris(long compteId , long vehiculeId)
+        {
+            return Json(_iCompteService.favoris(compteId, vehiculeId));
+
+        }
+
 
     }
 }

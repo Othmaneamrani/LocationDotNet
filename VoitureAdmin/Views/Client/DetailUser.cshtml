@@ -6,6 +6,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 @if (Model.idVehicule == null)
 {
@@ -54,7 +56,7 @@ else
                             <p class="text-right">
                                 <a asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-3 mb-3 ">Commander</a>
                                 <a class="btn btn-primary m-lg-3 mb-3 ">
-                                    <img class="heart" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" alt="heart" />
+                                    <img id="heart" class="heart" alt="heart" />
                                 </a>
 
                             </p>
@@ -110,7 +112,7 @@ else
                             <p class="text-right mt-3">
                                 <a class="btn btn-primary" asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
                                 <a class="btn btn-primary ">
-                                    <img class="heart" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" alt="heart" />
+                                    <img id="heart" class="heart"  alt="heart" />
                                 </a>
                             </p>
                         </div>
@@ -177,3 +179,31 @@ else
         height: 25px;
     }
 </style>
+
+
+<script>
+    var compteId = "@Model.compteRepresentation.idRepresentation";
+    var vehiculeId = "@Model.idVehicule.idRepresentation";
+
+    $.ajax({
+        url: "/Client/getFavoris",
+        type: "GET",
+        data: {
+            compteId: compteId,
+            vehiculeId: vehiculeId
+        },
+        success: function (result) {
+            var heartImg = document.getElementById("heart");
+
+            if (result) {
+                heartImg.src = "https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-broken-heart-94.png?alt=media&token=aaa11b3e-e1f9-4723-a03f-e44fafecf516";
+            } else {
+                heartImg.src = "https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a";
+            }
+        },
+        error: function (error) {
+            console.error("Erreur  : ", error);
+        },
+        async: false
+    });
+</script>
