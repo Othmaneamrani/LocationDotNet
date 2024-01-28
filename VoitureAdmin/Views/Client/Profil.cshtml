@@ -1,4 +1,101 @@
-﻿@model BLL.Representation.LoginRepresentation
+﻿@using Newtonsoft.Json;
+@model BLL.Representation.LoginRepresentation
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Honk&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Honk&display=swap" rel="stylesheet">
 
 <partial name="navbarLogin" model="Model" />
 
+<div class="containerr">
+    <h1 class="name">
+        @Model.compteRepresentation.usernameRepresentation
+    </h1>
+    <div class="links">
+        <a asp-controller="Client" asp-action="CommandesUser" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="button">Mes commandes</a>
+        <a asp-controller="Client" asp-action="FavUser" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="button">Mes favoris</a>
+        <a asp-controller="Client" asp-action="Parametre" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="button">Paramètres</a>
+        <a asp-controller="Compte" asp-action="LogoutGet" class="button logout">Déconnexion</a>
+    </div>
+
+    <div class="tofs">
+        <img alt="bmw" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/bm.png?alt=media&token=12af5780-c092-48d7-b429-48ee6a8a1d8d" />
+        <img alt="jaguar" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/jag.png?alt=media&token=a9bdeccc-baf9-441e-9f7c-761627893bfc" />
+        <img alt="porsche" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/por.png?alt=media&token=e12e9c2a-df8c-4e78-8b18-514553668adc" />
+        <img alt="mercedes" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/mer.png?alt=media&token=b1a69bbf-71ca-4aea-a455-c266fdfb8a3d" />
+        <img alt="ferrari" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/fer.png?alt=media&token=3f65434a-6a40-4bf6-833a-e55f35ae4b8e" />
+
+    </div>
+
+</div>
+
+<style>
+
+    .containerr {
+        text-align: center;
+        margin-top:30px;
+    }
+
+        .container h1 {
+        font-family: 'Honk', cursive;
+        font-size:60px;
+            color: #333; 
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+        }
+
+    .links {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 30px auto;
+    }
+
+    .button {
+        padding: 10px;
+        margin: 10px 0;
+        text-decoration: none;
+        color: #fff;
+        background-color: #3498db;
+        border: 1px solid #2980b9;
+        width: 200px;
+        transition: background-color 0.3s, transform 0.3s;
+        font-family: 'Caveat', sans-serif;
+        font-size: 18px;
+        border-radius:10px;
+    }
+
+        .button:hover {
+            background-color: #2980b9; 
+            transform: scale(1.03);
+            color:black;
+        }
+
+    .logout {
+        background-color: #e74c3c;
+        border-color: #c0392b;
+    }
+
+    .logout:hover {
+        background-color: red;
+    }
+
+ 
+    .tofs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .tofs img {
+        width: 150px;
+        margin: 10px;
+    }
+
+
+
+</style>

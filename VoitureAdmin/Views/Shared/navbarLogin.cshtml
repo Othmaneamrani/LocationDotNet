@@ -11,7 +11,6 @@
         background-color: #333;
         overflow: hidden;
         width: 100%;
-        border-bottom: 2px solid #ddd;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         border-radius: 10px;
     }
@@ -114,7 +113,7 @@
 
 
     <div class="navbar-right">
-        <a id="profilButton" asp-controller="Client" asp-action="Profil" class="navbar-right">Mon profil</a>
+        <a id="profilButton" asp-controller="Client" asp-action="Profil" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="navbar-right">Mon profil</a>
     </div>
 </div>
 
@@ -143,7 +142,7 @@
         aboutButton.classList.remove('selected-button');
         promoButton.classList.remove('selected-button');
 
-        if (currentUrl.includes('/compte/profil')) {
+        if (currentUrl.includes('/client/profil')) {
             profilButton.classList.add('selected-button');
         }
         

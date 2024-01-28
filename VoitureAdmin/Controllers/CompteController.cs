@@ -245,7 +245,13 @@ namespace VoitureAdmin.Controllers
             return RedirectToAction("Login", "Compte");
         }
 
+        [HttpGet]
+        public IActionResult LogoutGet()
+        {
+            HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme).Wait();
 
+            return RedirectToAction("Login", "Compte");
+        }
 
 
         public IActionResult Acces()

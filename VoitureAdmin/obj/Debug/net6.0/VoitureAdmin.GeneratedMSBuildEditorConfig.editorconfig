@@ -44,6 +44,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XERldGFpbFVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/DetailUserFav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XERldGFpbFVzZXJGYXYuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/FavUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEZhdlVzZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

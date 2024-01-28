@@ -1,5 +1,6 @@
 ﻿using BLL.Command;
 using BLL.Representation;
+using DAL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace BLL.Services
         public Task addFav(long idCompte, long idVehicule);
         public Task deleteFav(long idCompte, long idVehicule);
 
+        public List<VehiculeRepresentation> favUser(CompteRepresentation compteRepresentation);
 
 
     }

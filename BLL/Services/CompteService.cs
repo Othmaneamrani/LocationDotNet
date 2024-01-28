@@ -233,5 +233,35 @@ namespace BLL.Services
                 }
             }
         }
+
+
+
+        public List<VehiculeRepresentation> favUser(CompteRepresentation compteRepresentation)
+        {
+            List<Favoris> favs = _db.favoris.ToList();
+            List<Favoris> favs2 = new List<Favoris>();
+            List<VehiculeRepresentation> result = new List<VehiculeRepresentation>();
+            foreach (var fav in favs)
+            {
+                if(fav.compteId == compteRepresentation.idRepresentation)
+                {
+                    favs2.Add(fav);
+                }
+            }
+            List<Vehicule> vehicules = _db.vehicules.ToList();
+            foreach(var vehicule in vehicules)
+            {
+                foreach(var fav in favs2)
+                {
+                    if (vehicule.id == fav.vehiculeId)
+                    {
+                        result.Add(_mapper.Map<VehiculeRepresentation>(vehicule));
+                    }
+
+                }
+            }
+            return result;
+        }
+
     }
 }

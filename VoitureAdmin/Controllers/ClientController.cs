@@ -96,8 +96,9 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         [Authorize(Roles = "User")]
 
-        public IActionResult Profil(LoginRepresentation loginRepresentation)
+        public IActionResult Profil(string loginJson)
         {
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
             return View(loginRepresentation);
         }
 
@@ -233,9 +234,38 @@ namespace VoitureAdmin.Controllers
             LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
             await _iCompteService.deleteFav(loginRepresentation.compteRepresentation.idRepresentation, loginRepresentation.idVehicule.idRepresentation);
             return View("DetailUser", loginRepresentation);
-
         }
 
 
+        [Authorize(Roles = "User")]
+        [HttpGet]
+        public async Task<IActionResult> deleteFav2(string loginJson)
+        {
+            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            await _iCompteService.deleteFav(loginRepresentation.compteRepresentation.idRepresentation, loginRepresentation.idVehicule.idRepresentation);
+            return View("DetailUserFav", loginRepresentation);
+        }
+
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IActionResult FavUser (string loginJson)
+        {
+            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            loginRepresentation.vehiculesSearch = _iCompteService.favUser(loginRepresentation.compteRepresentation);
+            return View(loginRepresentation);
+        }
+
+
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IActionResult DetailUserFav(long idVehicule, string loginJson)
+        {
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            VehiculeRepresentation vehiculeRepresentation = _iVehiculeService.getByIdRepresentation(idVehicule);
+            loginRepresentation.idVehicule = vehiculeRepresentation;
+            return View(loginRepresentation);
+        }
     }
 }
