@@ -29,6 +29,8 @@ namespace BLL.Services
         public Task deleteFav(long idCompte, long idVehicule);
 
         public List<VehiculeRepresentation> favUser(CompteRepresentation compteRepresentation);
+        public List<DemandeRepresentation> mesCommandes(long id);
+
 
 
     }

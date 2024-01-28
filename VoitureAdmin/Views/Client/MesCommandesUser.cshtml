@@ -1,0 +1,85 @@
+﻿@using BLL.Representation;
+@using Newtonsoft.Json;
+@model BLL.Representation.LoginRepresentation
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
+
+<partial name="navbarLogin" model="Model" />
+
+
+@{
+    LoginRepresentation loginJson1 = new LoginRepresentation();
+    loginJson1.compteRepresentation = Model.compteRepresentation;
+    loginJson1.vehiculesRepresentation = Model.vehiculesRepresentation;
+}
+
+<a asp-controller="Client" asp-action="Profil" asp-route-loginJson="@JsonConvert.SerializeObject(loginJson1)" class="btn btn-primary m-lg-3 ">Retour</a>
+
+
+<div style="text-align: center;">
+    <h2 class="titre">Vos Commandes</h2>
+</div>
+
+
+
+
+
+@if (Model.demandes == null || Model.demandes.Count == 0)
+{
+    <p>Aucune commande trouvée.</p>
+}
+
+
+@foreach(var demande in Model.demandes)
+{
+    <div class="card text-center mx-auto">
+        <div class="card-header">
+           Commande N°: @demande.idRepresentation
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">@demande.vehiculeIdRepresentation </h5>
+            <p class="card-text"> <span style="font-weight:bold;font-size:20px;"> Du </span> @demande.dateDebutRepresentation <span style="font-weight:bold;font-size:20px;">jusqu'à </span> @demande.dateFinRepresentation</p>
+            <a href="#" class="btn btn-primary">Payer</a>
+            <a href="#" class="btn btn-danger">Supprimer</a>
+        </div>
+        <div class="card-footer text-body-secondary">
+            @demande.prixTotalRepresentation DHs
+        </div>
+    </div>
+}
+
+
+<style>
+
+
+    .card{
+        max-width:60%;
+        margin-top: 30px;
+        margin-bottom: 60px;
+    }
+
+
+
+    .card-header{
+        font-weight: bold;
+        font-size:22px;
+    }
+
+    .card-footer{
+        font-weight: bold;
+        font-size: 22px;
+    }
+
+    .card-text{
+        font-size: 18px;
+    }
+
+    .titre{
+        margin-bottom:40px;
+    }
+
+
+
+</style>

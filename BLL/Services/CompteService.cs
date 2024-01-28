@@ -263,5 +263,24 @@ namespace BLL.Services
             return result;
         }
 
+
+
+        public List<DemandeRepresentation> mesCommandes(long id)
+        {
+            List<Demande> mesCommandes = _db.demandes.ToList();
+            List<Demande> result = new List<Demande>();
+            foreach (var demande in mesCommandes)
+            {
+                if(demande.compteId == id)
+                {
+                    result.Add(demande);
+                }
+            }
+            return _mapper.Map<List<DemandeRepresentation>>(result);
+        }
+
+
+
+
     }
 }

@@ -1,11 +1,10 @@
 ﻿@using Newtonsoft.Json;
 @model BLL.Representation.LoginRepresentation
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Honk&display=swap" rel="stylesheet">
 
 <partial name="navbarLogin" model="Model" />
+
+<a asp-controller="Client" asp-action="Profil" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
 
 
 <div class="settings-container">
@@ -36,7 +35,7 @@
     .settings-container {
         display: flex;
         justify-content: space-between; 
-        margin-top : 110px;
+        margin-top : 65px;
     }
 
     .form-container {

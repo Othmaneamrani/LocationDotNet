@@ -288,6 +288,14 @@ namespace VoitureAdmin.Controllers
         }
 
 
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IActionResult MesCommandesUser(string loginJson)
+        {
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            loginRepresentation.demandes = _iCompteService.mesCommandes(loginRepresentation.compteRepresentation.idRepresentation);
+            return View(loginRepresentation);
+        }
 
     }
 }
