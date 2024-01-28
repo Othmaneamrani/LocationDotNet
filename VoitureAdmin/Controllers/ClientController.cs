@@ -267,5 +267,18 @@ namespace VoitureAdmin.Controllers
             loginRepresentation.idVehicule = vehiculeRepresentation;
             return View(loginRepresentation);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IActionResult CommandeUserFav(long idVehicule, string loginJson)
+        {
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            VehiculeRepresentation vehiculeRepresentation = _iVehiculeService.getByIdRepresentation(idVehicule);
+            loginRepresentation.idVehicule = vehiculeRepresentation;
+            return View(loginRepresentation);
+        }
+
+
+
     }
 }

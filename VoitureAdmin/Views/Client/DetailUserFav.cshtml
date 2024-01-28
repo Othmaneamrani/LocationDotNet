@@ -54,7 +54,7 @@ else
 
                             }
                             <p class="text-right">
-                                <a class="btn btn-primary m-lg-3 mb-3 " asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
+                                <a class="btn btn-primary m-lg-3 mb-3 " asp-controller="Client" asp-action="CommandeUserFav" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
                                 <a id="bien" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="addFav" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" class="heart" alt="heart" />
                                 </a>
@@ -113,7 +113,7 @@ else
                                 }
 
                             <p class="text-right mt-3">
-                                <a class="btn btn-primary" style="margin-left:20px;" asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
+                                <a class="btn btn-primary" style="margin-left:20px;" asp-controller="Client" asp-action="CommandeUserFav" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
                                 <a class="btn btn-primary m-lg-3 mb-3 " id="bien" asp-controller="Client" asp-action="addFav" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" class="heart" alt="heart" />
                                 </a>
