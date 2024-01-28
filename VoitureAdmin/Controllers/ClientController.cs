@@ -279,6 +279,15 @@ namespace VoitureAdmin.Controllers
         }
 
 
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IActionResult Parametre(string loginJson)
+        {
+            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            return View(loginRepresentation);
+        }
+
+
 
     }
 }

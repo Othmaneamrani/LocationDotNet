@@ -1,0 +1,78 @@
+﻿@using Newtonsoft.Json;
+@model BLL.Representation.LoginRepresentation
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Honk&display=swap" rel="stylesheet">
+
+<partial name="navbarLogin" model="Model" />
+
+
+<div class="settings-container">
+    <form method="post" class="form-container">
+        <h2 class="hjouj">Changer le nom d'utilisateur</h2>
+        <input class="inputSettings" type="text" readonly />
+        <input class="inputSettings" type="text" placeholder="Nouveau nom d'utilisateur" required />
+        <input class="inputSettings" type="text" placeholder="Confirmer le nouveau nom d'utilisateur"  required />
+        <input class="inputSettings" type="password" placeholder="Password" name="newPassword" required />
+
+
+        <button class="bouton-settings" type="submit">Changer le nom d'utilisateur</button>
+    </form>
+
+    <form method="post" asp-page-handler="PasswordChange" class="form-container">
+        <h2 class="hjouj">Changer le mot de passe</h2>
+        <input class="inputSettings" type="text" readonly />
+        <input class="inputSettings" type="password" placeholder="Password actuel"  required />
+        <input class="inputSettings" type="password" placeholder="Nouveau password" required />
+        <input class="inputSettings" type="password" placeholder="Confirmer le password"  required />
+
+        <button class="bouton-settings" type="submit">Changer le mot de passe</button>
+    </form>
+</div>
+
+
+<style>
+    .settings-container {
+        display: flex;
+        justify-content: space-between; 
+        margin-top : 110px;
+    }
+
+    .form-container {
+        flex: 0 0 48%; 
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease-in-out;
+        margin-bottom: 40px;
+        border-radius: 8px;
+        padding: 20px;
+    }
+
+        .form-container:hover {
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+    .inputSettings {
+        width: 100%;
+        margin-bottom: 10px;
+        padding: 8px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .bouton-settings {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .bouton-settings:hover {
+            background-color: #45a049;
+        }
+</style>
+
