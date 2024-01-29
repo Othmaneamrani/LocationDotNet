@@ -1,6 +1,8 @@
-﻿
+﻿@using Newtonsoft.Json;
 
-<partial name="navbarHome" />
+<partial name="navbarGoodSign"  />
+
+<a asp-controller="Compte" asp-action="LogoutGet" class="btn btn-danger">Retour</a>
 
 
 <style>
@@ -8,8 +10,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 100vh;
+        height: 70vh;
         margin: 0;
+        margin-bottom:20px;
     }
 
     h1 {
@@ -20,3 +23,5 @@
 <div class="a" >
     <h1>Vous n'avez pas acces a cette page.</h1>
 </div>
+
+

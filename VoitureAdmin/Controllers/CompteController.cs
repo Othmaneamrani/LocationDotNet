@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json;
 
 namespace VoitureAdmin.Controllers
 {
@@ -252,7 +253,6 @@ namespace VoitureAdmin.Controllers
 
             return RedirectToAction("Login", "Compte");
         }
-
 
         public IActionResult Acces()
         {
