@@ -15,7 +15,5 @@ namespace BLL.Representation
         public string emailRepresentation { get; set; }
         public string telephoneRepresentation { get; set; }
 
-        public List<Demande> demandesRepresentation { get; set; }
-        public List<Vehicule> favorisRepresentation { get; set; }
     }
 }

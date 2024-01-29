@@ -22,10 +22,5 @@ namespace DAL.Models
         [Required]
         public string telephone { get; set; }
 
-        [InverseProperty("compte")]
-        public List<Demande> demandes { get; set; }
-
-        [InverseProperty("compte")]
-        public List<Favoris> favoris { get; set; }
     }
 }

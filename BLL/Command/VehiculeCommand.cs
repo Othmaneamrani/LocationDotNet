@@ -21,6 +21,5 @@ namespace BLL.Command
         public string promoCommand { get; set; } = string.Empty;
         public double promoPrixCommand { get; set; }
 
-        public List<Demande> demandesCommand { get; set; }
     }
 }

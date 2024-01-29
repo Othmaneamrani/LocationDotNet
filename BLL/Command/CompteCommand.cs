@@ -17,7 +17,5 @@ namespace BLL.Command
         public string emailCommand { get; set; }
         public string telephoneCommand { get; set; }
 
-        public List<Demande> demandesCommand { get; set; }
-        public List<Vehicule> favorisCommand { get; set; }
     }
 }

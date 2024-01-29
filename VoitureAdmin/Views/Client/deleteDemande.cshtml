@@ -1,0 +1,27 @@
+﻿@using BLL.Representation;
+@using Newtonsoft.Json;
+@model BLL.Representation.LoginRepresentation
+
+<partial name="navbarLogin" model="Model" />
+
+
+
+@if (Model != null)
+{
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 70vh;">
+        <div class="card " style="width: 18rem; padding: 35px;">
+            <div class="card-body text-center ">
+                <h5 class="card-title mb-4">Etes-vous sur de vouloir supprimer la demande @Model.demandeId ?</h5>
+                <form asp-controller="Client" asp-action="deleteDemandeUser" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" method="post">
+                    <button type="submit" class="btn btn-danger m-lg-1">Oui</button>
+
+                    <a asp-controller="Client" asp-action="MesCommandesUser" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-md-1">Non</a>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>Demande déjà supprimée.</p>
+}

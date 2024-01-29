@@ -349,5 +349,31 @@ namespace VoitureAdmin.Controllers
 
 
 
+        [HttpGet]
+        [Authorize(Roles = "User")]
+        public IActionResult deleteDemandeView(long id ,string loginJson)
+        {
+            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            loginRepresentation.demandeId = id;
+            return View("deleteDemande", loginRepresentation) ;
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> deleteDemandeUser(string loginJson)
+        {
+            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
+            await _iDemandeService.deleteDemande(loginRepresentation.demandeId);
+            for (int i = loginRepresentation.demandes.Count - 1; i >= 0; i--)
+            {
+                if (loginRepresentation.demandes[i].idRepresentation == loginRepresentation.demandeId)
+                {
+                    loginRepresentation.demandes.RemoveAt(i);
+                }
+            }
+            return View("MesCommandesUser", loginRepresentation);
+        }
+
+
     }
 }

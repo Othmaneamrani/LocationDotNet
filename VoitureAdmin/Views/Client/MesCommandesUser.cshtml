@@ -34,6 +34,7 @@
 
 @foreach(var demande in Model.demandes)
 {
+
     <div class="card text-center mx-auto">
         <div class="card-header">
            Commande N°: @demande.idRepresentation
@@ -42,7 +43,7 @@
             <h5 class="card-title">@demande.vehiculeIdRepresentation </h5>
             <p class="card-text"> <span style="font-weight:bold;font-size:20px;"> Du </span> @demande.dateDebutRepresentation <span style="font-weight:bold;font-size:20px;">jusqu'à </span> @demande.dateFinRepresentation</p>
             <a href="#" class="btn btn-primary">Payer</a>
-            <a href="#" class="btn btn-danger">Supprimer</a>
+            <a asp-controller="Client" asp-action="deleteDemandeView" asp-route-id="@demande.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" asp class="btn btn-danger">Supprimer</a>
         </div>
         <div class="card-footer text-body-secondary">
             @demande.prixTotalRepresentation DHs

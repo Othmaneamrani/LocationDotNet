@@ -26,10 +26,5 @@ namespace DAL.Models
         public string promo { get; set; } = string.Empty;
         public double promoPrix { get; set; }
 
-        [InverseProperty("vehicule")]
-        public List<Demande> demandes { get; set; }
-
-        [InverseProperty("vehicule")]
-        public List<Favoris> favoris { get; set; }
     }
 }

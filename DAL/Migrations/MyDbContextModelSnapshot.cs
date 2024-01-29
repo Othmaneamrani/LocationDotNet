@@ -148,13 +148,13 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.Models.Demande", b =>
                 {
                     b.HasOne("DAL.Models.Compte", "compte")
-                        .WithMany("demandes")
+                        .WithMany()
                         .HasForeignKey("compteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DAL.Models.Vehicule", "vehicule")
-                        .WithMany("demandes")
+                        .WithMany()
                         .HasForeignKey("vehiculeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -167,13 +167,13 @@ namespace DAL.Migrations
             modelBuilder.Entity("DAL.Models.Favoris", b =>
                 {
                     b.HasOne("DAL.Models.Compte", "compte")
-                        .WithMany("favoris")
+                        .WithMany()
                         .HasForeignKey("compteId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("DAL.Models.Vehicule", "vehicule")
-                        .WithMany("favoris")
+                        .WithMany()
                         .HasForeignKey("vehiculeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -181,20 +181,6 @@ namespace DAL.Migrations
                     b.Navigation("compte");
 
                     b.Navigation("vehicule");
-                });
-
-            modelBuilder.Entity("DAL.Models.Compte", b =>
-                {
-                    b.Navigation("demandes");
-
-                    b.Navigation("favoris");
-                });
-
-            modelBuilder.Entity("DAL.Models.Vehicule", b =>
-                {
-                    b.Navigation("demandes");
-
-                    b.Navigation("favoris");
                 });
 #pragma warning restore 612, 618
         }

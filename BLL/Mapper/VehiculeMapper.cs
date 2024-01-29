@@ -15,7 +15,6 @@ namespace BLL.Mapper
             .ForMember(dest => dest.marqueRepresentation, opt => opt.MapFrom(src => src.marque))
             .ForMember(dest => dest.typeMoteurRepresentation, opt => opt.MapFrom(src => src.typeMoteur))
             .ForMember(dest => dest.prixRepresentation, opt => opt.MapFrom(src => src.prix))
-            .ForMember(dest => dest.demandesRepresentation, opt => opt.MapFrom(src => src.demandes))
             .ForMember(dest => dest.estDispoRepresentation, opt => opt.MapFrom(src => src.estDispo))
             .ForMember(dest => dest.promoRepresentation, opt => opt.MapFrom(src => src.promo))
             .ForMember(dest => dest.promoPrixRepresentation, opt => opt.MapFrom(src => src.promoPrix));
@@ -28,7 +27,6 @@ namespace BLL.Mapper
             .ForMember(dest => dest.marque, opt => opt.MapFrom(src => src.marqueCommand))
             .ForMember(dest => dest.typeMoteur, opt => opt.MapFrom(src => src.typeMoteurCommand))
             .ForMember(dest => dest.prix, opt => opt.MapFrom(src => src.prixCommand))
-            .ForMember(dest => dest.demandes, opt => opt.MapFrom(src => src.demandesCommand))
             .ForMember(dest => dest.estDispo, opt => opt.MapFrom(src => src.estDispoCommand))
              .ForMember(dest => dest.promo, opt => opt.MapFrom(src => src.promoCommand))
             .ForMember(dest => dest.promoPrix, opt => opt.MapFrom(src => src.promoPrixCommand));
@@ -41,7 +39,6 @@ namespace BLL.Mapper
             .ForMember(dest => dest.marqueCommand, opt => opt.MapFrom(src => src.marque))
             .ForMember(dest => dest.typeMoteurCommand, opt => opt.MapFrom(src => src.typeMoteur))
             .ForMember(dest => dest.prixCommand, opt => opt.MapFrom(src => src.prix))
-            .ForMember(dest => dest.demandesCommand, opt => opt.MapFrom(src => src.demandes))
             .ForMember(dest => dest.estDispoCommand, opt => opt.MapFrom(src => src.estDispo))
             .ForMember(dest => dest.promoCommand, opt => opt.MapFrom(src => src.promo))
             .ForMember(dest => dest.promoPrixCommand, opt => opt.MapFrom(src => src.promoPrix));

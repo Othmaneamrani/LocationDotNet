@@ -15,6 +15,8 @@ namespace BLL.Representation
         public List<VehiculeRepresentation> vehiculesSearch { get; set; }
         public DemandeCommand DemandeCommand { get; set; }
         public List<DemandeRepresentation> demandes { get; set; }
+        public long demandeId { get; set; }
+
         public string ok { get; set; }
 
     }
