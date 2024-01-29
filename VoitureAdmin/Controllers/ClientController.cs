@@ -382,5 +382,12 @@ namespace VoitureAdmin.Controllers
         }
 
 
+        [HttpGet]
+        public JsonResult EstDispo(long vehiculeId)
+        {
+            return Json(_iVehiculeService.estDispo(vehiculeId));
+
+        }
+
     }
 }

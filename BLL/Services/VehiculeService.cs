@@ -126,5 +126,18 @@ namespace BLL.Services
         }
 
 
+        public bool estDispo(long idVehicule)
+        {
+            bool ok = false;
+            Vehicule vehicule = _db.vehicules.Find(idVehicule);
+            if(vehicule.estDispo.Equals("Oui") )
+            {
+                ok = true;
+            }
+            return ok;
+        }
+
+
+
     }
 }
