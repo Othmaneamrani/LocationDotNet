@@ -21,7 +21,7 @@ namespace BLL.Services
         public List<VehiculeRepresentation> searchUser(string search);
         public List<VehiculeRepresentation> getAllPromo();
         public VehiculeRepresentation getByIdRepresentation(long id);
-
+        public string GetMarqueById(long idVehicule);
 
 
     }

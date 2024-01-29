@@ -1,10 +1,15 @@
-﻿@using BLL.Representation;
+﻿@using AutoMapper;
+@using BLL.Representation;
+@using BLL.Services;
+@using DAL;
 @using Newtonsoft.Json;
 @model BLL.Representation.LoginRepresentation
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 
 <partial name="navbarLogin" model="Model" />
 
@@ -13,6 +18,8 @@
     LoginRepresentation loginJson1 = new LoginRepresentation();
     loginJson1.compteRepresentation = Model.compteRepresentation;
     loginJson1.vehiculesRepresentation = Model.vehiculesRepresentation;
+    List<long> list = new List<long>();
+
 }
 
 <a asp-controller="Client" asp-action="Profil" asp-route-loginJson="@JsonConvert.SerializeObject(loginJson1)" class="btn btn-primary m-lg-3 ">Retour</a>
@@ -40,7 +47,10 @@
            Commande N°: @demande.idRepresentation
         </div>
         <div class="card-body">
-            <h5 class="card-title">@demande.vehiculeIdRepresentation </h5>
+            @{
+                list.Add(demande.vehiculeIdRepresentation);
+            }
+            <h5 id="vehicule-@demande.vehiculeIdRepresentation" class="card-title mb-3"  style="font-size:20px;font-weight:bold;" ></h5>
             <p class="card-text"> <span style="font-weight:bold;font-size:20px;"> Du </span> @demande.dateDebutRepresentation <span style="font-weight:bold;font-size:20px;">jusqu'à </span> @demande.dateFinRepresentation</p>
             <a href="#" class="btn btn-primary">Payer</a>
             <a asp-controller="Client" asp-action="deleteDemandeView" asp-route-id="@demande.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" asp class="btn btn-danger">Supprimer</a>
@@ -86,3 +96,26 @@
 
 
 </style>
+
+
+<script>
+    @for (var i = list.Count - 1; i >= 0; i--)
+    {
+        var vehiculeId = list[i];
+        <text>
+        var marque = document.getElementById("vehicule-" + @vehiculeId);
+        $.ajax({
+            url: "/Client/getMarque",
+            type: "GET",
+            data: { vehiculeId: @vehiculeId },
+            success: function (result) {
+                marque.innerHTML = result.charAt(0).toUpperCase() + result.slice(1);;
+            },
+            error: function (error) {
+                console.error("Erreur : ", error);
+            },
+            async: false
+        });
+        </text>
+    }
+</script>

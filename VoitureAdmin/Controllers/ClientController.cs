@@ -374,6 +374,13 @@ namespace VoitureAdmin.Controllers
             return View("MesCommandesUser", loginRepresentation);
         }
 
+        [HttpGet]
+        public JsonResult getMarque(long vehiculeId)
+        {
+            return Json(_iVehiculeService.GetMarqueById(vehiculeId));
+
+        }
+
 
     }
 }

@@ -12,6 +12,7 @@ namespace BLL.Services
         private readonly MyDbContext _db;
         private readonly IMapper _mapper;
 
+
         public VehiculeService(MyDbContext db, IMapper mapper)
         {
             _db = db;
@@ -117,6 +118,12 @@ namespace BLL.Services
             }
         }
 
+        public string GetMarqueById(long idVehicule)
+        {
+            Vehicule vehicule = _db.vehicules.Find(idVehicule);
+            VehiculeRepresentation vehiculeRepresentation = _mapper.Map<VehiculeRepresentation>(vehicule);
+            return vehiculeRepresentation.marqueRepresentation;
+        }
 
 
     }
