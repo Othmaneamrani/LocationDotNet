@@ -1,6 +1,7 @@
 ﻿@using Newtonsoft.Json;
 @model BLL.Representation.LoginRepresentation
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <partial name="navbarLogin" model="Model" />
 
@@ -8,23 +9,67 @@
 
 
 <div class="settings-container">
-    <form method="post" class="form-container">
+    <form method="post" asp-controller="Client" asp-action="UsernameChange" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" onsubmit="return validationAlert();" class="form-container">
         <h2 class="hjouj">Changer le nom d'utilisateur</h2>
-        <input class="inputSettings" type="text" readonly />
-        <input class="inputSettings" type="text" placeholder="Nouveau nom d'utilisateur" required />
-        <input class="inputSettings" type="text" placeholder="Confirmer le nouveau nom d'utilisateur"  required />
-        <input class="inputSettings" type="password" placeholder="Password" name="newPassword" required />
+        <input class="inputSettings" type="text" asp-for="@Model.compteRepresentation.usernameRepresentation" readonly />
+
+        <div class="mb-4 mt-4">
+            <input id="username" oninput="inputValidation()" name="usernameNew" class="inputSettings" type="text" placeholder="Nouveau nom d'utilisateur" required />
+        <div id="espaceUsername" style="color: red;"></div>
+        <div id="usernameUtilise" style="color: red;"></div>
+        </div>
+
+
+        <input id="usernameConfirm" class="inputSettings" oninput="inputValidation()" type="text" placeholder="Confirmer le nouveau nom d'utilisateur" required />
+        <div id="usernameMismatch" style="color: red;"></div>
+
+
+        <div class="mb-4 mt-4">
+        <div class="input-group">
+                <input class="inputSettings" type="password" placeholder="Password actuel" name="password" id="passwordUsername" required />
+            <button class="btn btn-outline-secondary" type="button" id="togglePasswordUsername">
+                <img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c" alt="eyeOpen" />
+            </button>
+        </div>
+        </div>
 
 
         <button class="bouton-settings" type="submit">Changer le nom d'utilisateur</button>
     </form>
-
-    <form method="post" asp-page-handler="PasswordChange" class="form-container">
+     
+    <form method="post" onsubmit="return validationAlert();"  asp-controller="Client" asp-action="PasswordChange" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="form-container">
         <h2 class="hjouj">Changer le mot de passe</h2>
-        <input class="inputSettings" type="text" readonly />
-        <input class="inputSettings" type="password" placeholder="Password actuel"  required />
-        <input class="inputSettings" type="password" placeholder="Nouveau password" required />
-        <input class="inputSettings" type="password" placeholder="Confirmer le password"  required />
+        <input class="inputSettings" type="text" asp-for="@Model.compteRepresentation.usernameRepresentation" readonly />
+
+        <div class="mb-4 mt-4">
+            <div class="input-group">
+                <input class="inputSettings" type="password" name="password" id="passwordNow" placeholder="Password actuel" required />
+                <button class="btn btn-outline-secondary" type="button" id="togglePasswordNow">
+                    <img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c" alt="eyeOpen" />
+                </button>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <input id="passwordNew" oninput="inputValidation()" name="passwordNew" class="inputSettings" type="password" placeholder="Nouveau password" required />
+            <button id="toggleNewPassword" class="btn btn-outline-secondary" type="button">
+            <img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c" alt="eyeOpen" />
+        </button>
+        </div>
+        <div id="passwordLongueur" style="color: red;"></div>
+        <div id="espacePassword" style="color: red;"></div>
+
+
+        <div class="mb-4 mt-4">
+            <div class="input-group">
+                <input class="inputSettings" oninput="inputValidation()" type="password" id="confirmPassword" placeholder="Confirmer le password" required />
+                <button class="btn btn-outline-secondary" type="button" id="togglePasswordConfirm">
+                    <img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c" alt="eyeOpen" />
+                </button>
+            </div>
+            <div id="passwordMismatch" style="color: red;"></div>
+
+        </div>
 
         <button class="bouton-settings" type="submit">Changer le mot de passe</button>
     </form>
@@ -52,8 +97,8 @@
         }
 
     .inputSettings {
+        position: relative;
         width: 100%;
-        margin-bottom: 10px;
         padding: 8px;
         box-sizing: border-box;
         border: 1px solid #ccc;
@@ -73,5 +118,187 @@
         .bouton-settings:hover {
             background-color: #45a049;
         }
+
+
+    .input-group {
+        display: flex;
+    }
+
+    .input-group input {
+        flex: 1;
+    }
+
+    .input-group button {
+        margin-left: 10px;
+    }
+
+
+
 </style>
 
+
+
+
+<script>
+
+    document.getElementById("toggleNewPassword").addEventListener("click", function () {
+        var passwordInput = document.getElementById("passwordNew");
+        var toggleButton = document.getElementById("toggleNewPassword");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-eye-50.png?alt=media&token=1a528adb-1c31-44c0-abcb-6225adce0717"alt="eyeOpen" />';
+        } else {
+            passwordInput.type = "password";
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c"alt="eyeClose" />';
+        }
+    });
+
+
+    document.getElementById("togglePasswordConfirm").addEventListener("click", function () {
+        var passwordInput = document.getElementById("confirmPassword");
+        var toggleButton = document.getElementById("togglePasswordConfirm");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-eye-50.png?alt=media&token=1a528adb-1c31-44c0-abcb-6225adce0717"alt="eyeOpen" />';
+        } else {
+            passwordInput.type = "password";
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c"alt="eyeClose" />';
+        }
+    });
+
+
+
+    document.getElementById("togglePasswordNow").addEventListener("click", function () {
+        var passwordInput = document.getElementById("passwordNow");
+        var toggleButton = document.getElementById("togglePasswordNow");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-eye-50.png?alt=media&token=1a528adb-1c31-44c0-abcb-6225adce0717"alt="eyeOpen" />';
+        } else {
+            passwordInput.type = "password";
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c"alt="eyeClose" />';
+        }
+    });
+
+
+
+
+    document.getElementById("togglePasswordUsername").addEventListener("click", function () {
+        var passwordInput = document.getElementById("passwordUsername");
+        var toggleButton = document.getElementById("togglePasswordUsername");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-eye-50.png?alt=media&token=1a528adb-1c31-44c0-abcb-6225adce0717"alt="eyeOpen" />';
+        } else {
+            passwordInput.type = "password";
+            toggleButton.innerHTML = '<img class="eye" src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-closed-eye-50.png?alt=media&token=5a5459b3-320f-4f29-bcf6-f3356328526c"alt="eyeClose" />';
+        }
+    });
+
+
+
+    function inputValidation() {
+        var username = document.getElementById("username").value;
+        var passwordNew = document.getElementById("passwordNew").value;
+        var usernameConfirm = document.getElementById("usernameConfirm").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        var usernameCommand = "@Model.compteRepresentation.usernameRepresentation";
+
+
+
+        if (username.includes(" ") && username.trim() !== "") {
+            document.getElementById("espaceUsername").textContent = "Username ne doit pas contenir d'espaces.";
+        } else {
+            document.getElementById("espaceUsername").textContent = "";
+        }
+
+        if (passwordNew.includes(" ") && passwordNew.trim() !== "") {
+            document.getElementById("espacePassword").textContent = "Password ne doit pas contenir d'espaces.";
+        } else {
+            document.getElementById("espacePassword").textContent = "";
+        }
+
+        if (passwordNew.length < 6 && passwordNew.trim() !== "") {
+            document.getElementById("passwordLongueur").textContent = "Password invalide, il doit dépasser 6 caractères.";
+        } else {
+            document.getElementById("passwordLongueur").textContent = "";
+        }
+
+        if (passwordNew.trim() !== "" && confirmPassword.trim() !== "" && passwordNew !== confirmPassword) {
+            document.getElementById("passwordMismatch").textContent = "Les mots de passe ne correspondent pas.";
+        } else {
+            document.getElementById("passwordMismatch").textContent = "";
+        }
+        if (usernameConfirm.trim() !== "" && username !== usernameConfirm) {
+            document.getElementById("usernameMismatch").textContent = "Les usernames ne correspondent pas.";
+        } else {
+            document.getElementById("usernameMismatch").textContent = "";
+        }
+
+
+        if (username.trim() !== "") {
+            $.ajax({
+                url: "/Compte/CheckUsernameUpdate",
+                type: "GET",
+                data: {
+                    username: username,
+                    usernameCommand: usernameCommand
+                },
+                success: function (result) {
+                    console.log(result);
+                    if (result === true) {
+                        document.getElementById("usernameUtilise").textContent = "";
+                    } else {
+                        document.getElementById("usernameUtilise").textContent = "Username déjà utilisé.";
+                    }
+                },
+                error: function (error) {
+                    console.error("Erreur lors de la vérification de l'username : ", error);
+                },
+                async: false
+            });
+        }
+
+        return true;
+    }
+
+
+    function validationAlert() {
+        var password = document.getElementById("passwordNew").value;
+        var username = document.getElementById("username").value;
+        var usernameUtilise = document.getElementById("usernameUtilise").textContent;
+        var passwordLongueur = document.getElementById("passwordLongueur").textContent;
+        var usernameMismatch = document.getElementById("usernameMismatch").textContent;
+        var passwordMismatch = document.getElementById("passwordMismatch").textContent;
+
+        if (usernameMismatch === "Les usernames ne correspondent pas.") {
+            alert("Les usernames ne correspondent pas.");
+            return false;
+        }else if (password.includes(" ")) {
+            alert("Password ne doit pas contenir d'espace.");
+            return false;
+        } else if (username.includes(" ")) {
+            alert("Username ne doit pas contenir d'espace.");
+            return false;
+        } else if (passwordLongueur === "Password invalide, il doit dépasser 6 caractères.") {
+            alert("Password invalide, il doit dépasser 6 caractères.");
+            return false;
+        } else if (usernameUtilise === "Username déjà utilisé.") {
+            alert("Username déjà utilisé.");
+            return false;
+        } else if (passwordMismatch === "Les mots de passe ne correspondent pas.") {
+            alert("Les mots de passe ne correspondent pas.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+
+
+
+</script>

@@ -12,6 +12,9 @@
         <h2 class="titre">Vos favoris</h2>
     </div>
 
+<a asp-controller="Client" asp-action="Profil" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
+
+
 @if (Model.vehiculesSearch == null || Model.vehiculesSearch.Count == 0)
 {
     <p>Aucun Véhicule trouvé.</p>
@@ -162,7 +165,6 @@ else
         font-family: 'Gluten', cursive;
         margin-right: 20px;
         margin-top: 20px;
-        margin-bottom: 20px;
         font-weight: bold;
     }
 

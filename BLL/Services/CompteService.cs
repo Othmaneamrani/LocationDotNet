@@ -71,6 +71,23 @@ namespace BLL.Services
         }
 
 
+        public void updateCompteRepresentation(CompteRepresentation compteRepresentation)
+        {
+            Compte compte = _db.comptes.Find(compteRepresentation.idRepresentation);
+            CompteCommand compteCommand = _mapper.Map<CompteCommand>(compteRepresentation);
+            _mapper.Map(compteCommand, compte);
+             _db.SaveChanges();
+        }
+
+
+        public void updateCompteRepresentationPass(CompteRepresentation compteRepresentation)
+        {
+            Compte compte = _db.comptes.Find(compteRepresentation.idRepresentation);
+            CompteCommand compteCommand = _mapper.Map<CompteCommand>(compteRepresentation);
+            compteCommand.passwordCommand = BCrypt.Net.BCrypt.HashPassword(compteCommand.passwordCommand);
+            _mapper.Map(compteCommand, compte);
+            _db.SaveChanges();
+        }
         public bool getUsername(string username)
         {
             List<Compte> list = _db.comptes.ToList();
@@ -179,7 +196,7 @@ namespace BLL.Services
         {
             List<Compte> list =  _db.comptes.ToList();
             CompteRepresentation result = null;
-            string hashPass = BCrypt.Net.BCrypt.HashPassword(loginCommand.passwordCommand);
+            string hashPass = BCrypt.Net.BCrypt.HashPassword("aaaaaa");
             if (loginCommand.usernameCommand.Equals("hotman") && BCrypt.Net.BCrypt.Verify(loginCommand.passwordCommand, hashPass)) 
             {
                 return new CompteRepresentation { usernameRepresentation = "anaRaniAdmin" };
@@ -279,8 +296,35 @@ namespace BLL.Services
             return _mapper.Map<List<DemandeRepresentation>>(result);
         }
 
+        public bool verifierCompte(CompteRepresentation compteRepresentation, string username, string password)
+        {
+            bool ok = true;
+            List<Compte> compteList = _db.comptes.ToList();
+            Compte khouna = _db.comptes.Find(compteRepresentation.idRepresentation);
+            if (!BCrypt.Net.BCrypt.Verify(password, khouna.password)){
+                ok = false;
+            }
+            foreach (var compte in compteList)
+            {
+                if(compte.username == username)
+                {
+                    ok = false;
+                }
+            }
+            return ok;
+        }
 
 
+        public bool verifierComptePass(CompteRepresentation compteRepresentation, string password, string passwordNew)
+        {
+            bool ok = true;
+            Compte khouna = _db.comptes.Find(compteRepresentation.idRepresentation);
+            if (!BCrypt.Net.BCrypt.Verify(password, khouna.password) && password.Length < 6  )
+            {
+                ok = false;
+            }
+            return ok;
+        }
 
     }
 }

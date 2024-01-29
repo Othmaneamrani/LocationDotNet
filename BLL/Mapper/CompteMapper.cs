@@ -48,6 +48,15 @@ namespace BLL.Mapper
             .ForMember(dest => dest.telephoneRepresentation, opt => opt.MapFrom(src => src.telephoneCommand));
 
 
+            CreateMap<CompteRepresentation, CompteCommand > ()
+        .ForMember(dest => dest.idCommand, opt => opt.MapFrom(src => src.idRepresentation))
+        .ForMember(dest => dest.usernameCommand, opt => opt.MapFrom(src => src.usernameRepresentation))
+        .ForMember(dest => dest.passwordCommand, opt => opt.MapFrom(src => src.passwordRepresentation))
+        .ForMember(dest => dest.emailCommand, opt => opt.MapFrom(src => src.emailRepresentation))
+        .ForMember(dest => dest.demandesCommand, opt => opt.MapFrom(src => src.demandesRepresentation))
+        .ForMember(dest => dest.favorisCommand, opt => opt.MapFrom(src => src.favorisRepresentation))
+        .ForMember(dest => dest.telephoneCommand, opt => opt.MapFrom(src => src.telephoneRepresentation));
+
 
         }
     }

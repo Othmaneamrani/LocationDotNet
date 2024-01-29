@@ -88,6 +88,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XHNlYXJjaFVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/Settingz.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XFNldHRpbmd6LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Client/settingzPass.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50XHNldHRpbmd6UGFzcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/user/projets/VoitureAdmin/VoitureAdmin/Views/Compte/Acces.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29tcHRlXEFjY2VzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

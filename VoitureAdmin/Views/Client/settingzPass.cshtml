@@ -1,0 +1,29 @@
+﻿@using Newtonsoft.Json;
+@model BLL.Representation.LoginRepresentation
+
+
+<partial name="navbarGoodSign" />
+
+@if (Model.ok.Equals("ah"))
+{
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 70vh;">
+        <div class="card" style="width: 18rem; padding: 35px;">
+            <div class="card-body text-center">
+                <h5 class="card-title mb-4">Password changé !</h5>
+                <a asp-controller="Client" asp-action="Parametre" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-1">Ok</a>
+            </div>
+        </div>
+    </div>
+}
+else if (Model.ok.Equals("la"))
+
+{
+    <div class="d-flex align-items-center justify-content-center" style="min-height: 70vh;">
+        <div class="card" style="width: 18rem; padding: 35px;">
+            <div class="card-body text-center">
+                <h5 class="card-title mb-4">Password invalide.</h5>
+                <a asp-controller="Client" asp-action="Parametre" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-1">Ok</a>
+            </div>
+        </div>
+    </div>
+}
