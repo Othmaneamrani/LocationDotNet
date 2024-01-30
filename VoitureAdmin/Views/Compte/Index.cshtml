@@ -27,6 +27,7 @@ else
         <tbody>
         @foreach (var compte in Model)
         {
+            if(compte.idRepresentation != 43){
                 <tr>
                 <th scope="row">@compte.idRepresentation</th>
                 <td class="align-middle">@compte.usernameRepresentation</td>
@@ -40,6 +41,7 @@ else
                 </td>
                 </tr>
             }
+        }
         </tbody>
     </table>
 }
