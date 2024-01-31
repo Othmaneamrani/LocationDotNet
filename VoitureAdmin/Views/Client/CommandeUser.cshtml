@@ -98,12 +98,23 @@
                         if (result.promoRepresentation.includes("Non")) {
                             var prixVehicule = result.prixRepresentation;
                             prixTotal = prixVehicule * ((dateFin - dateDebut) / (1000 * 60 * 60 * 24));
-                            document.getElementById("prix").value = prixTotal;
+                            prixTotal = prixTotal.toFixed(2);
+                            if (prixTotal > 0) {
+                                document.getElementById("prix").value = prixTotal;
+                            }else{
+                                document.getElementById("prix").value = "";
+                            }
                         }
                         if (result.promoRepresentation.includes("Oui")) {
                             var prixVehicule = result.promoPrixRepresentation;
                             prixTotal = prixVehicule * ((dateFin - dateDebut) / (1000 * 60 * 60 * 24));
-                            document.getElementById("prix").value = prixTotal;
+                            prixTotal = prixTotal.toFixed(2);
+                            if (prixTotal > 0){
+                                document.getElementById("prix").value = prixTotal;
+                            } else {
+                                document.getElementById("prix").value = "";
+                            }
+ 
                         }
                     }
                 },
