@@ -12,7 +12,7 @@ namespace BLL.Representation
         public long idRepresentation { get; set; }
         public DateTime dateDebutRepresentation { get; set; }
         public DateTime dateFinRepresentation { get; set; }
-        public double prixTotalRepresentation { get; set; }
+        public decimal prixTotalRepresentation { get; set; }
 
         public long compteIdRepresentation { get; set; }
 

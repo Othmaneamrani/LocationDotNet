@@ -185,7 +185,7 @@ namespace VoitureAdmin.Controllers
         public async Task<IActionResult> addDemande(string loginJson,
                                            [FromForm(Name = "compteIdCommand")] long compteIdCommand,
                                            [FromForm(Name = "vehiculeIdCommand")] long vehiculeIdCommand,
-                                           [FromForm(Name = "prixTotalCommand")] double prixTotalCommand,
+                                           [FromForm(Name = "prixTotalCommand")] decimal prixTotalCommand,
                                            [FromForm(Name = "dateDebutCommand")] DateTime dateDebutCommand,
                                            [FromForm(Name = "dateFinCommand")] DateTime dateFinCommand)
         {

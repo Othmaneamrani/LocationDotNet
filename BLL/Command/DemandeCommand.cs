@@ -14,7 +14,7 @@ namespace BLL.Command
         public long idCommand { get; set; }
         public DateTime dateDebutCommand { get; set; }
         public DateTime dateFinCommand { get; set; }
-        public double prixTotalCommand { get; set; }
+        public decimal prixTotalCommand { get; set; }
 
         public long compteIdCommand { get; set; }
 

@@ -16,10 +16,10 @@ namespace BLL.Command
 
         public string marqueCommand { get; set; }
         public string typeMoteurCommand { get; set; } 
-        public double prixCommand { get; set; }
+        public decimal prixCommand { get; set; }
         public string estDispoCommand { get; set; }
         public string promoCommand { get; set; } = string.Empty;
-        public double promoPrixCommand { get; set; }
+        public decimal promoPrixCommand { get; set; }
 
     }
 }

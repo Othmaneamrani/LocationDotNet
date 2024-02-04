@@ -68,8 +68,8 @@ namespace DAL.Migrations
                     b.Property<DateTime>("dateFin")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("prixTotal")
-                        .HasColumnType("float");
+                    b.Property<decimal>("prixTotal")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<long>("vehiculeId")
                         .HasColumnType("bigint");
@@ -126,15 +126,15 @@ namespace DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("prix")
-                        .HasColumnType("float");
+                    b.Property<decimal>("prix")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("promo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("promoPrix")
-                        .HasColumnType("float");
+                    b.Property<decimal>("promoPrix")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("typeMoteur")
                         .IsRequired()

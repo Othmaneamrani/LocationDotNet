@@ -39,24 +39,24 @@
 }
 
 
-@foreach(var demande in Model.demandes)
+@for (var i = Model.demandes.Count - 1; i >= 0; i--)
 {
 
     <div class="card text-center mx-auto">
         <div class="card-header">
-           Commande N°: @demande.idRepresentation
+            Commande N°: @Model.demandes[i].idRepresentation
         </div>
         <div class="card-body">
             @{
-                list.Add(demande.vehiculeIdRepresentation);
+                list.Add(@Model.demandes[i].vehiculeIdRepresentation);
             }
-            <h5 id="vehicule-@demande.vehiculeIdRepresentation" class="card-title mb-3"  style="font-size:20px;font-weight:bold;" ></h5>
-            <p class="card-text"> <span style="font-weight:bold;font-size:20px;"> Du </span> @demande.dateDebutRepresentation <span style="font-weight:bold;font-size:20px;">jusqu'à </span> @demande.dateFinRepresentation</p>
-            <a  id="btn-@demande.vehiculeIdRepresentation" class="btn btn-primary"></a>
-            <a asp-controller="Client" asp-action="deleteDemandeView" asp-route-id="@demande.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" asp class="btn btn-danger">Supprimer</a>
+            <h5 id="vehicule-@i" class="card-title mb-3" style="font-size:20px;font-weight:bold;"></h5>
+            <p class="card-text"> <span style="font-weight:bold;font-size:20px;"> Du </span> @Model.demandes[i].dateDebutRepresentation <span style="font-weight:bold;font-size:20px;">jusqu'à </span> @Model.demandes[i].dateFinRepresentation</p>
+            <a id="btn-@i" class="btn btn-primary"></a>
+            <a asp-controller="Client" asp-action="deleteDemandeView" asp-route-id="@Model.demandes[i].idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" asp class="btn btn-danger">Supprimer</a>
         </div>
         <div class="card-footer text-body-secondary">
-            @demande.prixTotalRepresentation DHs
+            @Model.demandes[i].prixTotalRepresentation DHs
         </div>
     </div>
 }
@@ -114,8 +114,8 @@
     @for (var i = list.Count - 1; i >= 0; i--)
     {
         var vehiculeId = list[i];
-        <text>
-        var marque = document.getElementById("vehicule-" + @vehiculeId);
+        <text>  
+        var marque = document.getElementById("vehicule-" + @i);
         $.ajax({
             url: "/Client/getMarque",
             type: "GET",
@@ -136,7 +136,7 @@
         {
         var vehiculeId = list[i];
         <text>
-            var btn = document.getElementById("btn-" + @vehiculeId);
+            var btn = document.getElementById("btn-" + @i);
             $.ajax({
                 url: "/Client/EstDispo",
                 type: "GET",

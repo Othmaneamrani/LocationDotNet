@@ -20,11 +20,11 @@ namespace DAL.Models
         [Required]
         public string typeMoteur { get; set; } //manuelle ou automatique
         [Required]
-        public double prix { get; set; }
+        public decimal prix { get; set; }
         [Required]
         public string estDispo { get; set; } //vente ou location
         public string promo { get; set; } = string.Empty;
-        public double promoPrix { get; set; }
+        public decimal promoPrix { get; set; }
 
     }
 }

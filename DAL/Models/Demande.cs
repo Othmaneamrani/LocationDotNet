@@ -18,7 +18,7 @@ namespace DAL.Models
         [Required]
         public DateTime dateFin { get; set; }
         [Required]
-        public double prixTotal { get; set; }
+        public decimal prixTotal { get; set; }
         public long compteId { get; set; }
         [ForeignKey("compteId")]
         public Compte compte { get; set; }
