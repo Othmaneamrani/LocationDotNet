@@ -28,6 +28,8 @@ namespace VoitureAdmin.Controllers
         [Authorize(Roles = "User")]
         public IActionResult Index(LoginRepresentation loginRepresentation)
         {
+            var vehiculeList = _iVehiculeService.getAll();
+            ViewBag.list = vehiculeList;
             return View(loginRepresentation);
         }
 
