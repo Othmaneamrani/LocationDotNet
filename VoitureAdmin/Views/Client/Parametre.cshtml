@@ -12,7 +12,7 @@
 <div class="settings-container">
     <form method="post" asp-controller="Client" asp-action="UsernameChange" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" onsubmit="return validationAlert();" class="form-container">
         <h2 class="hjouj">Changer le nom d'utilisateur</h2>
-        <input class="inputSettings" type="text" asp-for="@Model.compteRepresentation.usernameRepresentation" readonly />
+        <input class="inputSettings" type="text" asp-for="@User.Identity.Name" readonly />
 
         <div class="mb-4 mt-4">
             <input id="username" oninput="inputValidation()" name="usernameNew" class="inputSettings" type="text" placeholder="Nouveau nom d'utilisateur" required />
@@ -40,7 +40,7 @@
      
     <form method="post" onsubmit="return validationAlert();"  asp-controller="Client" asp-action="PasswordChange" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="form-container">
         <h2 class="hjouj">Changer le mot de passe</h2>
-        <input class="inputSettings" type="text" asp-for="@Model.compteRepresentation.usernameRepresentation" readonly />
+        <input class="inputSettings" type="text" asp-for="@User.Identity.Name" readonly />
 
         <div class="mb-4 mt-4">
             <div class="input-group">

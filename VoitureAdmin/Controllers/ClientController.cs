@@ -71,7 +71,9 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         public IActionResult Depart()
         {
-            return View(_iVehiculeService.getAll());
+            var vehiculeList = _iVehiculeService.getAll();
+            ViewBag.list = vehiculeList;
+            return View();
         }
 
 
@@ -115,7 +117,9 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         public IActionResult Promo()
         {
-            return View(_iVehiculeService.getAllPromo());
+            var vehiculeList = _iVehiculeService.getAllPromo();
+            ViewBag.list = vehiculeList;
+            return View();
         }
 
 

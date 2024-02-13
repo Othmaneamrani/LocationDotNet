@@ -169,8 +169,9 @@ namespace VoitureAdmin.Controllers
             {
                 var claims = new List<Claim>
                 {
+                    new Claim(ClaimTypes.NameIdentifier, result.idRepresentation.ToString()),
                     new Claim(ClaimTypes.Name, result.usernameRepresentation),
-                    new Claim(ClaimTypes.Role, "User")
+                    new Claim(ClaimTypes.Role, "User"),
                 };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -220,8 +221,9 @@ namespace VoitureAdmin.Controllers
                     loginRepresentation.vehiculesRepresentation = vehiculesRepresentation;
                     var claims = new List<Claim>
                     {
+                        new Claim(ClaimTypes.NameIdentifier, result.idRepresentation.ToString()),
                         new Claim(ClaimTypes.Name, result.usernameRepresentation),
-                        new Claim(ClaimTypes.Role, "User")
+                        new Claim(ClaimTypes.Role, "User"),
                     };
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

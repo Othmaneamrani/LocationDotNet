@@ -1,4 +1,5 @@
 ﻿@using Newtonsoft.Json;
+@using System.Security.Claims;
 @model BLL.Representation.LoginRepresentation
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -8,12 +9,10 @@
 
 <partial name="navbarLogin" model="Model" />
 
-@if (@Model.compteRepresentation != null)
-{
+
     <div style="text-align: center;">
-        <h2 class="titre">Bienvenue @Model.compteRepresentation.usernameRepresentation</h2>
+    <h2 class="titre">Bienvenue @User.Identity.Name </h2> @* @User.FindFirstValue(ClaimTypes.NameIdentifier) *@
     </div>
-}
 
 @if (Model.vehiculesRepresentation == null || Model.vehiculesRepresentation.Count == 0)
 {

@@ -12,7 +12,7 @@
 
 <div class="containerr">
     <h1 class="name">
-        @Model.compteRepresentation.usernameRepresentation
+        @User.Identity.Name
     </h1>
     <div class="links">
         <a asp-controller="Client" asp-action="MesCommandesUser" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="button">Mes commandes</a>

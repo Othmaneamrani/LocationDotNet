@@ -1,11 +1,16 @@
-﻿@model List<BLL.Representation.VehiculeRepresentation>
+﻿@using BLL.Representation;
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
 
 <partial name="navbarHome" />
-@if (Model == null || Model.Count == 0)
+
+
+@{
+    List<VehiculeRepresentation> list = ViewBag.List;
+}
+@if (list == null || list.Count == 0)
 {
     <p>Aucun Véhicule trouvé.</p>
 }
@@ -18,7 +23,7 @@ else
 
 <div class="container">
     <div class="row">
-        @foreach (var vehicule in @Model)
+            @foreach (var vehicule in list)
         {
             if (@vehicule.estDispoRepresentation.Equals("Oui") && @vehicule.promoRepresentation.Equals("Non"))
             {
@@ -69,7 +74,7 @@ else
 
 
 
-    @if (Model.Any(v => v.estDispoRepresentation.Equals("Non")))
+    @if (list.Any(v => v.estDispoRepresentation.Equals("Non")))
     {
 
         <div class="separator-line"></div>
@@ -79,7 +84,7 @@ else
         <div class="container">
             <div class="row">
 
-                @foreach (var vehicule in @Model)
+                @foreach (var vehicule in list)
                 {
                     if (@vehicule.estDispoRepresentation.Equals("Non") && @vehicule.promoRepresentation.Equals("Non"))
                     {
