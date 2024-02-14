@@ -1,22 +1,26 @@
-﻿@using Newtonsoft.Json;
-@model BLL.Representation.LoginRepresentation
+﻿@using BLL.Representation;
+@using Newtonsoft.Json;
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
 
 
-<partial name="navbarLogin" model="Model" />
+<partial name="navbarLogin"  />
 
-@if (@Model.compteRepresentation != null)
-{
-    <div style="text-align: center;">
-        <h2 class="titre">Bienvenue M.@Model.compteRepresentation.usernameRepresentation</h2>
-    </div>
+
+@{
+    List<VehiculeRepresentation> list = ViewBag.list;
 }
 
 
-@if (Model.vehiculesRepresentation == null || Model.vehiculesRepresentation.Count == 0)
+<div style="text-align: center;">
+    <h2 class="titre">Bienvenue @User.Identity.Name </h2> @* @User.FindFirstValue(ClaimTypes.NameIdentifier) *@
+</div>
+
+
+
+@if (list == null || list.Count == 0)
 {
     <p>Aucun Véhicule trouvé.</p>
 }
@@ -29,7 +33,7 @@ else
 
     <div class="container">
         <div class="row">
-            @foreach (var vehicule in Model.vehiculesRepresentation)
+            @foreach (var vehicule in list)
             {
                 if (@vehicule.estDispoRepresentation.Equals("Oui") && @vehicule.promoRepresentation.Equals("Oui") && @vehicule.promoPrixRepresentation > 0)
                 {
@@ -38,12 +42,9 @@ else
                             <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                             <div class="card-body">
                                 <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-                                @{
-                                    long idVehicule = @vehicule.idRepresentation;
-                                    string loginJson = JsonConvert.SerializeObject(Model);
-                                }
+
                                 <p>
-                                    <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                    <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                     <span style="float: right;">
                                         <span class="card-text-before">@vehicule.prixRepresentation</span>
                                         <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
@@ -67,7 +68,7 @@ else
 
 
 
-    @if (Model.vehiculesRepresentation.Where(v => v.estDispoRepresentation.Equals("Non")).Count() > 0)
+    @if (list.Where(v => v.estDispoRepresentation.Equals("Non")).Count() > 0)
     {
 
         <div class="separator-line"></div>
@@ -77,7 +78,7 @@ else
         <div class="container">
             <div class="row">
 
-                @foreach (var vehicule in @Model.vehiculesRepresentation)
+                @foreach (var vehicule in list)
                 {
                     if (@vehicule.estDispoRepresentation.Equals("Non") && @vehicule.promoRepresentation.Equals("Non"))
                     {
@@ -86,12 +87,9 @@ else
                                 <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-                                    @{
-                                        long idVehicule = @vehicule.idRepresentation;
-                                        string loginJson = JsonConvert.SerializeObject(Model);
-                                    }
+
                                     <p>
-                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text-before">@vehicule.prixRepresentation</span>
                                             <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
@@ -113,12 +111,9 @@ else
                                 <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-                                    @{
-                                        long idVehicule = @vehicule.idRepresentation;
-                                        string loginJson = JsonConvert.SerializeObject(Model);
-                                    }
+
                                     <p>
-                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text-before">@vehicule.prixRepresentation</span>
                                             <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>

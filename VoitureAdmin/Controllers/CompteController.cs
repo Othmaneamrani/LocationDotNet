@@ -231,7 +231,7 @@ namespace VoitureAdmin.Controllers
 
                     HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal).Wait();
 
-                    return View("~/Views/Client/Index.cshtml", loginRepresentation);
+                    return RedirectToAction("Index","Client");
                 }
             }else
             {

@@ -1,5 +1,4 @@
 ﻿@using Newtonsoft.Json;
-@model BLL.Representation.LoginRepresentation
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8,16 +7,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Honk&display=swap" rel="stylesheet">
 
-<partial name="navbarLogin" model="Model" />
+<partial name="navbarLogin"  />
 
 <div class="containerr">
     <h1 class="name">
         @User.Identity.Name
     </h1>
     <div class="links">
-        <a asp-controller="Client" asp-action="MesCommandesUser" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="button">Mes commandes</a>
-        <a asp-controller="Client" asp-action="FavUser" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="button">Mes favoris</a>
-        <a asp-controller="Client" asp-action="Parametre" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="button">Paramètres</a>
+        <a asp-controller="Client" asp-action="MesCommandesUser"  class="button">Mes commandes</a>
+        <a asp-controller="Client" asp-action="FavUser" class="button">Mes favoris</a>
+        <a asp-controller="Client" asp-action="Parametre"  class="button">Paramètres</a>
         <a asp-controller="Compte" asp-action="LogoutGet" class="button logout">Déconnexion</a>
     </div>
 

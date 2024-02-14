@@ -26,11 +26,11 @@ namespace VoitureAdmin.Controllers
 
 
         [Authorize(Roles = "User")]
-        public IActionResult Index(LoginRepresentation loginRepresentation)
+        public IActionResult Index()
         {
             var vehiculeList = _iVehiculeService.getAll();
             ViewBag.list = vehiculeList;
-            return View(loginRepresentation);
+            return View();
         }
 
         [HttpGet]
@@ -42,32 +42,6 @@ namespace VoitureAdmin.Controllers
 
         }
 
-
-        [Authorize(Roles = "User")]
-        public IActionResult IndexJson(string loginJson)
-        {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-
-            return View("Index", loginRepresentation);
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "User")]
-
-        public IActionResult PromoUserJson(string loginJson)
-        {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            return View("PromoUser", loginRepresentation);
-        }
-
-        [HttpGet]
-        [Authorize(Roles = "User")]
-
-        public IActionResult AboutUserJson(string loginJson)
-        {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            return View("AboutUser", loginRepresentation);
-        }
 
 
         [HttpGet]
@@ -91,19 +65,18 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         [Authorize(Roles = "User")]
 
-        public IActionResult AboutUser(LoginRepresentation loginRepresentation)
+        public IActionResult AboutUser()
         {
-            return View(loginRepresentation);
+            return View();
         }
 
 
         [HttpGet]
         [Authorize(Roles = "User")]
 
-        public IActionResult Profil(string loginJson)
+        public IActionResult Profil()
         {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            return View(loginRepresentation);
+            return View();
         }
 
 
@@ -111,9 +84,11 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         [Authorize(Roles = "User")]
 
-        public IActionResult PromoUser(LoginRepresentation loginRepresentation)
+        public IActionResult PromoUser()
         {
-            return View(loginRepresentation);
+            var vehiculeList = _iVehiculeService.getAll();
+            ViewBag.list = vehiculeList;
+            return View();
         }
 
         [HttpGet]
@@ -142,13 +117,13 @@ namespace VoitureAdmin.Controllers
         }
 
         [HttpPost]
-        public IActionResult searchUser(string search, string loginJson)
+        public IActionResult searchUser(string search)
         {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            loginRepresentation.vehiculesSearch = _iVehiculeService.searchUser(search);
-            if (loginRepresentation.vehiculesSearch != null)
+            var list = _iVehiculeService.searchUser(search);
+            if (list != null)
             {
-                return View(loginRepresentation);
+                ViewBag.list = list;
+                return View();
             }
             else
             {
@@ -167,12 +142,11 @@ namespace VoitureAdmin.Controllers
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult DetailUser(long idVehicule, string loginJson)
+        public IActionResult DetailUser(long idVehicule)
         {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
             VehiculeRepresentation vehiculeRepresentation = _iVehiculeService.getByIdRepresentation(idVehicule);
-            loginRepresentation.idVehicule = vehiculeRepresentation;
-            return View(loginRepresentation);
+            ViewBag.vehicule = vehiculeRepresentation;
+            return View();
         }
 
 
