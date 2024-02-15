@@ -180,11 +180,9 @@ namespace VoitureAdmin.Controllers
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal).Wait();
 
                 List<VehiculeRepresentation> vehiculesRepresentation = _iVehiculeService.getAll();
-                LoginRepresentation loginRepresentation = new LoginRepresentation();
-                loginRepresentation.compteRepresentation = result;
-                loginRepresentation.vehiculesRepresentation = vehiculesRepresentation;
 
-                return View("goodSign", loginRepresentation);
+
+                return View("goodSign");
             }
             return View();
         }

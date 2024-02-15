@@ -1,7 +1,8 @@
 ﻿@using Newtonsoft.Json;
-@model BLL.Representation.LoginRepresentation
+@using System.Security.Claims;
+@model BLL.Representation.VehiculeRepresentation
 
-<partial name="navbarLogin" model="Model" />
+<partial name="navbarLogin"  />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -9,7 +10,7 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
-@if (Model.idVehicule == null)
+@if (Model == null)
 {
     <p>Aucun Véhicule trouvé.</p>
 }
@@ -18,47 +19,47 @@ else
 
     <h2 class="titre">Details</h2>
 
-    @if (Model.idVehicule.promoRepresentation.Equals("Non"))
+    @if (Model.promoRepresentation.Equals("Non"))
     {
         <div class="col-md-6 mb-4 mx-auto text-center">
             <div class="card">
                 <div class="row no-gutters">
                     <div class="col-md-6">
-                        <img style="height: 118%;width: 116%;" src="@Model.idVehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                        <img style="height: 118%;width: 116%;" src="@Model.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
-                            <h5 class="card-title" style="font-size: 2em;">@Model.idVehicule.marqueRepresentation.First().ToString().ToUpper()@Model.idVehicule.marqueRepresentation.Substring(1)</h5>
+                            <h5 class="card-title" style="font-size: 2em;">@Model.marqueRepresentation.First().ToString().ToUpper()@Model.marqueRepresentation.Substring(1)</h5>
                             <p class="text-right">
-                                <span class="card-text">@Model.idVehicule.prixRepresentation</span>
+                                <span class="card-text">@Model.prixRepresentation</span>
                                 <span class="card-dh">DHs/jour</span>
                             </p>
-                            @if (Model.idVehicule.typeMoteurRepresentation.Equals("Manuel"))
+                            @if (Model.typeMoteurRepresentation.Equals("Manuel"))
                             {
                                 <span class="card-text">Moteur Manuel</span>
 
                             }
-                            @if (Model.idVehicule.typeMoteurRepresentation.Equals("Automatique"))
+                            @if (Model.typeMoteurRepresentation.Equals("Automatique"))
                             {
                                 <span class="card-text">Moteur Automatique</span>
 
                             }
-                            @if (Model.idVehicule.estDispoRepresentation.Equals("Oui"))
+                            @if (Model.estDispoRepresentation.Equals("Oui"))
                             {
                                 <span class="card-text">Disponible !</span>
 
                             }
-                            @if (Model.idVehicule.estDispoRepresentation.Equals("Non"))
+                            @if (Model.estDispoRepresentation.Equals("Non"))
                             {
                                 <span class="card-text">Non Disponible</span>
 
                             }
                             <p class="text-right">
-                                <a class="btn btn-primary m-lg-3 mb-3 " asp-controller="Client" asp-action="CommandeUserFav" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
-                                <a id="bien" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="addFav" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
+                                <a class="btn btn-primary m-lg-3 mb-3 " asp-controller="Client" asp-action="CommandeUserFav" asp-route-idVehicule="@Model.idRepresentation" >Commander</a>
+                                <a id="bien" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="addFav" asp-route-idVehicule="@Model.idRepresentation" asp-route-idCompte="@User.FindFirstValue(ClaimTypes.NameIdentifier)">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" class="heart" alt="heart" />
                                 </a>
-                                <a id="broke" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="deleteFav2" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
+                                <a id="broke" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="deleteFav2" asp-route-idVehicule="@Model.idRepresentation" asp-route-idCompte="@User.FindFirstValue(ClaimTypes.NameIdentifier)">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-broken-heart-94.png?alt=media&token=aaa11b3e-e1f9-4723-a03f-e44fafecf516" class="heart" alt="heartBroke" />
                                 </a>
 
@@ -70,54 +71,54 @@ else
             </div>
         </div>
     }
-    @if (Model.idVehicule.promoRepresentation.Equals("Oui"))
+    @if (Model.promoRepresentation.Equals("Oui"))
     {
         <div class="col-md-6 mb-4 mx-auto text-center">
             <div class="card">
                 <div class="row no-gutters">
                     <div class="col-md-6">
-                        <img style="height: 101%;width: 101%;" src="@Model.idVehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                        <img style="height: 101%;width: 101%;" src="@Model.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
-                            <h5 style="font-size: 2em;" class="card-title">@Model.idVehicule.marqueRepresentation.First().ToString().ToUpper()@Model.idVehicule.marqueRepresentation.Substring(1)</h5>
+                            <h5 style="font-size: 2em;" class="card-title">@Model.marqueRepresentation.First().ToString().ToUpper()@Model.marqueRepresentation.Substring(1)</h5>
                             <p class="text-right">
                                 <span style="float: right;">
-                                    <span class="card-text-before">@Model.idVehicule.prixRepresentation</span>
+                                    <span class="card-text-before">@Model.prixRepresentation</span>
                                     <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
                                 </span>
                             <p></p>
                             <span style="float: right;">
-                                <span class="card-text">@Model.idVehicule.promoPrixRepresentation</span>
+                                <span class="card-text">@Model.promoPrixRepresentation</span>
                                 <span class="card-dh">DHs/jour</span>
                             </span>
-                                @if (Model.idVehicule.typeMoteurRepresentation.Equals("Manuel"))
+                                @if (Model.typeMoteurRepresentation.Equals("Manuel"))
                                 {
                                 <span class="card-text">Moteur Manuel</span>
 
                                 }
-                                @if (Model.idVehicule.typeMoteurRepresentation.Equals("Automatique"))
+                                @if (Model.typeMoteurRepresentation.Equals("Automatique"))
                                 {
                                 <span class="card-text">Moteur Automatique</span>
 
                                 }
-                                @if (Model.idVehicule.estDispoRepresentation.Equals("Oui"))
+                                @if (Model.estDispoRepresentation.Equals("Oui"))
                                 {
                                 <span class="card-text">Disponible !</span>
 
                                 }
-                                @if (Model.idVehicule.estDispoRepresentation.Equals("Non"))
+                                @if (Model.estDispoRepresentation.Equals("Non"))
                                 {
                                 <span class="card-text">Non Disponible</span>
 
                                 }
 
                             <p class="text-right mt-3">
-                                <a class="btn btn-primary" style="margin-left:20px;" asp-controller="Client" asp-action="CommandeUserFav" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">Commander</a>
-                                <a class="btn btn-primary m-lg-3 mb-3 " id="bien" asp-controller="Client" asp-action="addFav" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
+                                <a class="btn btn-primary" style="margin-left:20px;" asp-controller="Client" asp-action="CommandeUserFav" asp-route-idVehicule="@Model.idRepresentation" >Commander</a>
+                                <a class="btn btn-primary m-lg-3 mb-3 " id="bien" asp-controller="Client" asp-action="addFav" asp-route-idVehicule="@Model.idRepresentation" asp-route-idCompte="@User.FindFirstValue(ClaimTypes.NameIdentifier)">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" class="heart" alt="heart" />
                                 </a>
-                                <a class="btn btn-primary m-lg-3 mb-3 " id="broke" asp-controller="Client" asp-action="deleteFav2" asp-route-loginJson="@JsonConvert.SerializeObject(Model)">
+                                <a class="btn btn-primary m-lg-3 mb-3 " id="broke" asp-controller="Client" asp-action="deleteFav2" asp-route-idVehicule="@Model.idRepresentation" asp-route-idCompte="@User.FindFirstValue(ClaimTypes.NameIdentifier)">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-broken-heart-94.png?alt=media&token=aaa11b3e-e1f9-4723-a03f-e44fafecf516" class="heart" alt="heartBroke" />
                                 </a>
                             </p>
@@ -128,7 +129,7 @@ else
         </div>
     }
 }
-<a asp-controller="Client" asp-action="FavUser" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
+<a asp-controller="Client" asp-action="FavUser" asp-route-idCompte="@User.FindFirstValue(ClaimTypes.NameIdentifier)" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
 <style>
     .titre {
         font-family: 'Gluten', cursive;
@@ -188,8 +189,8 @@ else
 
 
 <script>
-    var compteId = "@Model.compteRepresentation.idRepresentation";
-    var vehiculeId = "@Model.idVehicule.idRepresentation";
+    var compteId = "@User.FindFirstValue(ClaimTypes.NameIdentifier)";
+    var vehiculeId = "@Model.idRepresentation";
 
     $.ajax({
         url: "/Client/getFavoris",

@@ -4,6 +4,7 @@ using BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace VoitureAdmin.Controllers
 {
@@ -145,24 +146,21 @@ namespace VoitureAdmin.Controllers
         public IActionResult DetailUser(long idVehicule)
         {
             VehiculeRepresentation vehiculeRepresentation = _iVehiculeService.getByIdRepresentation(idVehicule);
-            ViewBag.vehicule = vehiculeRepresentation;
-            return View();
+            return View(vehiculeRepresentation);
         }
 
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult CommandeUser(long idVehicule, string loginJson)
+        public IActionResult CommandeUser(long idVehicule)
         {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
             VehiculeRepresentation vehiculeRepresentation = _iVehiculeService.getByIdRepresentation(idVehicule);
-            loginRepresentation.idVehicule = vehiculeRepresentation;
-            return View(loginRepresentation);
+            return View(vehiculeRepresentation);
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> addDemande(string loginJson,
+        public async Task<IActionResult> addDemande(
                                            [FromForm(Name = "compteIdCommand")] long compteIdCommand,
                                            [FromForm(Name = "vehiculeIdCommand")] long vehiculeIdCommand,
                                            [FromForm(Name = "prixTotalCommand")] decimal prixTotalCommand,
@@ -175,16 +173,15 @@ namespace VoitureAdmin.Controllers
             demandeCommand.dateFinCommand = dateFinCommand;
             demandeCommand.vehiculeIdCommand = vehiculeIdCommand;
             demandeCommand.prixTotalCommand = prixTotalCommand;
-            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
             await _iDemandeService.addDemande(demandeCommand);
-            return View("DemandeAdded",loginRepresentation);
+            return View("DemandeAdded");
         }
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult DemandeAdded(LoginRepresentation loginRepresentation)
+        public IActionResult DemandeAdded()
         {
-            return View(loginRepresentation);
+            return View();
         }
 
         [HttpGet]
@@ -198,73 +195,65 @@ namespace VoitureAdmin.Controllers
         [HttpGet]
         [Authorize(Roles = "User")]
 
-        public async Task<IActionResult> addFav(string loginJson)
+        public async Task<IActionResult> addFav(long idVehicule, long idCompte)
         {
-            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            await _iCompteService.addFav(loginRepresentation.compteRepresentation.idRepresentation, loginRepresentation.idVehicule.idRepresentation);
-            return View("DetailUser", loginRepresentation);
+            await _iCompteService.addFav(idCompte, idVehicule);
+            return RedirectToAction("DetailUser", new { idVehicule = idVehicule });
 
         }
 
 
         [Authorize(Roles = "User")]
         [HttpGet]
-        public async Task<IActionResult> deleteFav(string loginJson)
+        public async Task<IActionResult> deleteFav(long idVehicule, long idCompte)
         {
-            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            await _iCompteService.deleteFav(loginRepresentation.compteRepresentation.idRepresentation, loginRepresentation.idVehicule.idRepresentation);
-            return View("DetailUser", loginRepresentation);
+            await _iCompteService.deleteFav(idCompte, idVehicule);
+            return RedirectToAction("DetailUser", new { idVehicule = idVehicule });
         }
 
 
         [Authorize(Roles = "User")]
         [HttpGet]
-        public async Task<IActionResult> deleteFav2(string loginJson)
+        public async Task<IActionResult> deleteFav2(long idVehicule, long idCompte)
         {
-            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            await _iCompteService.deleteFav(loginRepresentation.compteRepresentation.idRepresentation, loginRepresentation.idVehicule.idRepresentation);
-            return View("DetailUserFav", loginRepresentation);
+            await _iCompteService.deleteFav(idCompte, idVehicule);
+            return RedirectToAction("DetailUserFav", new { idVehicule = idVehicule });
         }
 
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult FavUser (string loginJson)
+        public IActionResult FavUser (long idCompte)
         {
-            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            loginRepresentation.vehiculesSearch = _iCompteService.favUser(loginRepresentation.compteRepresentation);
-            return View(loginRepresentation);
+            List < VehiculeRepresentation > listFav = _iCompteService.favUser(idCompte);
+            ViewBag.FavUser = listFav;
+            return View();
         }
 
 
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult DetailUserFav(long idVehicule, string loginJson)
+        public IActionResult DetailUserFav(long idVehicule)
         {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
             VehiculeRepresentation vehiculeRepresentation = _iVehiculeService.getByIdRepresentation(idVehicule);
-            loginRepresentation.idVehicule = vehiculeRepresentation;
-            return View(loginRepresentation);
+            return View(vehiculeRepresentation);
         }
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult CommandeUserFav(long idVehicule, string loginJson)
+        public IActionResult CommandeUserFav(long idVehicule)
         {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
             VehiculeRepresentation vehiculeRepresentation = _iVehiculeService.getByIdRepresentation(idVehicule);
-            loginRepresentation.idVehicule = vehiculeRepresentation;
-            return View(loginRepresentation);
+            return View(vehiculeRepresentation);
         }
 
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult Parametre(string loginJson)
+        public IActionResult Parametre()
         {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            return View(loginRepresentation);
+            return View();
         }
 
 
@@ -353,6 +342,8 @@ namespace VoitureAdmin.Controllers
             }
             return View("MesCommandesUser", loginRepresentation);
         }
+
+
 
         [HttpGet]
         public JsonResult getMarque(long vehiculeId)

@@ -1,7 +1,7 @@
 ﻿@using BLL.Representation;
 @using Newtonsoft.Json;
 @using System.Security.Claims;
-
+@model BLL.Representation.VehiculeRepresentation
 <partial name="navbarLogin"  />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -9,12 +9,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-@{
-    VehiculeRepresentation vehicule = ViewBag.vehicule;
-}
 
 
-@if (vehicule == null)
+
+@if (@Model == null)
 {
     <p>Aucun Véhicule trouvé.</p>
 }
@@ -23,47 +21,47 @@ else
 
     <h2 class="titre">Details</h2>
 
-    @if (vehicule.promoRepresentation.Equals("Non"))
+    @if (@Model.promoRepresentation.Equals("Non"))
     {
         <div class="col-md-6 mb-4 mx-auto text-center">
             <div class="card">
                 <div class="row no-gutters">
                     <div class="col-md-6">
-                        <img style="height: 118%;width: 116%;" src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                        <img style="height: 118%;width: 116%;" src="@Model.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
-                            <h5 class="card-title" style="font-size: 2em;">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                            <h5 class="card-title" style="font-size: 2em;">@Model.marqueRepresentation.First().ToString().ToUpper()@Model.marqueRepresentation.Substring(1)</h5>
                             <p class="text-right">
-                                <span class="card-text">@vehicule.prixRepresentation</span>
+                                <span class="card-text">@Model.prixRepresentation</span>
                                 <span class="card-dh">DHs/jour</span>
                             </p>
-                            @if (vehicule.typeMoteurRepresentation.Equals("Manuel"))
+                            @if (Model.typeMoteurRepresentation.Equals("Manuel"))
                             {
                                 <span class="card-text">Moteur Manuel</span>
 
                             }
-                            @if (vehicule.typeMoteurRepresentation.Equals("Automatique"))
+                            @if (Model.typeMoteurRepresentation.Equals("Automatique"))
                             {
                                 <span class="card-text">Moteur Automatique</span>
 
                             }
-                            @if (vehicule.estDispoRepresentation.Equals("Oui"))
+                            @if (Model.estDispoRepresentation.Equals("Oui"))
                             {
                                 <span class="card-text">Disponible !</span>
 
                             }
-                            @if (vehicule.estDispoRepresentation.Equals("Non"))
+                            @if (Model.estDispoRepresentation.Equals("Non"))
                             {
                                 <span class="card-text">Non Disponible</span>
 
                             }
                             <p class="text-right">
-                                <a class="btn btn-primary m-lg-3 mb-3 " asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@vehicule.idRepresentation" >Commander</a>
-                                <a id="bien" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="addFav" >
+                                <a class="btn btn-primary m-lg-3 mb-3 " asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idRepresentation">Commander</a>
+                                <a id="bien" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="addFav" asp-route-idVehicule="@Model.idRepresentation" asp-route-idCompte="@User.FindFirstValue(ClaimTypes.NameIdentifier)">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" class="heart" alt="heart" />
                                 </a>
-                                <a id="broke" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="deleteFav" >
+                                <a id="broke" class="btn btn-primary m-lg-3 mb-3" asp-controller="Client" asp-action="deleteFav" asp-route-idVehicule="@Model.idRepresentation" asp-route-idCompte="@User.FindFirstValue(ClaimTypes.NameIdentifier)">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-broken-heart-94.png?alt=media&token=aaa11b3e-e1f9-4723-a03f-e44fafecf516" class="heart" alt="heartBroke" />
                                 </a>
 
@@ -75,54 +73,54 @@ else
             </div>
         </div>
     }
-    @if (vehicule.promoRepresentation.Equals("Oui"))
+    @if (Model.promoRepresentation.Equals("Oui"))
     {
         <div class="col-md-6 mb-4 mx-auto text-center">
             <div class="card">
                 <div class="row no-gutters">
                     <div class="col-md-6">
-                        <img style="height: 101%;width: 101%;" src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
+                        <img style="height: 101%;width: 101%;" src="@Model.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                     </div>
                     <div class="col-md-6">
                         <div class="card-body">
-                            <h5 style="font-size: 2em;" class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
+                            <h5 style="font-size: 2em;" class="card-title">@Model.marqueRepresentation.First().ToString().ToUpper()@Model.marqueRepresentation.Substring(1)</h5>
                             <p class="text-right">
                                 <span style="float: right;">
-                                    <span class="card-text-before">@vehicule.prixRepresentation</span>
+                                    <span class="card-text-before">@Model.prixRepresentation</span>
                                     <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
                                 </span>
                             <p></p>
                             <span style="float: right;">
-                                <span class="card-text">@vehicule.promoPrixRepresentation</span>
+                                <span class="card-text">@Model.promoPrixRepresentation</span>
                                 <span class="card-dh">DHs/jour</span>
                             </span>
-                                @if (vehicule.typeMoteurRepresentation.Equals("Manuel"))
+                                @if (Model.typeMoteurRepresentation.Equals("Manuel"))
                                 {
                                 <span class="card-text">Moteur Manuel</span>
 
                                 }
-                                @if (vehicule.typeMoteurRepresentation.Equals("Automatique"))
+                                @if (Model.typeMoteurRepresentation.Equals("Automatique"))
                                 {
                                 <span class="card-text">Moteur Automatique</span>
 
                                 }
-                                @if (vehicule.estDispoRepresentation.Equals("Oui"))
+                                @if (Model.estDispoRepresentation.Equals("Oui"))
                                 {
                                 <span class="card-text">Disponible !</span>
 
                                 }
-                                @if (vehicule.estDispoRepresentation.Equals("Non"))
+                                @if (Model.estDispoRepresentation.Equals("Non"))
                                 {
                                 <span class="card-text">Non Disponible</span>
 
                                 }
 
                             <p class="text-right mt-3">
-                                <a class="btn btn-primary" style="margin-left:20px;" asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@vehicule.idRepresentation" >Commander</a>
-                                <a class="btn btn-primary m-lg-3 mb-3 " id="bien" asp-controller="Client" asp-action="addFav" >
+                                <a class="btn btn-primary" style="margin-left:20px;" asp-controller="Client" asp-action="CommandeUser" asp-route-idVehicule="@Model.idRepresentation">Commander</a>
+                                <a class="btn btn-primary m-lg-3 mb-3 " id="bien" asp-controller="Client" asp-action="addFav" asp-route-idVehicule="@Model.idRepresentation" asp-route-idCompte="@User.FindFirstValue(ClaimTypes.NameIdentifier)">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-heart-94.png?alt=media&token=2924c4c2-9063-48d3-8e80-6333c1bfbc2a" class="heart" alt="heart" />
                                 </a>
-                                <a class="btn btn-primary m-lg-3 mb-3 " id="broke" asp-controller="Client" asp-action="deleteFav" >
+                                <a class="btn btn-primary m-lg-3 mb-3 " id="broke" asp-controller="Client" asp-action="deleteFav" asp-route-idVehicule="@Model.idRepresentation" asp-route-idCompte="@User.FindFirstValue(ClaimTypes.NameIdentifier)">
                                     <img src="https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/icons8-broken-heart-94.png?alt=media&token=aaa11b3e-e1f9-4723-a03f-e44fafecf516" class="heart" alt="heartBroke" />
                                 </a>
                             </p>
@@ -194,7 +192,7 @@ else
 
 <script>
     var compteId = " @User.FindFirstValue(ClaimTypes.NameIdentifier)";
-    var vehiculeId = "@vehicule.idRepresentation";
+    var vehiculeId = "@Model.idRepresentation";
 
     $.ajax({
         url: "/Client/getFavoris",

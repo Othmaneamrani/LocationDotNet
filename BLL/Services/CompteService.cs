@@ -253,14 +253,14 @@ namespace BLL.Services
 
 
 
-        public List<VehiculeRepresentation> favUser(CompteRepresentation compteRepresentation)
+        public List<VehiculeRepresentation> favUser(long id )
         {
             List<Favoris> favs = _db.favoris.ToList();
             List<Favoris> favs2 = new List<Favoris>();
             List<VehiculeRepresentation> result = new List<VehiculeRepresentation>();
             foreach (var fav in favs)
             {
-                if(fav.compteId == compteRepresentation.idRepresentation)
+                if(fav.compteId == id)
                 {
                     favs2.Add(fav);
                 }

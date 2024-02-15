@@ -1,5 +1,4 @@
 ﻿@using Newtonsoft.Json;
-@model BLL.Representation.LoginRepresentation
 
 
 <partial name="navbarGoodSign" />
@@ -9,7 +8,7 @@
         <div class="card" style="width: 18rem; padding: 35px;">
             <div class="card-body text-center">
                 <h5 class="card-title mb-4">Inscription réussie.</h5>
-            <a asp-controller="Client" asp-action="IndexJson" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-1">Ok</a>
+            <a asp-controller="Client" asp-action="Index"  class="btn btn-primary m-lg-1">Ok</a>
         </div>
         </div>
 </div>

@@ -1,7 +1,8 @@
 ﻿@using BLL.Command;
 @using BLL.Representation;
 @using Newtonsoft.Json;
-@model BLL.Representation.LoginRepresentation
+@using System.Security.Claims;
+@model BLL.Representation.VehiculeRepresentation
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,11 +19,11 @@
     }
 </style>
 
-<partial name="navbarLogin" model="Model" />
+<partial name="navbarLogin"  />
 
 <h2 class="mt-5 titre">Commandez !</h2>
 
-<form method="post" asp-controller="Client" asp-action="addDemande" asp-route-demandeCommand="@Model.DemandeCommand" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" onsubmit="return validationAlert();" class="mt-5">
+<form method="post" asp-controller="Client" asp-action="addDemande"  onsubmit="return validationAlert();" class="mt-5">
 
     <div class="mb-3">
         <label class="form-label">Date de début</label>
@@ -48,12 +49,7 @@
 
     <button type="submit" class="btn btn-primary">Commander</button>
 
-    @{
-        LoginRepresentation loginJson1 = new LoginRepresentation();
-        loginJson1.compteRepresentation = Model.compteRepresentation;
-        loginJson1.vehiculesRepresentation = Model.vehiculesRepresentation;
-    }
-    <a asp-controller="Client" asp-action="DetailUserFav" asp-route-idVehicule="@Model.idVehicule.idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(loginJson1)" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
+    <a asp-controller="Client" asp-action="DetailUserFav" asp-route-idVehicule="@Model.idRepresentation"  class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
 </form>
 
 
@@ -61,8 +57,8 @@
 
     var prixTotal = 0;
 
-    document.getElementById("compteId").value = "@Model.compteRepresentation.idRepresentation";
-    document.getElementById("vehiculeId").value = "@Model.idVehicule.idRepresentation";
+    document.getElementById("compteId").value = "@User.FindFirstValue(ClaimTypes.NameIdentifier)";
+    document.getElementById("vehiculeId").value = "@Model.idRepresentation";
 
     function validationAlert() {
         var dateMismatch = document.getElementById("dateMismatch").textContent;

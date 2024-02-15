@@ -1,21 +1,25 @@
-﻿@using Newtonsoft.Json;
-@model BLL.Representation.LoginRepresentation
+﻿@using BLL.Representation;
+@using Newtonsoft.Json;
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,200&family=Gluten:wght@200&display=swap" rel="stylesheet">
 
-<partial name="navbarLogin" model="Model" />
+<partial name="navbarLogin" />
 
+
+@{
+    List<VehiculeRepresentation> listFav = ViewBag.FavUser;
+}
 
     <div style="text-align: center;">
         <h2 class="titre">Vos favoris</h2>
     </div>
 
-<a asp-controller="Client" asp-action="Profil" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
+<a asp-controller="Client" asp-action="Profil" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
 
 
-@if (Model.vehiculesSearch == null || Model.vehiculesSearch.Count == 0)
+@if (listFav == null || listFav.Count == 0)
 {
     <p>Aucun Véhicule trouvé.</p>
 }
@@ -28,7 +32,7 @@ else
 
     <div class="container">
         <div class="row">
-            @foreach (var vehicule in @Model.vehiculesSearch)
+            @foreach (var vehicule in listFav)
             {
                 if (@vehicule.estDispoRepresentation.Equals("Oui") && @vehicule.promoRepresentation.Equals("Non"))
                 {
@@ -37,12 +41,9 @@ else
                             <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                             <div class="card-body">
                                 <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-                                @{
-                                    long idVehicule = @vehicule.idRepresentation;
-                                    string loginJson = JsonConvert.SerializeObject(Model);
-                                }
+
                                 <p>
-                                    <a asp-controller="Client" asp-action="DetailUserFav" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                    <a asp-controller="Client" asp-action="DetailUserFav" asp-route-idVehicule="@vehicule.idRepresentation"  class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                     <span style="float: right;">
                                         <span class="card-text">@vehicule.prixRepresentation</span>
                                         <span class="card-dh">DHs/jour</span>
@@ -59,12 +60,9 @@ else
                             <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                             <div class="card-body">
                                 <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-                                @{
-                                    long idVehicule = @vehicule.idRepresentation;
-                                    string loginJson = JsonConvert.SerializeObject(Model);
-                                }
+
                                 <p>
-                                    <a asp-controller="Client" asp-action="DetailUserFav" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                    <a asp-controller="Client" asp-action="DetailUserFav" asp-route-idVehicule="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                     <span style="float: right;">
                                         <span class="card-text-before">@vehicule.prixRepresentation</span>
                                         <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
@@ -87,7 +85,7 @@ else
 
 
 
-    @if (Model.vehiculesSearch.Any(v => v.estDispoRepresentation.Equals("Non")))
+    @if (listFav.Any(v => v.estDispoRepresentation.Equals("Non")))
     {
 
         <div class="separator-line"></div>
@@ -97,7 +95,7 @@ else
         <div class="container">
             <div class="row">
 
-                @foreach (var vehicule in @Model.vehiculesSearch)
+                @foreach (var vehicule in listFav)
                 {
                     if (@vehicule.estDispoRepresentation.Equals("Non") && @vehicule.promoRepresentation.Equals("Non"))
                     {
@@ -106,12 +104,9 @@ else
                                 <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-                                    @{
-                                        long idVehicule = @vehicule.idRepresentation;
-                                        string loginJson = JsonConvert.SerializeObject(Model);
-                                    }
+
                                     <p>
-                                        <a asp-controller="Client" asp-action="DetailUserFav" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="DetailUserFav" asp-route-idVehicule="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text">@vehicule.prixRepresentation</span>
                                             <span class="card-dh">DHs/jour</span>
@@ -130,12 +125,9 @@ else
                                 <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
                                 <div class="card-body">
                                     <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-                                    @{
-                                        long idVehicule = @vehicule.idRepresentation;
-                                        string loginJson = JsonConvert.SerializeObject(Model);
-                                    }
+
                                     <p>
-                                        <a asp-controller="Client" asp-action="DetailUserFav" asp-route-idVehicule="@idVehicule" asp-route-loginJson="@loginJson" class="btn btn-primary mt-2" style="float: left;">Détails</a>
+                                        <a asp-controller="Client" asp-action="DetailUserFav" asp-route-idVehicule="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
                                         <span style="float: right;">
                                             <span class="card-text-before">@vehicule.prixRepresentation</span>
                                             <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>

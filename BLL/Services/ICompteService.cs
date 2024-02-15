@@ -30,7 +30,7 @@ namespace BLL.Services
         public Task addFav(long idCompte, long idVehicule);
         public Task deleteFav(long idCompte, long idVehicule);
 
-        public List<VehiculeRepresentation> favUser(CompteRepresentation compteRepresentation);
+        public List<VehiculeRepresentation> favUser(long id);
         public List<DemandeRepresentation> mesCommandes(long id);
         public bool verifierCompte(CompteRepresentation compteRepresentation , string username , string password);
         public bool verifierComptePass(CompteRepresentation compteRepresentation, string password, string passwordNew);
