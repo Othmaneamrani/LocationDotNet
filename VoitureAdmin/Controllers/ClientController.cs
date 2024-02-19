@@ -89,7 +89,7 @@ namespace VoitureAdmin.Controllers
 
         public IActionResult PromoUser()
         {
-            var vehiculeList = _iVehiculeService.getAll();
+            var vehiculeList = _iVehiculeService.getAllPromo();
             ViewBag.list = vehiculeList;
             return View();
         }

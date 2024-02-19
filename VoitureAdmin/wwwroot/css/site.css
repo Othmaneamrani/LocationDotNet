@@ -9,19 +9,24 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
     margin-bottom: 60px;
     background-color: #fbfafa;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/vehicule-32b2d.appspot.com/o/blueBack.jpg?alt=media&token=5e983041-8286-445f-a2d3-6cdebd0b4da5');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 
 .footer {
     background-color: #f8f8f8;
 }
+
 
 .thumbnail-image {
         width: 170px;

@@ -80,31 +80,7 @@ else
 
                 @foreach (var vehicule in list)
                 {
-                    if (@vehicule.estDispoRepresentation.Equals("Non") && @vehicule.promoRepresentation.Equals("Non"))
-                    {
-                        <div class="col-md-3 mb-4">
-                            <div class="card">
-                                <img src="@vehicule.photoRepresentation" class="card-img-top" alt="Photo du véhicule">
-                                <div class="card-body">
-                                    <h5 class="card-title">@vehicule.marqueRepresentation.First().ToString().ToUpper()@vehicule.marqueRepresentation.Substring(1)</h5>
-
-                                    <p>
-                                        <a asp-controller="Client" asp-action="DetailUser" asp-route-idVehicule="@vehicule.idRepresentation" class="btn btn-primary mt-2" style="float: left;">Détails</a>
-                                        <span style="float: right;">
-                                            <span class="card-text-before">@vehicule.prixRepresentation</span>
-                                            <span class="card-dh" style="text-decoration: line-through;">DHs/jour</span>
-                                        </span>
-                                        <span style="float: right;">
-                                            <span class="card-text">@vehicule.promoPrixRepresentation</span>
-                                            <span class="card-dh">DHs/jour</span>
-                                        </span>
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                    if (@vehicule.estDispoRepresentation.Equals("Non") && @vehicule.promoRepresentation.Equals("Oui") && @vehicule.promoPrixRepresentation > 0)
+                    if (@vehicule.estDispoRepresentation.Equals("Non"))
                     {
                         <div class="col-md-3 mb-4">
                             <div class="card">
