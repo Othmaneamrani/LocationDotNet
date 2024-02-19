@@ -3,7 +3,7 @@
 @using BLL.Services;
 @using DAL;
 @using Newtonsoft.Json;
-@model BLL.Representation.LoginRepresentation
+@using System.Security.Claims;
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,18 +11,15 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
-<partial name="navbarLogin" model="Model" />
+<partial name="navbarLogin"  />
 
 
 @{
-    LoginRepresentation loginJson1 = new LoginRepresentation();
-    loginJson1.compteRepresentation = Model.compteRepresentation;
-    loginJson1.vehiculesRepresentation = Model.vehiculesRepresentation;
+    List<DemandeRepresentation> demandes = ViewBag.demandes;
     List<long> list = new List<long>();
-
 }
 
-<a asp-controller="Client" asp-action="Profil" asp-route-loginJson="@JsonConvert.SerializeObject(loginJson1)" class="btn btn-primary m-lg-3 ">Retour</a>
+<a asp-controller="Client" asp-action="Profil" class="btn btn-primary m-lg-3 ">Retour</a>
 
 
 <div style="text-align: center;">
@@ -33,30 +30,30 @@
 
 
 
-@if (Model.demandes == null || Model.demandes.Count == 0)
+@if (demandes == null || demandes.Count == 0)
 {
     <p>Aucune commande trouvée.</p>
 }
 
 
-@for (var i = Model.demandes.Count - 1; i >= 0; i--)
+@for (var i = 0; i < demandes.Count; i++)
 {
 
     <div class="card text-center mx-auto">
         <div class="card-header">
-            Commande N°: @Model.demandes[i].idRepresentation
+            Commande N°: @demandes[i].idRepresentation
         </div>
         <div class="card-body">
             @{
-                list.Add(@Model.demandes[i].vehiculeIdRepresentation);
+                list.Add(@demandes[i].vehiculeIdRepresentation);
             }
             <h5 id="vehicule-@i" class="card-title mb-3" style="font-size:20px;font-weight:bold;"></h5>
-            <p class="card-text"> <span style="font-weight:bold;font-size:20px;"> Du </span> @Model.demandes[i].dateDebutRepresentation <span style="font-weight:bold;font-size:20px;">jusqu'à </span> @Model.demandes[i].dateFinRepresentation</p>
+            <p class="card-text"> <span style="font-weight:bold;font-size:20px;"> Du </span> @demandes[i].dateDebutRepresentation <span style="font-weight:bold;font-size:20px;">jusqu'à </span> @demandes[i].dateFinRepresentation</p>
             <a id="btn-@i" class="btn btn-primary"></a>
-            <a asp-controller="Client" asp-action="deleteDemandeView" asp-route-id="@Model.demandes[i].idRepresentation" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" asp class="btn btn-danger">Supprimer</a>
+            <a asp-controller="Client" asp-action="deleteDemandeView" asp-route-id="@demandes[i].idRepresentation" class="btn btn-danger">Supprimer</a>
         </div>
         <div class="card-footer text-body-secondary">
-            @Model.demandes[i].prixTotalRepresentation DHs
+            @demandes[i].prixTotalRepresentation DHs
         </div>
     </div>
 }

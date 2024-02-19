@@ -1,6 +1,7 @@
 ﻿using BLL.Command;
 using BLL.Representation;
 using BLL.Services;
+using DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -259,11 +260,11 @@ namespace VoitureAdmin.Controllers
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult MesCommandesUser(string loginJson)
+        public IActionResult MesCommandesUser(long id)
         {
-            var loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            loginRepresentation.demandes = _iCompteService.mesCommandes(loginRepresentation.compteRepresentation.idRepresentation);
-            return View(loginRepresentation);
+            List<DemandeRepresentation> demandes = _iCompteService.mesCommandes(id);
+            ViewBag.demandes = demandes;
+            return View();
         }
 
 
@@ -320,27 +321,18 @@ namespace VoitureAdmin.Controllers
 
         [HttpGet]
         [Authorize(Roles = "User")]
-        public IActionResult deleteDemandeView(long id ,string loginJson)
+        public IActionResult deleteDemandeView(long id)
         {
-            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            loginRepresentation.demandeId = id;
-            return View("deleteDemande", loginRepresentation) ;
+            return View("deleteDemande",id) ;
         }
 
 
         [HttpPost]
-        public async Task<IActionResult> deleteDemandeUser(string loginJson)
+        public async Task<IActionResult> deleteDemandeUser(long id, long idDemande)
         {
-            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            await _iDemandeService.deleteDemande(loginRepresentation.demandeId);
-            for (int i = loginRepresentation.demandes.Count - 1; i >= 0; i--)
-            {
-                if (loginRepresentation.demandes[i].idRepresentation == loginRepresentation.demandeId)
-                {
-                    loginRepresentation.demandes.RemoveAt(i);
-                }
-            }
-            return View("MesCommandesUser", loginRepresentation);
+            await _iDemandeService.deleteDemande(idDemande);
+
+            return RedirectToAction("MesCommandesUser", new { id = id });
         }
 
 

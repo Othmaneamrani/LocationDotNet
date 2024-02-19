@@ -15,7 +15,7 @@
         @User.Identity.Name
     </h1>
     <div class="links">
-        <a asp-controller="Client" asp-action="MesCommandesUser"  class="button">Mes commandes</a>
+        <a asp-controller="Client" asp-action="MesCommandesUser" asp-route-id="@User.FindFirstValue(ClaimTypes.NameIdentifier)" class="button">Mes commandes</a>
         <a asp-controller="Client" asp-action="FavUser" asp-route-idCompte="@User.FindFirstValue(ClaimTypes.NameIdentifier)" class="button">Mes favoris</a>
         <a asp-controller="Client" asp-action="Parametre"  class="button">Paramètres</a>
         <a asp-controller="Compte" asp-action="LogoutGet" class="button logout">Déconnexion</a>
