@@ -1,9 +1,10 @@
 ﻿@using Newtonsoft.Json;
+@using System.Security.Claims;
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 
-<partial name="navbarLogin" model="Model" />
+<partial name="navbarLogin" />
 
 <a asp-controller="Client" asp-action="Profil" class="btn btn-primary m-lg-3 mb-3 ">Retour</a>
 
@@ -11,7 +12,8 @@
 <div class="settings-container">
     <form method="post" asp-controller="Client" asp-action="UsernameChange" onsubmit="return validationAlert();" class="form-container">
         <h2 class="hjouj">Changer le nom d'utilisateur</h2>
-        <input class="inputSettings" type="text" asp-for="@User.Identity.Name" readonly />
+        <input class="inputSettings" name="idUser" type="text" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" readonly hidden />
+        <input class="inputSettings" name="usernameRO" type="text" asp-for="@User.Identity.Name" readonly />
 
         <div class="mb-4 mt-4">
             <input id="username" oninput="inputValidation()" name="usernameNew" class="inputSettings" type="text" placeholder="Nouveau nom d'utilisateur" required />
@@ -39,6 +41,8 @@
      
     <form method="post" onsubmit="return validationAlert();"  asp-controller="Client" asp-action="PasswordChange"  class="form-container">
         <h2 class="hjouj">Changer le mot de passe</h2>
+
+        <input class="inputSettings" name="idUserPass" type="text" value="@User.FindFirstValue(ClaimTypes.NameIdentifier)" readonly hidden />
         <input class="inputSettings" type="text" asp-for="@User.Identity.Name" readonly />
 
         <div class="mb-4 mt-4">

@@ -16,8 +16,8 @@ namespace BLL.Services
         public CompteCommand getById(long id);
         public Task deleteCompte(long id);
         public Task updateCompte(CompteCommand compteCommand);
-        public void updateCompteRepresentation(CompteRepresentation compteRepresentation);
-        public void updateCompteRepresentationPass(CompteRepresentation compteRepresentation);
+        public void updateCompteRepresentation(long id, string usernameNew);
+        public void updateCompteRepresentationPass(long id, string passwordNew);
         public bool getUsername(string username);
         public bool getMail(string mail);
         public bool GetIds(long compteId);
@@ -32,8 +32,8 @@ namespace BLL.Services
 
         public List<VehiculeRepresentation> favUser(long id);
         public List<DemandeRepresentation> mesCommandes(long id);
-        public bool verifierCompte(CompteRepresentation compteRepresentation , string username , string password);
-        public bool verifierComptePass(CompteRepresentation compteRepresentation, string password, string passwordNew);
+        public bool verifierCompte(long id , string username ,string usernameNew, string password);
+        public bool verifierComptePass(long id, string password, string passwordNew);
 
 
 

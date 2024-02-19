@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace VoitureAdmin.Controllers
 {
@@ -270,50 +271,32 @@ namespace VoitureAdmin.Controllers
 
 
         [HttpPost]
-        public IActionResult UsernameChange(string loginJson,
-                                   [FromForm(Name = "usernameNew")] string usernameNew,
-                                   [FromForm(Name = "password")] string password)
+        public IActionResult UsernameChange([FromForm(Name = "idUser")] long idUser,
+                                            [FromForm(Name = "usernameRO")] string usernameRO,
+                                            [FromForm(Name = "usernameNew")] string usernameNew,
+                                            [FromForm(Name = "password")] string password)
         {
 
-            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            bool ok = _iCompteService.verifierCompte(loginRepresentation.compteRepresentation , usernameNew , password);
+            bool ok = _iCompteService.verifierCompte(idUser , usernameRO ,usernameNew, password);
             if(ok)
             {
-                loginRepresentation.ok = "ah";
-                loginRepresentation.compteRepresentation.usernameRepresentation = usernameNew;
-                _iCompteService.updateCompteRepresentation(loginRepresentation.compteRepresentation);
-                return View("settingz", loginRepresentation);
-
+                _iCompteService.updateCompteRepresentation(idUser,usernameNew) ;
             }
-            else
-            {
-                loginRepresentation.ok = "la";
-                return View("settingz", loginRepresentation);
-            }
-
+            return View("Settingz",ok);
         }
 
         [HttpPost]
-        public IActionResult PasswordChange(string loginJson,
-                                                      [FromForm(Name = "password")] string password,
-                                                      [FromForm(Name = "passwordNew")] string passwordNew)
+        public IActionResult PasswordChange([FromForm(Name = "idUserPass")] long idUser,
+                                            [FromForm(Name = "password")] string password,
+                                            [FromForm(Name = "passwordNew")] string passwordNew)
         {
 
-            LoginRepresentation loginRepresentation = JsonConvert.DeserializeObject<LoginRepresentation>(loginJson);
-            bool ok = _iCompteService.verifierComptePass(loginRepresentation.compteRepresentation, password, passwordNew);
+            bool ok = _iCompteService.verifierComptePass(idUser, password, passwordNew) ;
             if (ok)
             {
-                loginRepresentation.ok = "ah";
-                loginRepresentation.compteRepresentation.passwordRepresentation = passwordNew;
-                _iCompteService.updateCompteRepresentationPass(loginRepresentation.compteRepresentation);
-                return View("settingzPass", loginRepresentation);
-
+                _iCompteService.updateCompteRepresentationPass(idUser,passwordNew);
             }
-            else
-            {
-                loginRepresentation.ok = "la";
-                return View("settingzPass", loginRepresentation);
-            }
+                return View("SettingzPass",ok);
 
         }
 

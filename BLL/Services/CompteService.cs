@@ -71,23 +71,6 @@ namespace BLL.Services
         }
 
 
-        public void updateCompteRepresentation(CompteRepresentation compteRepresentation)
-        {
-            Compte compte = _db.comptes.Find(compteRepresentation.idRepresentation);
-            CompteCommand compteCommand = _mapper.Map<CompteCommand>(compteRepresentation);
-            _mapper.Map(compteCommand, compte);
-             _db.SaveChanges();
-        }
-
-
-        public void updateCompteRepresentationPass(CompteRepresentation compteRepresentation)
-        {
-            Compte compte = _db.comptes.Find(compteRepresentation.idRepresentation);
-            CompteCommand compteCommand = _mapper.Map<CompteCommand>(compteRepresentation);
-            compteCommand.passwordCommand = BCrypt.Net.BCrypt.HashPassword(compteCommand.passwordCommand);
-            _mapper.Map(compteCommand, compte);
-            _db.SaveChanges();
-        }
         public bool getUsername(string username)
         {
             List<Compte> list = _db.comptes.ToList();
@@ -296,17 +279,17 @@ namespace BLL.Services
             return _mapper.Map<List<DemandeRepresentation>>(result);
         }
 
-        public bool verifierCompte(CompteRepresentation compteRepresentation, string username, string password)
+        public bool verifierCompte(long id, string username,string usernameNew, string password)
         {
             bool ok = true;
             List<Compte> compteList = _db.comptes.ToList();
-            Compte khouna = _db.comptes.Find(compteRepresentation.idRepresentation);
-            if (!BCrypt.Net.BCrypt.Verify(password, khouna.password)){
+            Compte khouna = _db.comptes.Find(id);
+            if (!BCrypt.Net.BCrypt.Verify(password, khouna.password) || !khouna.username.Equals(username)){
                 ok = false;
             }
             foreach (var compte in compteList)
             {
-                if(compte.username == username)
+                if(compte.username.Equals(usernameNew))
                 {
                     ok = false;
                 }
@@ -315,15 +298,36 @@ namespace BLL.Services
         }
 
 
-        public bool verifierComptePass(CompteRepresentation compteRepresentation, string password, string passwordNew)
+        public bool verifierComptePass(long id, string password ,string passwordNew)
         {
             bool ok = true;
-            Compte khouna = _db.comptes.Find(compteRepresentation.idRepresentation);
-            if (!BCrypt.Net.BCrypt.Verify(password, khouna.password) && password.Length < 6  )
+            Compte khouna = _db.comptes.Find(id);
+            if (!BCrypt.Net.BCrypt.Verify(password, khouna.password) || passwordNew.Length < 6  )
             {
                 ok = false;
             }
             return ok;
+        }
+
+
+
+        public void updateCompteRepresentation(long id, string usernameNew)
+        {
+            Compte compte = _db.comptes.Find(id);
+            compte.username = usernameNew;
+            CompteCommand compteCommand = _mapper.Map<CompteCommand>(compte);
+            _mapper.Map(compteCommand, compte);
+            _db.SaveChanges();
+        }
+
+
+        public void updateCompteRepresentationPass(long id, string passwordNew)
+        {
+            Compte compte = _db.comptes.Find(id);
+            compte.password = BCrypt.Net.BCrypt.HashPassword(passwordNew);
+            CompteCommand compteCommand = _mapper.Map<CompteCommand>(compte);
+            _mapper.Map(compteCommand, compte);
+            _db.SaveChanges();
         }
 
     }

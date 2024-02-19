@@ -1,27 +1,26 @@
-﻿@using Newtonsoft.Json;
-@model BLL.Representation.LoginRepresentation
+﻿@model bool
 
 
-<partial name="navbarLogin" model="Model" />
+<partial name="navbarLogin" />
 
-@if (Model.ok.Equals("ah"))
+@if (Model)
 {
 <div class="d-flex align-items-center justify-content-center" style="min-height: 70vh;">
     <div class="card" style="width: 18rem; padding: 35px;">
         <div class="card-body text-center">
-            <h5 class="card-title mb-4">Username changé !</h5>
-                <a asp-controller="Client" asp-action="Parametre" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-1">Ok</a>
+                <h5 class="card-title mb-4">Username changé !</h5>
+                <h5 class="card-title mb-4">Veuillez vous reconnecter pour que le changement soit appliqué.</h5>
+                <a asp-controller="Compte" asp-action="LogoutGet" class="btn btn-primary m-lg-1">Déconnexion</a>
         </div>
     </div>
     </div>
-}else if (Model.ok.Equals("la"))
-
+}else
 {
     <div class="d-flex align-items-center justify-content-center" style="min-height: 70vh;">
         <div class="card" style="width: 18rem; padding: 35px;">
             <div class="card-body text-center">
                 <h5 class="card-title mb-4">Password invalide.</h5>
-                <a asp-controller="Client" asp-action="Parametre" asp-route-loginJson="@JsonConvert.SerializeObject(Model)" class="btn btn-primary m-lg-1">Ok</a>
+                <a asp-controller="Client" asp-action="Parametre"  class="btn btn-primary m-lg-1">Ok</a>
             </div>
         </div>
     </div>
