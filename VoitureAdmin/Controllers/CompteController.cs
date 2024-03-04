@@ -213,10 +213,6 @@ namespace VoitureAdmin.Controllers
                 }
                 else 
                 {
-                    List<VehiculeRepresentation> vehiculesRepresentation = _iVehiculeService.getAll();
-                    LoginRepresentation loginRepresentation = new LoginRepresentation();
-                    loginRepresentation.compteRepresentation = result;
-                    loginRepresentation.vehiculesRepresentation = vehiculesRepresentation;
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.NameIdentifier, result.idRepresentation.ToString()),
